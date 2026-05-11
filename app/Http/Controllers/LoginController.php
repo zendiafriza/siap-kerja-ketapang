@@ -1,15 +1,17 @@
 <?php
+
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 class LoginController extends Controller
 {
     public function showLogin()
     {
         $user = Auth::user();
+
         return view('auth.login', compact('user'));
     }
 
@@ -19,7 +21,7 @@ class LoginController extends Controller
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
-            'role' => 'required|in:pencari_kerja,perusahaan,lpk' // Role dari tombol toggle manual
+            'role' => 'required|in:pencari_kerja,perusahaan,lpk', // Role dari tombol toggle manual
         ]);
 
         $requestedRole = strtoupper($request->role);
@@ -33,16 +35,19 @@ class LoginController extends Controller
         // Coba login
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
+
             return redirect()->route('dashboard.index');
         }
 
         return back()->with('error', 'Email atau password salah.');
     }
+
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect()->route('index');
     }
 }

@@ -23,9 +23,6 @@
         <a href="{{ route('dashboard.index') }}" class="nav-pill {{ $active_page == 'kerja' ? 'active' : '' }}">
             <span style="font-size: 16px;">🔍</span> Eksplorasi
         </a>
-        <a href="{{ route('dashboard.lms') }}" class="nav-pill {{ $active_page == 'lms' ? 'active' : '' }}">
-            <span style="font-size: 16px;">📚</span> Belajar
-        </a>
         <a href="{{ route('dashboard.lamaran') }}" class="nav-pill {{ $active_page == 'lamaran' ? 'active' : '' }}">
             <span style="font-size: 16px;">📋</span> Lamaran
         </a>
@@ -70,9 +67,6 @@
                 <div class="mobile-only-links">
                     <a href="{{ route('dashboard.index') }}" class="dropdown-link {{ $active_page == 'kerja' ? 'active' : '' }}">
                         <span>🔍</span> Eksplorasi Kerja
-                    </a>
-                    <a href="{{ route('dashboard.lms') }}" class="dropdown-link {{ $active_page == 'lms' ? 'active' : '' }}">
-                        <span>📚</span> LMS Belajar
                     </a>
                     <a href="{{ route('dashboard.lamaran') }}" class="dropdown-link {{ $active_page == 'lamaran' ? 'active' : '' }}">
                         <span>📋</span> Lamaran Saya

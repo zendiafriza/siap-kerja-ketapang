@@ -15,6 +15,7 @@ class ProfileController extends Controller
         // Mengirim data user ke view 'profil'
         return view('dashboard.profil', compact('user'));
     }
+
     public function update(Request $request)
     {
         $user = Auth::user();

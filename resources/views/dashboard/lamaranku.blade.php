@@ -104,9 +104,40 @@
                 </div>
             </div>
 
-            @if($app->status == 'interview')
+            @if($app->status == 'interview' && $app->interview_date)
+            <div style="background: #f0fdf4; border-radius: 14px; padding: 20px; margin-bottom: 20px; color: #166534; font-size: 13px; line-height: 1.6; border: 1px solid #dcfce7;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                    <span style="font-size: 20px;">📅</span>
+                    <strong style="font-size: 15px; font-weight: 800; color: #065f46;">Jadwal Interview Telah Ditentukan!</strong>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; background: white; padding: 16px; border-radius: 12px; border: 1px solid #dcfce7; margin-bottom: 12px;">
+                    <div>
+                        <div style="font-size: 11px; color: #15803d; font-weight: 800; text-transform: uppercase;">Tanggal</div>
+                        <div style="font-weight: 700; color: #065f46;">{{ \Carbon\Carbon::parse($app->interview_date)->translatedFormat('l, d F Y') }}</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 11px; color: #15803d; font-weight: 800; text-transform: uppercase;">Waktu</div>
+                        <div style="font-weight: 700; color: #065f46;">{{ \Carbon\Carbon::parse($app->interview_time)->format('H:i') }} WIB</div>
+                    </div>
+                    @if($app->interview_location)
+                    <div style="grid-column: span 2;">
+                        <div style="font-size: 11px; color: #15803d; font-weight: 800; text-transform: uppercase;">Lokasi / Link</div>
+                        <div style="font-weight: 700; color: #065f46;">{{ $app->interview_location }}</div>
+                    </div>
+                    @endif
+                </div>
+
+                @if($app->interview_note)
+                <div style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed #dcfce7;">
+                    <div style="font-size: 11px; color: #15803d; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">Catatan dari Perusahaan</div>
+                    <div style="color: #475569; font-style: italic;">"{{ $app->interview_note }}"</div>
+                </div>
+                @endif
+            </div>
+            @elseif($app->status == 'interview')
             <div style="background: #f0fdf4; border-radius: 14px; padding: 16px; margin-bottom: 20px; color: #166534; font-size: 13px; font-weight: 600; line-height: 1.6; border: 1px solid #dcfce7;">
-                🚀 <strong style="font-weight: 800;">Selamat!</strong> Lamaran Anda telah lolos seleksi awal. Pihak HRD akan segera menghubungi Anda melalui email atau nomor WhatsApp untuk jadwal interview.
+                🚀 <strong style="font-weight: 800;">Selamat!</strong> Lamaran Anda telah lolos seleksi awal. Pihak HRD akan segera menghubungi Anda untuk menentukan jadwal interview.
             </div>
             @else
             <div style="color: #64748b; font-size: 13px; margin-bottom: 20px; font-weight: 500;">

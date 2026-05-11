@@ -389,6 +389,8 @@
                     <input id="email" class="form-input" type="email" name="email" value="{{ old('email') }}" required autocomplete="username" placeholder="nama@email.com" />
                 </div>
 
+
+
                 <div class="form-group">
                     <label for="password" class="form-label">Kata Sandi</label>
                     <input id="password" class="form-input" type="password" name="password" required autocomplete="new-password" placeholder="Minimal 8 karakter" />

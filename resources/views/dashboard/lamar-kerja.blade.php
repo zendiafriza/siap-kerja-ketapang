@@ -86,16 +86,42 @@
                         placeholder="Ceritakan mengapa Anda tertarik dengan posisi ini dan apa nilai tambah yang bisa Anda berikan..." 
                         style="width: 100%; padding: 16px; border: 1px solid #e2e8f0; border-radius: 16px; font-size: 14px; outline: none; transition: 0.2s; resize: vertical; background: #f8fafc; font-family: inherit; line-height: 1.6;" 
                         onfocus="this.style.borderColor='#10b981'; this.style.background='#fff'"></textarea>
+                    
+                    <div style="margin-top: 24px; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                            <label style="font-size: 14px; font-weight: 800; color: #0f172a;">CV/Resume Anda</label>
+                            <a href="{{ route('dashboard.profil') }}" style="font-size: 12px; color: #10b981; text-decoration: none; font-weight: 700;">Ganti CV <span>→</span></a>
+                        </div>
+                        
+                        @if(auth()->user()->cv_path)
+                            <div style="display: flex; align-items: center; gap: 12px; color: #166534; font-size: 13px; font-weight: 600;">
+                                <span style="font-size: 20px;">✅</span>
+                                <div>CV Anda sudah siap dan akan dikirim bersama lamaran ini.</div>
+                            </div>
+                        @else
+                            <div style="display: flex; align-items: center; gap: 12px; color: #991b1b; font-size: 13px; font-weight: 600;">
+                                <span style="font-size: 20px;">⚠️</span>
+                                <div>Anda belum mengunggah CV di profil. <a href="{{ route('dashboard.profil') }}" style="color: #ef4444; text-decoration: underline;">Upload CV dulu</a> sebelum melamar.</div>
+                            </div>
+                        @endif
+                    </div>
+
                     <div style="margin-top: 10px; font-size: 12px; color: #64748b; display: flex; align-items: center; gap: 6px;">
                         <span>💡</span> Tips: Fokus pada keahlian spesifik yang diminta di deskripsi pekerjaan.
                     </div>
                 </div>
 
-                <button type="submit" style="width: 100%; background: #10b981; color: white; padding: 18px; border: none; border-radius: 16px; font-size: 16px; font-weight: 800; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 12px; box-shadow: 0 8px 16px rgba(16, 185, 129, 0.25);" 
-                    onmouseover="this.style.background='#059669'; this.style.transform='translateY(-2px)'" 
-                    onmouseout="this.style.background='#10b981'; this.style.transform='translateY(0)'">
-                    Kirim Lamaran Pekerjaan <span>🚀</span>
-                </button>
+                @if(auth()->user()->cv_path)
+                    <button type="submit" style="width: 100%; background: #10b981; color: white; padding: 18px; border: none; border-radius: 16px; font-size: 16px; font-weight: 800; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 12px; box-shadow: 0 8px 16px rgba(16, 185, 129, 0.25);" 
+                        onmouseover="this.style.background='#059669'; this.style.transform='translateY(-2px)'" 
+                        onmouseout="this.style.background='#10b981'; this.style.transform='translateY(0)'">
+                        Kirim Lamaran Pekerjaan <span>🚀</span>
+                    </button>
+                @else
+                    <button type="button" onclick="window.location.href='{{ route('dashboard.profil') }}'" style="width: 100%; background: #94a3b8; color: white; padding: 18px; border: none; border-radius: 16px; font-size: 16px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px;">
+                        Lengkapi CV di Profil <span>📄</span>
+                    </button>
+                @endif
             </form>
         </div>
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siap Kerja Ketapang — Platform Karier & Belajar</title>
+    <title>Siap Kerja Ketapang — Platform Karier Ketapang</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <style>
         /* RESET & BASE */
@@ -352,7 +352,7 @@
             </div>
             <div class="brand-text">
                 <div class="brand-title">Siap Kerja Ketapang</div>
-                <div class="brand-sub">PLATFORM KARIER & BELAJAR</div>
+                <div class="brand-sub">PLATFORM KARIER KETAPANG</div>
             </div>
         </div>
 
@@ -362,8 +362,8 @@
             Ketapang
         </h1>
         <p class="hero-desc animate-up" style="animation-delay: 0.2s;">
-            Pencari kerja mendapatkan karir, perusahaan menemukan talenta, dan semua bisa belajar. 
-            Kurikulum Merdeka · Data lokal · Gratis selamanya.
+            Pencari kerja mendapatkan karir dan perusahaan menemukan talenta terbaik di Ketapang. 
+            Data lokal · Gratis selamanya.
         </p>
 
         <div class="animate-up" style="animation-delay: 0.3s;">
@@ -387,12 +387,6 @@
                 <div class="card-tag tag-green">Pencari Kerja / Perusahaan</div>
             </a>
 
-            <a href="#" class="nav-card animate-up" style="animation-delay: 0.6s;">
-                <div class="card-icon">📚</div>
-                <div class="card-title">LMS Belajar</div>
-                <div class="card-desc">Platform belajar SD–SMA/SMK, Kurikulum Merdeka, quiz & sertifikat</div>
-                <div class="card-tag tag-purple">SD · SMP · SMA · SMK</div>
-            </a>
 
             <a href="#" class="nav-card animate-up" style="animation-delay: 0.7s;">
                 <div class="card-icon">🏢</div>
@@ -424,24 +418,63 @@
 
         </div>
 
-        <div class="footer-stats animate-up" style="animation-delay: 1.1s;">
+        <div class="footer-stats animate-up" style="animation-delay: 1.1s;" 
+             x-data="{ 
+                stats: { hired: 0, talenta: 0, lowongan: 0, match_rate: 0, mitra: 0 },
+                display: { hired: 0, talenta: 0, lowongan: 0, match_rate: 0, mitra: 0 },
+                async fetchStats() {
+                    try {
+                        const res = await fetch('/api/stats');
+                        const data = await res.json();
+                        this.stats = data;
+                        
+                        Object.keys(this.stats).forEach(key => {
+                            this.animateValue(key, this.stats[key]);
+                        });
+                    } catch (e) { console.error('Failed to fetch stats'); }
+                },
+                animateValue(key, target) {
+                    const start = this.display[key];
+                    const duration = 2000;
+                    const startTime = performance.now();
+                    
+                    const animate = (currentTime) => {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                        this.display[key] = Math.floor(start + (target - start) * easeProgress);
+                        if (progress < 1) requestAnimationFrame(animate);
+                        else this.display[key] = target;
+                    };
+                    requestAnimationFrame(animate);
+                },
+                init() {
+                    this.fetchStats();
+                    setInterval(() => this.fetchStats(), 10000);
+                }
+             }">
             <div class="stat-item">
-                <div class="stat-val">5.6K+</div>
+                <div class="stat-val" x-text="display.hired">0</div>
+                <div class="stat-lbl">Diterima Kerja</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-val" x-text="display.talenta > 1000 ? (display.talenta/1000).toFixed(1) + 'K+' : display.talenta">0</div>
                 <div class="stat-lbl">Talenta</div>
             </div>
             <div class="stat-item">
-                <div class="stat-val">1.2K</div>
+                <div class="stat-val" x-text="display.lowongan > 1000 ? (display.lowongan/1000).toFixed(1) + 'K' : display.lowongan">0</div>
                 <div class="stat-lbl">Lowongan</div>
             </div>
             <div class="stat-item">
-                <div class="stat-val">88%</div>
+                <div class="stat-val"><span x-text="display.match_rate">0</span>%</div>
                 <div class="stat-lbl">Match Rate</div>
             </div>
             <div class="stat-item">
-                <div class="stat-val">18</div>
+                <div class="stat-val" x-text="display.mitra">0</div>
                 <div class="stat-lbl">Mitra</div>
             </div>
         </div>
+
     </div>
 
 </body>

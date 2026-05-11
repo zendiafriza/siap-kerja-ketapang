@@ -29,17 +29,24 @@
         @if(!$isCompany && !$isLpk)
         <!-- MATCH SCORE PANEL (Candidate Only) -->
         <div style="background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 16px; padding: 16px; width: 100%; box-sizing: border-box; transition: 0.3s;" onmouseover="this.style.background='{{ $primaryLight }}'; this.style.borderColor='{{ $isCompany ? '#e0e7ff' : ($isLpk ? '#fef3c7' : '#dcfce7') }}'" onmouseout="this.style.background='#f8fafc'; this.style.borderColor='#f1f5f9'">
+            @php
+                $score = auth()->user()->match_score ?? 0;
+                $isReady = $score >= 65;
+                $statusLabel = $isReady ? 'SIAP KERJA' : 'BELUM SIAP';
+                $statusColor = $isReady ? $primaryColor : '#f59e0b';
+                $statusBg = $isReady ? $primaryLight : '#fffbeb';
+            @endphp
             <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
-                <div style="font-size: 32px; font-weight: 900; color: {{ $primaryColor }}; font-family: Georgia, serif; line-height: 1;">
-                    {{ auth()->user()->profile_metadata['match_score'] ?? 85 }}<span style="font-size: 14px; opacity: 0.6;">%</span>
+                <div style="font-size: 32px; font-weight: 900; color: {{ $statusColor }}; font-family: Georgia, serif; line-height: 1;">
+                    {{ $score }}<span style="font-size: 14px; opacity: 0.6;">%</span>
                 </div>
-                <div style="font-size: 10px; color: {{ $primaryDark }}; font-weight: 800; background: {{ $primaryLight }}; padding: 2px 8px; border-radius: 20px;">SIAP KERJA</div>
+                <div style="font-size: 10px; color: {{ $statusColor }}; font-weight: 800; background: {{ $statusBg }}; padding: 2px 8px; border-radius: 20px;">{{ $statusLabel }}</div>
             </div>
             <div style="font-size: 10px; color: #64748b; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">
                 Match Score Profil
             </div>
             <div style="width: 100%; height: 6px; background: #e2e8f0; border-radius: 10px; overflow: hidden; display: flex;">
-                <div style="width: {{ auth()->user()->profile_metadata['match_score'] ?? 85 }}%; height: 100%; background: {{ $gradient }};"></div>
+                <div style="width: {{ $score }}%; height: 100%; background: {{ $isReady ? $gradient : 'linear-gradient(90deg, #f59e0b, #fbbf24)' }};"></div>
             </div>
         </div>
         @else
@@ -124,12 +131,7 @@
                         <span>Disimpan</span>
                     </div>
                 </a>
-                <a href="{{ route('dashboard.lms') }}" class="sb-item {{ $active_page == 'lms' ? 'active' : '' }}" style="--hover-bg: #ecfdf5; --active-bg: #ecfdf5; --active-color: #059669;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <div class="sb-icon" style="background: #f5f3ff; color: #7c3aed;">📚</div>
-                        <span>LMS Belajar</span>
-                    </div>
-                </a>
+
             @endif
         </div>
     </div>

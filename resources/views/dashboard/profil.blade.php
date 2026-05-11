@@ -56,6 +56,13 @@
         </div>
     @endif
 
+    @if(session('error'))
+        <div class="alert-success-modern animate-in" style="background: #fef2f2; border-color: #ef4444;">
+            <div class="alert-icon">⚠️</div>
+            <div class="alert-msg" style="color: #991b1b;">{{ session('error') }}</div>
+        </div>
+    @endif
+
     <form action="{{ route('profile.update.lengkap') }}" method="POST" enctype="multipart/form-data" class="modern-form">
         @csrf
         
@@ -83,15 +90,19 @@
                                 <label>Email Profesional</label>
                                 <input type="email" name="email_profesional" value="{{ old('email_profesional', $meta['email_profesional'] ?? auth()->user()->email) }}" class="m-input">
                             </div>
+
+                        </div>
+                        <div class="input-row">
                             <div class="input-group">
                                 <label>WhatsApp / No. HP</label>
                                 <input type="text" name="no_hp" value="{{ old('no_hp', $meta['no_hp'] ?? '') }}" class="m-input">
                             </div>
+                            <div class="input-group">
+                                <label>Domisili Saat Ini</label>
+                                <input type="text" name="domisili" value="{{ old('domisili', $meta['domisili'] ?? '') }}" class="m-input" placeholder="Kota, Provinsi">
+                            </div>
                         </div>
-                        <div class="input-group">
-                            <label>Domisili Saat Ini</label>
-                            <input type="text" name="domisili" value="{{ old('domisili', $meta['domisili'] ?? '') }}" class="m-input" placeholder="Kota, Provinsi">
-                        </div>
+
                         <div class="input-group">
                             <label>LinkedIn URL</label>
                             <input type="url" name="linkedin" value="{{ old('linkedin', $meta['linkedin'] ?? '') }}" class="m-input">
@@ -270,12 +281,35 @@
                             <label>Link Portofolio (Behance, GitHub, etc)</label>
                             <input type="url" name="portofolio" value="{{ old('portofolio', $meta['portofolio'] ?? '') }}" class="m-input">
                         </div>
-                        <div class="file-upload-grid">
-                            <div class="file-box">
-                                <label>Resume/CV (PDF)</label>
-                                <input type="file" name="resume" class="m-file">
-                                @if($meta['resume_path'] ?? false)<div class="file-status">✅ Ready</div>@endif
+                        
+                        <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #f1f5f9;">
+                            <label style="display: block; margin-bottom: 12px; font-size: 13px; font-weight: 700; color: #475569;">Resume/CV (PDF)</label>
+                            <div style="display: flex; gap: 12px; align-items: center;">
+                                @if(auth()->user()->cv_path)
+                                    <div style="flex: 1; background: #f0fdf4; border: 1px solid #dcfce7; padding: 12px 16px; border-radius: 12px; display: flex; align-items: center; gap: 10px;">
+                                        <span style="font-size: 20px;">📄</span>
+                                        <div style="flex: 1;">
+                                            <div style="font-size: 13px; font-weight: 700; color: #166534;">CV Sudah Tersimpan</div>
+                                            <div style="font-size: 11px; color: #15803d;">Siap digunakan untuk melamar</div>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div style="flex: 1; background: #fef2f2; border: 1px solid #fee2e2; padding: 12px 16px; border-radius: 12px; display: flex; align-items: center; gap: 10px;">
+                                        <span style="font-size: 20px;">⚠️</span>
+                                        <div style="flex: 1;">
+                                            <div style="font-size: 13px; font-weight: 700; color: #991b1b;">CV Belum Diupload</div>
+                                            <div style="font-size: 11px; color: #b91c1c;">Wajib upload sebelum melamar</div>
+                                        </div>
+                                    </div>
+                                @endif
+                                <button type="button" onclick="document.getElementById('cv-upload-modal').style.display='flex'" 
+                                    style="padding: 12px 20px; background: #0f172a; color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 13px;">
+                                    {{ auth()->user()->cv_path ? 'Ganti CV' : 'Upload CV' }}
+                                </button>
                             </div>
+                        </div>
+
+                        <div class="file-upload-grid">
                             <div class="file-box">
                                 <label>Pas Foto Formal</label>
                                 <input type="file" name="foto" class="m-file">
@@ -301,6 +335,45 @@
         </div>
 
     </form>
+</div>
+
+<!-- CV UPLOAD MODAL -->
+<div id="cv-upload-modal" style="display:none; position:fixed; inset:0; background:rgba(15, 23, 42, 0.8); backdrop-filter:blur(8px); z-index:2000; align-items:center; justify-content:center; padding:20px;">
+    <div class="modern-card card-emerald animate-in" style="width:100%; max-width:450px;">
+        <div class="card-header">
+            <div class="header-icon">📄</div>
+            <div class="header-title">
+                <h3>Upload CV Profesional</h3>
+                <p>Format PDF, Maksimal 2MB</p>
+            </div>
+            <button onclick="document.getElementById('cv-upload-modal').style.display='none'" style="margin-left:auto; background:none; border:none; font-size:24px; cursor:pointer;">&times;</button>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('dashboard.cv.upload') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div style="border: 2px dashed #e2e8f0; border-radius: 20px; padding: 40px; text-align: center; margin-bottom: 24px; cursor: pointer; transition: 0.3s;" 
+                    onmouseover="this.style.borderColor='#10b981'; this.style.background='#f0fdf4'" 
+                    onmouseout="this.style.borderColor='#e2e8f0'; this.style.background='transparent'"
+                    onclick="document.getElementById('cv-file-input').click()">
+                    <div style="font-size: 48px; margin-bottom: 16px;">📂</div>
+                    <div style="font-size: 14px; font-weight: 700; color: #1e293b; margin-bottom: 4px;">Klik untuk Pilih File</div>
+                    <div style="font-size: 12px; color: #64748b;">Hanya menerima file PDF</div>
+                    <input type="file" id="cv-file-input" name="cv" accept=".pdf" style="display:none" onchange="document.getElementById('file-name-display').innerText = this.files[0].name; document.getElementById('file-info').style.display='block'">
+                </div>
+                
+                <div id="file-info" style="display:none; margin-bottom: 24px; background: #f8fafc; padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0;">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <span style="font-size: 20px;">📎</span>
+                        <div id="file-name-display" style="font-size: 13px; font-weight: 600; color: #0f172a; word-break: break-all;"></div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-save-modern" style="width:100%; position:static; transform:none; justify-content:center; box-shadow:none;">
+                    Unggah CV Sekarang
+                </button>
+            </form>
+        </div>
+    </div>
 </div>
 
 <style>

@@ -12,16 +12,17 @@ class ProfilController extends Controller
         $user = Auth::user();
 
         $request->validate([
-            'name'    => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'sekolah' => 'nullable|string|max:255',
             'jurusan' => 'nullable|string|max:255',
         ]);
 
         $user->update([
-            'name'    => $request->name,
+            'name' => $request->name,
             'sekolah' => $request->sekolah,
             'jurusan' => $request->jurusan,
         ]);
+
 
         return back()->with('success', 'Profil berhasil diperbarui!');
     }
@@ -37,29 +38,29 @@ class ProfilController extends Controller
             'no_hp' => 'required|string|max:20',
             'domisili' => 'required|string|max:255',
             'linkedin' => 'nullable|url',
-            
+
             // 2. Profil Profesional
             'headline' => 'nullable|string|max:255',
             'summary' => 'nullable|string',
             'gaji' => 'nullable|string|max:255',
-            
+
             // 3. Pengalaman Kerja (Arrays)
             'pengalaman_perusahaan' => 'nullable|array',
             'pengalaman_posisi' => 'nullable|array',
             'pengalaman_durasi' => 'nullable|array',
             'pengalaman_deskripsi' => 'nullable|array',
-            
+
             // 4. Riwayat Pendidikan (Arrays)
             'pendidikan_institusi' => 'nullable|array',
             'pendidikan_jurusan' => 'nullable|array',
             'pendidikan_lulus' => 'nullable|array',
             'pendidikan_ipk' => 'nullable|array',
-            
+
             // 5. Keahlian
             'hard_skills' => 'nullable|string',
             'soft_skills' => 'nullable|string',
             'bahasa' => 'nullable|string',
-            
+
             // 6. Sertifikasi
             'sertifikat' => 'nullable|string',
             'portofolio' => 'nullable|url',
@@ -120,14 +121,26 @@ class ProfilController extends Controller
 
         // Hitung Match Score
         $score = 0;
-        if($request->nama_lengkap && $request->email_profesional && $request->no_hp && $request->domisili) $score += 20;
-        if($request->headline || $request->summary) $score += 15;
-        if(!empty($pengalaman)) $score += 25;
-        if(!empty($pendidikan)) $score += 20;
-        if($request->hard_skills || $request->soft_skills) $score += 10;
-        if($request->sertifikat || $request->portofolio) $score += 10;
+        if ($request->nama_lengkap && $request->email_profesional && $request->no_hp && $request->domisili) {
+            $score += 20;
+        }
+        if ($request->headline || $request->summary) {
+            $score += 15;
+        }
+        if (! empty($pengalaman)) {
+            $score += 25;
+        }
+        if (! empty($pendidikan)) {
+            $score += 20;
+        }
+        if ($request->hard_skills || $request->soft_skills) {
+            $score += 10;
+        }
+        if ($request->sertifikat || $request->portofolio) {
+            $score += 10;
+        }
 
-        $metadata = [
+        $metadata = array_merge($existingMeta, [
             'nama_lengkap' => $request->nama_lengkap,
             'email_profesional' => $request->email_profesional,
             'no_hp' => $request->no_hp,
@@ -145,13 +158,15 @@ class ProfilController extends Controller
             'portofolio' => $request->portofolio,
             'resume_path' => $resumePath,
             'foto_path' => $fotoPath,
-            'match_score' => $score
-        ];
-        
+            'match_score' => $score,
+        ]);
+
         $user->update([
             'name' => $request->nama_lengkap,
-            'profile_metadata' => $metadata
+            'profile_metadata' => $metadata,
+            'match_score' => $score, // Sync with top-level column
         ]);
+
 
         return back()->with('success', 'Profil lengkap berhasil disimpan! Match Score Anda telah diperbarui.');
     }

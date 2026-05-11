@@ -427,14 +427,25 @@
 <div class="dashboard-container">
     
     <!-- HEADER PROMO -->
+    @if(session('error'))
+        <div style="background: #fef2f2; border: 1px solid #ef4444; color: #991b1b; padding: 20px; border-radius: 20px; margin-bottom: 32px; font-weight: 700; display: flex; align-items: center; gap: 12px; animation: fadeInUp 0.5s ease both;">
+            <span style="font-size: 24px;">⚠️</span>
+            <span>{{ session('error') }}</span>
+        </div>
+    @endif
+
+    @php
+        $completeness = $user->match_score ?? 0;
+        $isComplete = $completeness >= 100;
+    @endphp
     <div class="promo-banner animate-up">
-        <div class="promo-icon">🚀</div>
+        <div class="promo-icon">{{ $isComplete ? '✅' : '🚀' }}</div>
         <div class="promo-content">
-            <h2>Profil Anda 85% Selesai!</h2>
-            <p>Lengkapi data pengalaman kerja Anda untuk mendapatkan rekomendasi lowongan yang lebih akurat dari AI kami.</p>
+            <h2>{{ $isComplete ? 'Profil Anda Sudah Lengkap!' : 'Profil Anda ' . $completeness . '% Selesai!' }}</h2>
+            <p>{{ $isComplete ? 'Hebat! Profil Anda sudah siap untuk menarik perhatian perusahaan terbaik. Tetap pantau rekomendasi AI kami.' : 'Lengkapi data pengalaman kerja Anda untuk mendapatkan rekomendasi lowongan yang lebih akurat dari AI kami.' }}</p>
         </div>
         <a href="{{ route('dashboard.profil') }}" class="promo-btn">
-            Lengkapi Sekarang
+            {{ $isComplete ? 'Tinjau Profil' : 'Lengkapi Sekarang' }}
         </a>
     </div>
 
@@ -539,9 +550,27 @@
 
             <div class="job-footer">
                 <div style="display: flex; align-items: center; gap: 20px;">
-                    <div class="match-badge">
-                        <span>✅</span>
-                        <span class="match-percent">92% Match Score</span>
+                    @php
+                        $userMatchScore = $job->calculateUserMatch($user);
+                        $isLowMatch = $userMatchScore < 50;
+                    @endphp
+                    <div class="match-badge" style="background: {{ $isLowMatch ? '#fff7ed' : '#f0fdf4' }}; border-color: {{ $isLowMatch ? '#ffedd5' : '#dcfce7' }}; position: relative;" 
+                         @if($isLowMatch) 
+                         onmouseover="document.getElementById('advice-{{ $job->id }}').style.display='block'" 
+                         onmouseout="document.getElementById('advice-{{ $job->id }}').style.display='none'"
+                         @endif>
+                        <span>{{ $isLowMatch ? '⚠️' : '✅' }}</span>
+                        <span class="match-percent" style="color: {{ $isLowMatch ? '#c2410c' : '#15803d' }};">{{ $userMatchScore }}% Match Score</span>
+                        
+                        @if($isLowMatch)
+                        <div id="advice-{{ $job->id }}" style="display: none; position: absolute; bottom: 100%; left: 0; width: 280px; background: #0f172a; color: white; padding: 16px; border-radius: 16px; font-size: 12px; line-height: 1.5; z-index: 100; box-shadow: 0 10px 25px rgba(0,0,0,0.2); margin-bottom: 12px;">
+                            <div style="font-weight: 800; color: #f59e0b; margin-bottom: 8px;">Saran Pengembangan Karir:</div>
+                            Data jurusan, pengalaman, atau sertifikasi Anda belum optimal untuk posisi ini. 
+                            <br><br>
+                            💡 <b>Anjuran:</b> Cobalah program <b>Magang</b> terlebih dahulu atau ikuti pelatihan di <b>LPK / BLK</b> terdekat untuk meningkatkan kualifikasi Anda.
+                            <div style="position: absolute; top: 100%; left: 20px; width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid #0f172a;"></div>
+                        </div>
+                        @endif
                     </div>
                     <span style="font-size: 13px; color: #94a3b8; font-weight: 600;">🕒 {{ $job->created_at->diffForHumans() }}</span>
                 </div>
@@ -553,9 +582,20 @@
                             🔖
                         </button>
                     </form>
-                    <a href="{{ route('dashboard.lamar.show', $job->id) }}" class="btn-apply">
-                        Lamar Sekarang <span>→</span>
-                    </a>
+                    
+                    @php
+                        $isLocked = ($user->match_score ?? 0) < 40 && strtolower($job->type) !== 'magang';
+                    @endphp
+
+                    @if($isLocked)
+                        <div style="background: #f1f5f9; color: #94a3b8; padding: 14px 32px; border-radius: 16px; font-size: 14px; font-weight: 800; display: inline-flex; align-items: center; gap: 8px; cursor: not-allowed; border: 1px solid #e2e8f0;" title="Lengkapi profil hingga minimal 40% untuk melamar">
+                            <span>🔒</span> Skor Rendah
+                        </div>
+                    @else
+                        <a href="{{ route('dashboard.lamar.show', $job->id) }}" class="btn-apply">
+                            Lamar Sekarang <span>→</span>
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>

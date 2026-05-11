@@ -1,13 +1,14 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Session;
 use Exception;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
 
 class GoogleAuthController extends Controller
 {
@@ -18,10 +19,11 @@ class GoogleAuthController extends Controller
 
     public function redirect($role)
     {
-        $allowedRoles = ['PENCARI_KERJA', 'PERUSAHAAN', 'LPK', 'LMS'];
+        $allowedRoles = ['PENCARI_KERJA', 'PERUSAHAAN', 'LPK'];
+
         $role = strtoupper($role);
 
-        if (!in_array($role, $allowedRoles)) {
+        if (! in_array($role, $allowedRoles)) {
             return redirect()->route('login')->with('error', 'Peran tidak valid!');
         }
 
@@ -42,13 +44,13 @@ class GoogleAuthController extends Controller
         try {
             $selectedRole = Session::get('auth_role');
 
-            if (!$selectedRole) {
+            if (! $selectedRole) {
                 return redirect('/login')->with('error', 'Sesi kedaluwarsa. Silakan pilih peran kembali.');
             }
 
             if (empty(env('GOOGLE_CLIENT_ID')) && app()->environment('local')) {
                 // Mock Google User untuk testing lokal
-                $googleUser = new \stdClass();
+                $googleUser = new \stdClass;
                 $googleUser->id = '1234567890_test';
                 $googleUser->name = 'Pengguna Google (Demo)';
                 $googleUser->email = 'demo_google@example.com';
@@ -63,6 +65,7 @@ class GoogleAuthController extends Controller
                     return redirect('/login')->with('error', "Gagal! Akun Google ini sudah terdaftar sebagai {$user->role}.");
                 }
                 Auth::login($user);
+
                 return redirect()->route('dashboard.index');
             }
 
@@ -79,6 +82,7 @@ class GoogleAuthController extends Controller
                 ]);
 
                 Auth::login($existingUser);
+
                 return redirect()->route('dashboard.index');
             }
 
@@ -94,6 +98,7 @@ class GoogleAuthController extends Controller
             ]);
 
             Auth::login($newUser);
+
             return redirect()
                 ->route('dashboard.index')
                 ->with('success', "Akun $selectedRole berhasil dibuat!");
