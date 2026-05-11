@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Perusahaan — Siap Lulus Ketapang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#06182C;--navy2:#0A2240;--teal:#00B37E;--teal2:#00D49A;--teal-lt:#E6FBF4;
+  --amber:#F59E0B;--amber-lt:#FEF3C7;--coral:#EF4444;--coral-lt:#FEE2E2;
+  --sky:#3B82F6;--sky-lt:#EFF6FF;--purple:#8B5CF6;--purple-lt:#F5F3FF;
+  --green:#16A34A;--green-lt:#DCFCE7;
+  --line:#E2E8F0;--surface:#F8FAFC;--muted:#64748B;--subtle:#94A3B8;--ink:#0F172A;--ink2:#334155;
+}
+html,body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:var(--ink);font-size:14px}
+
+/* TOPBAR */
+.topbar{background:var(--navy);height:58px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand-hex{width:36px;height:36px;background:var(--teal);clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);display:flex;align-items:center;justify-content:center}
+.brand-hex svg{width:18px;height:18px}
+.brand-txt{font-family:'Fraunces',serif;font-size:17px;color:#fff;font-weight:700}
+.brand-badge{font-size:9px;padding:2px 8px;border-radius:20px;background:var(--amber);color:#fff;font-weight:700;margin-left:6px;letter-spacing:.5px}
+.tb-nav{display:flex;gap:2px}
+.tbn{padding:7px 13px;border-radius:7px;font-size:12px;font-weight:600;color:rgba(255,255,255,.55);cursor:pointer;transition:.15s;border:none;background:none;font-family:'Plus Jakarta Sans',sans-serif}
+.tbn:hover{color:#fff;background:rgba(255,255,255,.08)}
+.tbn.on{color:#fff;background:rgba(255,255,255,.1)}
+.tb-right{display:flex;align-items:center;gap:8px}
+.notif-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(255,255,255,.6);position:relative}
+.notif-dot{width:7px;height:7px;background:var(--coral);border-radius:50%;position:absolute;top:7px;right:7px;border:1.5px solid var(--navy)}
+.user-pill{display:flex;align-items:center;gap:8px;padding:5px 12px 5px 5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:20px;cursor:pointer}
+.ua{width:28px;height:28px;border-radius:50%;background:var(--amber);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff}
+.un{font-size:11px;font-weight:600;color:#fff}
+
+/* HERO */
+.hero{background:var(--navy);padding:28px 24px 0;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#06182C 0%,#0A2A1C 60%,#06182C 100%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:44px 44px}
+.hero-orb{position:absolute;right:-80px;top:-80px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(0,179,126,.2) 0%,transparent 70%)}
+.hero-inner{max-width:1160px;margin:0 auto;position:relative;z-index:1}
+.hero-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:20px}
+.hero-left{}
+.hero-eyebrow{font-size:10px;font-weight:700;color:var(--teal2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.hero-title{font-family:'Fraunces',serif;font-size:28px;color:#fff;margin-bottom:4px;font-weight:700}
+.hero-sub{font-size:12px;color:rgba(255,255,255,.5);font-weight:300}
+.hero-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.ha-btn{padding:10px 18px;border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;border:none;transition:.2s}
+.ha-btn.primary{background:var(--teal);color:#fff}
+.ha-btn.primary:hover{background:var(--teal2)}
+.ha-btn.ghost{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.12)}
+.ha-btn.ghost:hover{background:rgba(255,255,255,.14)}
+
+.hero-kpis{display:flex;gap:1px;background:rgba(255,255,255,.07);border-radius:12px 12px 0 0;overflow:hidden;margin-top:24px}
+.hk{flex:1;padding:14px 18px;background:rgba(255,255,255,.04);text-align:center}
+.hk-val{font-family:'Fraunces',serif;font-size:26px;color:#fff;font-weight:700;line-height:1}
+.hk-lbl{font-size:10px;color:rgba(255,255,255,.35);margin-top:3px}
+
+/* LAYOUT */
+.page{max-width:1160px;margin:0 auto;padding:24px;display:grid;grid-template-columns:1fr 280px;gap:20px}
+@media(max-width:1000px){.page{grid-template-columns:1fr}}
+
+/* SECTION */
+.section-title{font-family:'Fraunces',serif;font-size:18px;color:var(--navy);margin-bottom:14px;font-weight:700}
+
+/* TABS */
+.main-tabs{display:flex;gap:0;background:#fff;border:1px solid var(--line);border-radius:11px;padding:4px;margin-bottom:18px;overflow-x:auto}
+.mt{flex-shrink:0;padding:8px 14px;border-radius:8px;font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;transition:.15s;border:none;background:none;font-family:'Plus Jakarta Sans',sans-serif}
+.mt.on{background:var(--navy);color:#fff}
+.mt:hover:not(.on){background:var(--surface);color:var(--navy)}
+
+/* CARD */
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:14px}
+.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.card-title{font-size:12px;font-weight:800;color:var(--navy);display:flex;align-items:center;gap:7px;text-transform:uppercase;letter-spacing:.5px}
+.ct-icon{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px}
+
+/* LOWONGAN CARD */
+.job-post{background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px;margin-bottom:10px;transition:.15s}
+.job-post:hover{border-color:#94A3B8;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.job-post.active{border-left:3px solid var(--teal)}
+.job-post.draft{border-left:3px solid var(--amber)}
+.job-post.closed{border-left:3px solid var(--subtle);opacity:.7}
+.jp-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.jp-title{font-size:13px;font-weight:700;color:var(--navy)}
+.jp-meta{font-size:11px;color:var(--muted);margin-top:2px}
+.jp-status{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px}
+.jp-stats{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px}
+.js{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)}
+.js-val{font-weight:700;color:var(--ink)}
+.jp-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.jp-tags{display:flex;gap:5px;flex-wrap:wrap}
+.jp-tag{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600}
+.jp-actions{display:flex;gap:6px}
+
+/* PELAMAR TABLE */
+.pelamar-row{display:flex;align-items:center;gap:12px;padding:12px;border-radius:10px;border:1px solid var(--line);margin-bottom:8px;background:#fff;transition:.15s}
+.pelamar-row:hover{border-color:#94A3B8;background:var(--surface)}
+.pr-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
+.pr-name{font-size:12px;font-weight:700;color:var(--navy)}
+.pr-meta{font-size:10px;color:var(--muted);margin-top:2px}
+.pr-match{font-family:'Fraunces',serif;font-size:24px;font-weight:700;flex-shrink:0}
+.pr-actions{display:flex;gap:6px;margin-left:auto}
+.btn-xs{padding:6px 12px;border-radius:7px;font-family:'Plus Jakarta Sans',sans-serif;font-size:10px;font-weight:700;cursor:pointer;border:none;transition:.15s}
+.btn-teal{background:var(--teal);color:#fff}
+.btn-teal:hover{background:var(--teal2)}
+.btn-outline{background:#fff;color:var(--navy);border:1.5px solid var(--line)}
+.btn-outline:hover{background:var(--surface)}
+.btn-amber{background:var(--amber);color:#fff}
+.btn-red{background:var(--coral-lt);color:var(--coral);border:1px solid var(--coral-lt)}
+.btn-red:hover{background:var(--coral);color:#fff}
+
+/* POST FORM */
+.post-form{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;margin-bottom:14px}
+.pf-title{font-family:'Fraunces',serif;font-size:18px;color:var(--navy);margin-bottom:4px;font-weight:700}
+.pf-sub{font-size:11px;color:var(--muted);margin-bottom:20px}
+.field{margin-bottom:14px}
+.field-label{font-size:11px;font-weight:700;color:var(--navy);margin-bottom:6px;display:block}
+.field-input,.field-select,.field-textarea{width:100%;padding:10px 14px;border:2px solid var(--line);border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;color:var(--ink);background:#fff;outline:none;transition:.2s;-webkit-appearance:none}
+.field-input:focus,.field-select:focus,.field-textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,179,126,.1)}
+.field-textarea{resize:vertical;min-height:90px;line-height:1.6}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.save-bar{display:flex;justify-content:flex-end;gap:8px;padding-top:14px;border-top:1px solid var(--line);margin-top:4px}
+.btn-lg{padding:10px 22px;border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;border:none;transition:.2s}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:var(--teal)}
+.btn-ghost{background:#fff;color:var(--navy);border:2px solid var(--line)}
+.btn-ghost:hover{background:var(--surface)}
+
+/* SIDE */
+.side-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px}
+.sc-title{font-size:11px;font-weight:800;color:var(--navy);margin-bottom:14px;text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:7px}
+.sc-icon{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px}
+.mini-stat{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:11px}
+.mini-stat:last-child{border-bottom:none;padding-bottom:0}
+.ms-label{color:var(--muted)}
+.ms-val{font-weight:700;color:var(--ink)}
+
+/* ANALYTICS */
+.analytics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.ag-box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px}
+.ag-val{font-family:'Fraunces',serif;font-size:30px;color:var(--navy);font-weight:700;line-height:1}
+.ag-lbl{font-size:10px;color:var(--muted);margin-top:3px}
+.ag-delta{font-size:10px;font-weight:700;margin-top:5px}
+
+/* BAR */
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.bar-label{font-size:11px;color:var(--ink2);width:180px;flex-shrink:0}
+.bar-track{flex:1;height:6px;background:var(--line);border-radius:20px;overflow:hidden}
+.bar-fill{height:100%;border-radius:20px}
+.bar-val{font-size:11px;font-weight:700;width:32px;text-align:right;color:var(--muted)}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(6,24,44,.6);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.modal-overlay.show{display:flex}
+.modal{background:#fff;border-radius:18px;padding:28px;width:520px;max-width:94vw;animation:mup .25s ease}
+@keyframes mup{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-title{font-family:'Fraunces',serif;font-size:22px;color:var(--navy);margin-bottom:6px;font-weight:700}
+.modal-sub{font-size:12px;color:var(--muted);margin-bottom:20px}
+.modal-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+
+/* SECTION */
+.sec{display:none}
+.sec.on{display:block}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;padding:11px 18px;border-radius:12px;font-size:12px;font-weight:600;opacity:0;transform:translateY(16px);transition:.3s;pointer-events:none;z-index:999;display:flex;align-items:center;gap:8px}
+.toast.show{opacity:1;transform:translateY(0)}
+
+.badge{font-size:9px;padding:2px 7px;border-radius:20px;font-weight:700}
+.progress-bar{height:5px;background:var(--line);border-radius:20px;overflow:hidden;margin-top:6px}
+.pb-fill{height:100%;border-radius:20px;background:var(--teal)}
+
+/* LOGOUT DROPDOWN */
+.user-wrap{position:relative}
+.user-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px;min-width:170px;box-shadow:0 8px 28px rgba(0,0,0,.14);z-index:300;display:none}
+.user-dropdown.open{display:block}
+.ud-item{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:8px;font-size:12px;font-weight:500;color:var(--ink2);cursor:pointer;text-decoration:none;transition:.12s}
+.ud-item:hover{background:var(--surface)}
+.ud-item.danger{color:var(--coral)}
+.ud-item.danger:hover{background:var(--coral-lt)}
+.ud-sep{height:1px;background:var(--line);margin:4px 0}
+.logout-modal{display:none;position:fixed;inset:0;background:rgba(6,24,44,.6);z-index:999;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.logout-modal.show{display:flex}
+.lm-box{background:#fff;border-radius:18px;padding:28px;width:360px;max-width:90vw;text-align:center}
+.lm-icon{font-size:40px;margin-bottom:12px}
+.lm-title{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.lm-sub{font-size:12px;color:var(--muted);margin-bottom:22px;line-height:1.6}
+.lm-actions{display:flex;gap:10px;justify-content:center}
+.lm-btn{padding:10px 22px;border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:.15s}
+.lm-btn.cancel{background:var(--surface);color:var(--navy);border:1.5px solid var(--line)}
+.lm-btn.confirm{background:var(--coral);color:#fff}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a class="brand" href="index.html">
+    <div class="brand-hex"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="white" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+    <div style="display:flex;align-items:center;gap:6px"><div class="brand-txt">Siap Lulus</div><div class="brand-badge">PERUSAHAAN</div></div>
+  </a>
+  <div class="tb-nav">
+    <a href="index.html" style="padding:7px 13px;border-radius:7px;font-size:12px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;transition:.15s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">← Beranda</a>
+    <button class="tbn on" onclick="setNav(this,'dashboard')">Dashboard</button>
+    <button class="tbn" onclick="setNav(this,'lowongan')">Lowongan</button>
+    <button class="tbn" onclick="setNav(this,'pelamar')">Pelamar</button>
+    <button class="tbn" onclick="setNav(this,'posting')">+ Buka Lowongan</button>
+    <button class="tbn" onclick="setNav(this,'analytics')">Analitik</button>
+  </div>
+  <div class="tb-right">
+    <div class="notif-btn" onclick="showToast('3 pelamar baru menunggu tinjauan')">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2"/></svg>
+      <div class="notif-dot"></div>
+    </div>
+    <div class="user-wrap" id="user-wrap">
+      <div class="user-pill" onclick="toggleUserMenu()" style="cursor:pointer">
+        <div class="ua">CK</div>
+        <div class="un">Cargill Ketapang</div>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" style="margin-left:2px;opacity:.6"><path d="M6 9l6 6 6-6" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="user-dropdown" id="user-dropdown">
+        <div class="ud-item" onclick="showToast('Membuka profil perusahaan...')">&#127970; Profil Perusahaan</div>
+        <div class="ud-item" onclick="setNav(document.querySelectorAll('.tbn')[4],'analytics')">&#128202; Analitik</div>
+        <div class="ud-sep"></div>
+        <div class="ud-item danger" onclick="showLogoutModal()">&#128682; Keluar</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div><div class="hero-grid"></div><div class="hero-orb"></div>
+  <div class="hero-inner">
+    <div class="hero-top">
+      <div class="hero-left">
+        <div class="hero-eyebrow">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zM16 11a1 1 0 110 2 1 1 0 010-2z" stroke="currentColor" stroke-width="2"/></svg>
+          Portal Pemberi Kerja
+        </div>
+        <div class="hero-title">Selamat datang, Cargill Ketapang Mill 👋</div>
+        <div class="hero-sub">Kelola lowongan, tinjau pelamar, dan temukan talenta terbaik lulusan Ketapang</div>
+        <div class="hero-actions">
+          <button class="ha-btn primary" onclick="setNav(document.querySelectorAll('.tbn')[3],'posting')">+ Buka Lowongan Baru</button>
+          <button class="ha-btn ghost" onclick="setNav(document.querySelectorAll('.tbn')[2],'pelamar')">Tinjau Pelamar (8)</button>
+        </div>
+      </div>
+    </div>
+    <div class="hero-kpis">
+      <div class="hk"><div class="hk-val">3</div><div class="hk-lbl">Lowongan Aktif</div></div>
+      <div class="hk"><div class="hk-val">24</div><div class="hk-lbl">Total Pelamar</div></div>
+      <div class="hk"><div class="hk-val">8</div><div class="hk-lbl">Menunggu Tinjauan</div></div>
+      <div class="hk"><div class="hk-val">3</div><div class="hk-lbl">Terjadwal Interview</div></div>
+      <div class="hk"><div class="hk-val">92</div><div class="hk-lbl">Avg. Match Score</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+<div class="main-col">
+
+  <!-- DASHBOARD -->
+  <div class="sec on" id="sec-dashboard">
+    <div class="analytics-grid">
+      <div class="ag-box" style="border-top:3px solid var(--teal)">
+        <div class="ag-val">24</div><div class="ag-lbl">Total Pelamar</div>
+        <div class="ag-delta" style="color:var(--teal)">↑ +5 minggu ini</div>
+      </div>
+      <div class="ag-box" style="border-top:3px solid var(--amber)">
+        <div class="ag-val">8</div><div class="ag-lbl">Menunggu Tinjauan</div>
+        <div class="ag-delta" style="color:var(--amber)">Perlu aksi segera</div>
+      </div>
+      <div class="ag-box" style="border-top:3px solid var(--sky)">
+        <div class="ag-val">3</div><div class="ag-lbl">Interview Dijadwalkan</div>
+        <div class="ag-delta" style="color:var(--sky)">Minggu ini</div>
+      </div>
+      <div class="ag-box" style="border-top:3px solid var(--green)">
+        <div class="ag-val">2</div><div class="ag-lbl">Penawaran Dikirim</div>
+        <div class="ag-delta" style="color:var(--green)">Menunggu respon</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1.3fr .7fr;gap:14px">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title"><div class="ct-icon" style="background:var(--teal-lt)">📋</div>Lowongan Aktif</div>
+          <button class="btn-xs btn-teal" onclick="setNav(document.querySelectorAll('.tbn')[3],'posting')">+ Buka Baru</button>
+        </div>
+        <div class="job-post active">
+          <div class="jp-head">
+            <div><div class="jp-title">Operator Kebun & Pemantau Lingkungan</div><div class="jp-meta">Muara Pawan · Magang → Full-time · Dibuka 1 Mei</div></div>
+            <span class="jp-status" style="background:var(--green-lt);color:var(--green)">✓ Aktif</span>
+          </div>
+          <div class="jp-stats">
+            <div class="js">👁 <span class="js-val">142</span> dilihat</div>
+            <div class="js">📨 <span class="js-val">18</span> pelamar</div>
+            <div class="js">⭐ <span class="js-val">94</span> avg. match</div>
+            <div class="js">⏳ Tutup <span class="js-val">15 Mei</span></div>
+          </div>
+          <div class="jp-footer">
+            <div class="jp-tags">
+              <span class="jp-tag" style="background:var(--teal-lt);color:var(--teal)">ATP</span>
+              <span class="jp-tag" style="background:var(--amber-lt);color:var(--amber)">RSPO</span>
+            </div>
+            <div class="jp-actions">
+              <button class="btn-xs btn-outline" onclick="showToast('Membuka editor lowongan...')">Edit</button>
+              <button class="btn-xs btn-teal" onclick="setNav(document.querySelectorAll('.tbn')[2],'pelamar')">Lihat Pelamar (18)</button>
+            </div>
+          </div>
+        </div>
+        <div class="job-post active">
+          <div class="jp-head">
+            <div><div class="jp-title">Teknisi Pabrik CPO – Shift Malam</div><div class="jp-meta">Muara Pawan · Full-time · Dibuka 28 Apr</div></div>
+            <span class="jp-status" style="background:var(--green-lt);color:var(--green)">✓ Aktif</span>
+          </div>
+          <div class="jp-stats">
+            <div class="js">👁 <span class="js-val">87</span> dilihat</div>
+            <div class="js">📨 <span class="js-val">4</span> pelamar</div>
+            <div class="js">⭐ <span class="js-val">88</span> avg. match</div>
+          </div>
+          <div class="jp-footer">
+            <div class="jp-tags"><span class="jp-tag" style="background:var(--sky-lt);color:var(--sky)">Teknik Mesin</span></div>
+            <div class="jp-actions">
+              <button class="btn-xs btn-outline" onclick="showToast('Edit lowongan...')">Edit</button>
+              <button class="btn-xs btn-teal" onclick="setNav(document.querySelectorAll('.tbn')[2],'pelamar')">Pelamar (4)</button>
+            </div>
+          </div>
+        </div>
+        <div class="job-post draft">
+          <div class="jp-head">
+            <div><div class="jp-title">Staf Monitoring RSPO & HSE</div><div class="jp-meta">Draft — belum dipublikasi</div></div>
+            <span class="jp-status" style="background:var(--amber-lt);color:var(--amber)">📝 Draft</span>
+          </div>
+          <div class="jp-footer">
+            <div class="jp-tags"><span class="jp-tag" style="background:var(--amber-lt);color:var(--amber)">HSE</span><span class="jp-tag" style="background:var(--teal-lt);color:var(--teal)">RSPO</span></div>
+            <div class="jp-actions">
+              <button class="btn-xs btn-outline" onclick="showToast('Edit draft...')">Edit Draft</button>
+              <button class="btn-xs btn-amber" onclick="showToast('Lowongan dipublikasikan!')">Publikasikan</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card" style="margin-bottom:12px">
+          <div class="card-head"><div class="card-title"><div class="ct-icon" style="background:var(--amber-lt)">⚡</div>Aksi Cepat</div></div>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <button class="btn-lg btn-navy" style="width:100%;text-align:center" onclick="setNav(document.querySelectorAll('.tbn')[2],'pelamar')">📋 Tinjau 8 Pelamar Baru</button>
+            <button class="btn-lg btn-ghost" style="width:100%;text-align:center" onclick="setNav(document.querySelectorAll('.tbn')[3],'posting')">+ Buka Lowongan Baru</button>
+            <button class="btn-lg btn-ghost" style="width:100%;text-align:center" onclick="showToast('Membuka laporan analitik...')">📊 Lihat Analitik</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><div class="card-title"><div class="ct-icon" style="background:var(--sky-lt)">📅</div>Interview Minggu Ini</div></div>
+          <div style="font-size:11px;line-height:1.7">
+            <div style="padding:9px;background:var(--green-lt);border-radius:8px;margin-bottom:7px">
+              <div style="font-weight:700;color:var(--green)">Senin 12 Mei · 09.00</div>
+              <div style="color:var(--muted)">Aldi Ramadan · Operator Kebun</div>
+            </div>
+            <div style="padding:9px;background:var(--sky-lt);border-radius:8px;margin-bottom:7px">
+              <div style="font-weight:700;color:var(--sky)">Rabu 14 Mei · 10.00</div>
+              <div style="color:var(--muted)">Sari Dewi · Operator Kebun</div>
+            </div>
+            <div style="padding:9px;background:var(--sky-lt);border-radius:8px">
+              <div style="font-weight:700;color:var(--sky)">Rabu 14 Mei · 13.30</div>
+              <div style="color:var(--muted)">Budi Santoso · Teknisi CPO</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PELAMAR TOP MATCH -->
+    <div class="card">
+      <div class="card-head"><div class="card-title"><div class="ct-icon" style="background:var(--teal-lt)">⭐</div>Top Match Pelamar</div><button class="btn-xs btn-outline" onclick="setNav(document.querySelectorAll('.tbn')[2],'pelamar')">Lihat semua</button></div>
+      <div id="top-pelamar">
+        <div class="pelamar-row">
+          <div class="pr-avatar" style="background:var(--teal)">AR</div>
+          <div style="flex:1">
+            <div class="pr-name">Aldi Ramadan</div>
+            <div class="pr-meta">SMK ATP – SMKN 1 Ketapang · K3 Dasar ✓</div>
+          </div>
+          <div class="pr-match" style="color:var(--teal)">96</div>
+          <div class="pr-actions">
+            <button class="btn-xs btn-outline" onclick="openPelamar('Aldi Ramadan')">Profil</button>
+            <button class="btn-xs btn-teal" onclick="scheduleInterview('Aldi Ramadan')">Interview</button>
+          </div>
+        </div>
+        <div class="pelamar-row">
+          <div class="pr-avatar" style="background:var(--sky)">SD</div>
+          <div style="flex:1">
+            <div class="pr-name">Sari Dewi</div>
+            <div class="pr-meta">SMK ATP – SMK PGRI Ketapang</div>
+          </div>
+          <div class="pr-match" style="color:var(--teal)">91</div>
+          <div class="pr-actions">
+            <button class="btn-xs btn-outline" onclick="openPelamar('Sari Dewi')">Profil</button>
+            <button class="btn-xs btn-teal" onclick="scheduleInterview('Sari Dewi')">Interview</button>
+          </div>
+        </div>
+        <div class="pelamar-row">
+          <div class="pr-avatar" style="background:var(--purple)">BS</div>
+          <div style="flex:1">
+            <div class="pr-name">Budi Santoso</div>
+            <div class="pr-meta">SMK Teknik Mesin – SMKN 2 Ketapang</div>
+          </div>
+          <div class="pr-match" style="color:var(--sky)">85</div>
+          <div class="pr-actions">
+            <button class="btn-xs btn-outline" onclick="openPelamar('Budi Santoso')">Profil</button>
+            <button class="btn-xs btn-teal" onclick="scheduleInterview('Budi Santoso')">Interview</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOWONGAN -->
+  <div class="sec" id="sec-lowongan">
+    <div class="main-tabs">
+      <button class="mt on">Semua (4)</button>
+      <button class="mt">Aktif (3)</button>
+      <button class="mt">Draft (1)</button>
+      <button class="mt">Ditutup (2)</button>
+    </div>
+    <!-- same job cards as dashboard, extended -->
+    <div class="job-post active">
+      <div class="jp-head">
+        <div><div class="jp-title">Operator Kebun & Pemantau Lingkungan</div><div class="jp-meta">Muara Pawan · Magang → Full-time · Dibuka 1 Mei 2026 · Tutup 15 Mei 2026</div></div>
+        <span class="jp-status" style="background:var(--green-lt);color:var(--green)">✓ Aktif</span>
+      </div>
+      <div class="jp-stats">
+        <div class="js">👁 <span class="js-val">142</span></div>
+        <div class="js">📨 <span class="js-val">18</span> pelamar</div>
+        <div class="js">⭐ avg <span class="js-val">94</span></div>
+        <div class="js">🎯 top match <span class="js-val">96</span></div>
+      </div>
+      <div class="progress-bar" style="margin-bottom:10px"><div class="pb-fill" style="width:78%"></div></div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:10px">78% kuota terisi (14 dari 18 posisi dibutuhkan)</div>
+      <div class="jp-footer">
+        <div class="jp-tags"><span class="jp-tag" style="background:var(--teal-lt);color:var(--teal)">ATP</span><span class="jp-tag" style="background:var(--amber-lt);color:var(--amber)">RSPO</span><span class="jp-tag" style="background:var(--sky-lt);color:var(--sky)">K3</span></div>
+        <div class="jp-actions">
+          <button class="btn-xs btn-red" onclick="showToast('Lowongan ditutup')">Tutup</button>
+          <button class="btn-xs btn-outline" onclick="showToast('Edit lowongan...')">Edit</button>
+          <button class="btn-xs btn-teal" onclick="setNav(document.querySelectorAll('.tbn')[2],'pelamar')">Pelamar (18)</button>
+        </div>
+      </div>
+    </div>
+    <div class="job-post active">
+      <div class="jp-head">
+        <div><div class="jp-title">Teknisi Pabrik CPO – Shift Malam</div><div class="jp-meta">Muara Pawan · Full-time · Dibuka 28 Apr 2026</div></div>
+        <span class="jp-status" style="background:var(--green-lt);color:var(--green)">✓ Aktif</span>
+      </div>
+      <div class="jp-stats"><div class="js">👁 <span class="js-val">87</span></div><div class="js">📨 <span class="js-val">4</span></div><div class="js">⭐ <span class="js-val">88</span></div></div>
+      <div class="jp-footer">
+        <div class="jp-tags"><span class="jp-tag" style="background:var(--sky-lt);color:var(--sky)">TKR</span><span class="jp-tag" style="background:var(--amber-lt);color:var(--amber)">Teknik Mesin</span></div>
+        <div class="jp-actions"><button class="btn-xs btn-outline" onclick="showToast('Edit...')">Edit</button><button class="btn-xs btn-teal" onclick="setNav(document.querySelectorAll('.tbn')[2],'pelamar')">Pelamar (4)</button></div>
+      </div>
+    </div>
+    <div class="job-post draft">
+      <div class="jp-head">
+        <div><div class="jp-title">Staf Monitoring RSPO & HSE</div><div class="jp-meta">Draft – belum dipublikasi</div></div>
+        <span class="jp-status" style="background:var(--amber-lt);color:var(--amber)">📝 Draft</span>
+      </div>
+      <div class="jp-footer">
+        <div class="jp-tags"><span class="jp-tag" style="background:var(--amber-lt);color:var(--amber)">HSE</span></div>
+        <div class="jp-actions"><button class="btn-xs btn-outline">Edit Draft</button><button class="btn-xs btn-amber" onclick="showToast('Dipublikasikan!')">Publikasikan</button></div>
+      </div>
+    </div>
+    <div class="job-post closed">
+      <div class="jp-head">
+        <div><div class="jp-title">Asisten Analis Mutu TBS</div><div class="jp-meta">Ditutup 15 Apr 2026 · 12 pelamar · 2 direkrut</div></div>
+        <span class="jp-status" style="background:var(--surface);color:var(--subtle)">Ditutup</span>
+      </div>
+      <div class="jp-footer">
+        <div style="font-size:11px;color:var(--subtle)">2 posisi berhasil diisi</div>
+        <div class="jp-actions"><button class="btn-xs btn-outline" onclick="showToast('Buka ulang lowongan...')">Buka Ulang</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PELAMAR -->
+  <div class="sec" id="sec-pelamar">
+    <div class="main-tabs" id="pelamar-tabs">
+      <button class="mt on" onclick="setSubTab(this,'semua')">Semua (24)</button>
+      <button class="mt" onclick="setSubTab(this,'baru')">Baru (8)</button>
+      <button class="mt" onclick="setSubTab(this,'interview')">Interview (3)</button>
+      <button class="mt" onclick="setSubTab(this,'penawaran')">Penawaran (2)</button>
+      <button class="mt" onclick="setSubTab(this,'ditolak')">Ditolak (1)</button>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="card-title"><div class="ct-icon" style="background:var(--amber-lt)">⏳</div>Menunggu Tinjauan (8)</div></div>
+      <div id="pelamar-list">
+        <!-- Pelamar items -->
+        <div class="pelamar-row">
+          <div class="pr-avatar" style="background:var(--teal)">AR</div>
+          <div style="flex:1">
+            <div class="pr-name">Aldi Ramadan</div>
+            <div class="pr-meta">SMKN 1 – ATP · Operator Kebun · 25 Apr 2026</div>
+            <div style="margin-top:5px;display:flex;gap:5px">
+              <span style="font-size:9px;padding:2px 7px;border-radius:20px;background:var(--teal-lt);color:var(--teal);font-weight:700">Match 96</span>
+              <span style="font-size:9px;padding:2px 7px;border-radius:20px;background:var(--sky-lt);color:var(--sky);font-weight:700">K3 ✓</span>
+            </div>
+          </div>
+          <div class="pr-actions">
+            <button class="btn-xs btn-outline" onclick="openPelamar('Aldi Ramadan')">Profil</button>
+            <button class="btn-xs btn-red" onclick="showToast('Lamaran ditolak')">Tolak</button>
+            <button class="btn-xs btn-teal" onclick="scheduleInterview('Aldi Ramadan')">Interview ↗</button>
+          </div>
+        </div>
+        <div class="pelamar-row">
+          <div class="pr-avatar" style="background:var(--sky)">SD</div>
+          <div style="flex:1">
+            <div class="pr-name">Sari Dewi</div>
+            <div class="pr-meta">SMK PGRI – ATP · Operator Kebun · 26 Apr 2026</div>
+            <div style="margin-top:5px;display:flex;gap:5px"><span style="font-size:9px;padding:2px 7px;border-radius:20px;background:var(--teal-lt);color:var(--teal);font-weight:700">Match 91</span></div>
+          </div>
+          <div class="pr-actions">
+            <button class="btn-xs btn-outline" onclick="openPelamar('Sari Dewi')">Profil</button>
+            <button class="btn-xs btn-red" onclick="showToast('Ditolak')">Tolak</button>
+            <button class="btn-xs btn-teal" onclick="scheduleInterview('Sari Dewi')">Interview ↗</button>
+          </div>
+        </div>
+        <div class="pelamar-row">
+          <div class="pr-avatar" style="background:var(--purple)">BS</div>
+          <div style="flex:1">
+            <div class="pr-name">Budi Santoso</div>
+            <div class="pr-meta">SMKN 2 – Teknik Mesin · Teknisi CPO · 27 Apr 2026</div>
+            <div style="margin-top:5px;display:flex;gap:5px"><span style="font-size:9px;padding:2px 7px;border-radius:20px;background:var(--sky-lt);color:var(--sky);font-weight:700">Match 85</span></div>
+          </div>
+          <div class="pr-actions">
+            <button class="btn-xs btn-outline" onclick="openPelamar('Budi Santoso')">Profil</button>
+            <button class="btn-xs btn-red" onclick="showToast('Ditolak')">Tolak</button>
+            <button class="btn-xs btn-teal" onclick="scheduleInterview('Budi Santoso')">Interview ↗</button>
+          </div>
+        </div>
+        <div class="pelamar-row">
+          <div class="pr-avatar" style="background:var(--amber)">FN</div>
+          <div style="flex:1">
+            <div class="pr-name">Fitri Nurhayati</div>
+            <div class="pr-meta">SMK PGRI – ATP · Operator Kebun · 28 Apr 2026</div>
+            <div style="margin-top:5px;display:flex;gap:5px"><span style="font-size:9px;padding:2px 7px;border-radius:20px;background:var(--amber-lt);color:var(--amber);font-weight:700">Match 78</span></div>
+          </div>
+          <div class="pr-actions">
+            <button class="btn-xs btn-outline" onclick="openPelamar('Fitri Nurhayati')">Profil</button>
+            <button class="btn-xs btn-red" onclick="showToast('Ditolak')">Tolak</button>
+            <button class="btn-xs btn-teal" onclick="scheduleInterview('Fitri Nurhayati')">Interview ↗</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POSTING FORM -->
+  <div class="sec" id="sec-posting">
+    <div class="post-form">
+      <div class="pf-title">Buka Lowongan Baru</div>
+      <div class="pf-sub">Isi detail posisi yang kamu butuhkan. Sistem kami akan otomatis mencocokkan dengan profil lulusan Ketapang.</div>
+      <div class="field"><div class="field-label">Judul Posisi</div><input class="field-input" placeholder="Contoh: Operator Kebun Sawit, Teknisi Mesin ..."></div>
+      <div class="field-row">
+        <div class="field"><div class="field-label">Sektor</div>
+          <select class="field-select"><option>Sawit & Agrikultur</option><option>Teknik & Mesin</option><option>Kesehatan</option><option>TIK & Digital</option><option>Admin & Keuangan</option></select>
+        </div>
+        <div class="field"><div class="field-label">Tipe Pekerjaan</div>
+          <select class="field-select"><option>Magang</option><option>Full-time</option><option>Part-time</option><option>Kontrak</option><option>Magang → Full-time</option></select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field"><div class="field-label">Kecamatan</div>
+          <select class="field-select"><option>Muara Pawan</option><option>Delta Pawan</option><option>Benua Kayong</option><option>Semua Kecamatan</option></select>
+        </div>
+        <div class="field"><div class="field-label">Jumlah yang Dibutuhkan</div><input class="field-input" type="number" placeholder="Contoh: 5" min="1"></div>
+      </div>
+      <div class="field"><div class="field-label">Jurusan / Kompetensi yang Dicari</div>
+        <select class="field-select"><option>Agribisnis Tanaman Perkebunan (ATP)</option><option>Teknik Kendaraan Ringan (TKR)</option><option>Teknik Mesin</option><option>TKJ / TIK</option><option>Keperawatan</option><option>Akuntansi</option><option>Semua Jurusan</option></select>
+      </div>
+      <div class="field-row">
+        <div class="field"><div class="field-label">Gaji / Uang Saku (Rp)</div><input class="field-input" placeholder="Contoh: 1.500.000 atau Negosiasi"></div>
+        <div class="field"><div class="field-label">Tanggal Tutup</div><input class="field-input" type="date"></div>
+      </div>
+      <div class="field"><div class="field-label">Deskripsi Pekerjaan</div><textarea class="field-textarea" placeholder="Jelaskan tanggung jawab, lingkungan kerja, dan apa yang akan dipelajari pelamar..."></textarea></div>
+      <div class="field"><div class="field-label">Kualifikasi & Persyaratan</div><textarea class="field-textarea" placeholder="Contoh: Lulusan SMK ATP, familiar dengan mesin semprot, bersedia kerja lapangan..."></textarea></div>
+      <div class="field"><div class="field-label">Fasilitas & Keuntungan</div><textarea class="field-textarea" rows="3" placeholder="BPJS, makan siang, transport, sertifikasi RSPO, peluang tetap..."></textarea></div>
+      <div style="background:var(--teal-lt);border-radius:10px;padding:14px;margin-bottom:14px;font-size:11px;color:var(--teal);line-height:1.7">
+        🤖 <strong>AI Matching aktif:</strong> Setelah kamu simpan lowongan ini, sistem akan otomatis mencocokkan dengan 5.600+ profil siswa dan lulusan Ketapang dan menampilkan daftar kandidat terbaik dalam beberapa menit.
+      </div>
+      <div class="save-bar">
+        <button class="btn-lg btn-ghost" onclick="showToast('Tersimpan sebagai draft')">Simpan Draft</button>
+        <button class="btn-lg btn-navy" onclick="publishJob()">Publikasikan Sekarang →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANALYTICS -->
+  <div class="sec" id="sec-analytics">
+    <div class="analytics-grid">
+      <div class="ag-box" style="border-top:3px solid var(--teal)"><div class="ag-val">342</div><div class="ag-lbl">Total Tampilan</div><div class="ag-delta" style="color:var(--teal)">↑ +22% bulan ini</div></div>
+      <div class="ag-box" style="border-top:3px solid var(--sky)"><div class="ag-val">24</div><div class="ag-lbl">Total Pelamar</div><div class="ag-delta" style="color:var(--sky)">↑ +5 minggu ini</div></div>
+      <div class="ag-box" style="border-top:3px solid var(--amber)"><div class="ag-val">7%</div><div class="ag-lbl">Tingkat Konversi</div><div class="ag-delta" style="color:var(--muted)">Rata-rata 5%</div></div>
+      <div class="ag-box" style="border-top:3px solid var(--green)"><div class="ag-val">4</div><div class="ag-lbl">Direkrut (YTD)</div><div class="ag-delta" style="color:var(--green)">Target: 8/tahun</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1.2fr .8fr;gap:14px">
+      <div class="card">
+        <div class="card-head"><div class="card-title"><div class="ct-icon" style="background:var(--sky-lt)">📊</div>Sumber Jurusan Pelamar</div></div>
+        <div class="bar-row"><div class="bar-label">Agribisnis ATP</div><div class="bar-track"><div class="bar-fill" style="width:75%;background:var(--teal)"></div></div><div class="bar-val">18</div></div>
+        <div class="bar-row"><div class="bar-label">Teknik Mesin / TKR</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:var(--sky)"></div></div><div class="bar-val">4</div></div>
+        <div class="bar-row"><div class="bar-label">TKJ / TIK</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:var(--purple)"></div></div><div class="bar-val">2</div></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="card-title"><div class="ct-icon" style="background:var(--amber-lt)">🏫</div>Top Sekolah Pelamar</div></div>
+        <div class="mini-stat"><span class="ms-label">SMKN 1 Ketapang</span><span class="ms-val">11</span></div>
+        <div class="mini-stat"><span class="ms-label">SMK PGRI Ketapang</span><span class="ms-val">7</span></div>
+        <div class="mini-stat"><span class="ms-label">SMKN 2 Ketapang</span><span class="ms-val">4</span></div>
+        <div class="mini-stat"><span class="ms-label">Lainnya</span><span class="ms-val">2</span></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end main-col -->
+
+<!-- SIDEBAR -->
+<div class="side-col">
+  <div class="side-card" style="background:var(--navy);border-color:var(--navy)">
+    <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px">Profil Perusahaan</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+      <div style="width:44px;height:44px;background:var(--amber);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;flex-shrink:0">CK</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:#fff">Cargill Ketapang Mill</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.45)">Sawit & Agrikultur · Muara Pawan</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+      <span style="font-size:9px;padding:3px 9px;border-radius:20px;background:rgba(0,179,126,.2);color:var(--teal2);font-weight:700">✓ Terverifikasi</span>
+      <span style="font-size:9px;padding:3px 9px;border-radius:20px;background:rgba(245,158,11,.2);color:var(--amber);font-weight:700">⭐ Mitra Utama</span>
+    </div>
+    <div style="background:rgba(255,255,255,.07);border-radius:9px;padding:11px;font-size:11px;color:rgba(255,255,255,.6);line-height:1.7">
+      Perusahaan pengolahan kelapa sawit terbesar di Ketapang dengan komitmen RSPO dan keberlanjutan lingkungan.
+    </div>
+    <button style="width:100%;margin-top:10px;padding:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:600;color:rgba(255,255,255,.7);cursor:pointer" onclick="showToast('Edit profil perusahaan')">Edit Profil Perusahaan</button>
+  </div>
+  <div class="side-card">
+    <div class="sc-title"><div class="sc-icon" style="background:var(--teal-lt)">📈</div>Statistik Rekrutmen</div>
+    <div class="mini-stat"><span class="ms-label">Pelamar diterima</span><span class="ms-val" style="color:var(--green)">4</span></div>
+    <div class="mini-stat"><span class="ms-label">Dalam proses</span><span class="ms-val" style="color:var(--amber)">8</span></div>
+    <div class="mini-stat"><span class="ms-label">Avg. match score</span><span class="ms-val" style="color:var(--teal)">92</span></div>
+    <div class="mini-stat"><span class="ms-label">Waktu rekrut avg.</span><span class="ms-val">12 hari</span></div>
+    <div class="mini-stat"><span class="ms-label">Tampilan profil</span><span class="ms-val">342</span></div>
+  </div>
+  <div class="side-card">
+    <div class="sc-title"><div class="sc-icon" style="background:var(--amber-lt)">💡</div>Rekomendasi AI</div>
+    <div style="font-size:11px;line-height:1.7;color:var(--ink2);margin-bottom:10px">Berdasarkan kebutuhan posisimu, ada <strong>12 kandidat baru</strong> dengan match 85+ yang belum melamar.</div>
+    <button class="btn-xs btn-navy" style="width:100%" onclick="showToast('Membuka daftar kandidat rekomendasi...')">Undang Kandidat →</button>
+  </div>
+  <div class="side-card">
+    <div class="sc-title"><div class="sc-icon" style="background:var(--sky-lt)">📋</div>Paket Langganan</div>
+    <div style="background:var(--surface);border-radius:9px;padding:12px;margin-bottom:10px">
+      <div style="font-size:12px;font-weight:700;color:var(--navy)">Paket Gratis</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:3px;line-height:1.6">3 lowongan aktif · 50 profil pelamar · Matching dasar</div>
+    </div>
+    <button class="btn-xs btn-amber" style="width:100%;padding:8px" onclick="showToast('Upgrade ke paket Pro...')">⬆ Upgrade ke Pro</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL: PROFIL PELAMAR -->
+<div class="modal-overlay" id="pelamar-modal" onclick="if(event.target===this)this.classList.remove('show')">
+  <div class="modal">
+    <div class="modal-title" id="modal-name">Profil Pelamar</div>
+    <div class="modal-sub">Detail profil dan riwayat lamaran</div>
+    <div style="display:grid;grid-template-columns:80px 1fr;gap:16px;margin-bottom:16px">
+      <div style="width:72px;height:72px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:24px;color:#fff;font-weight:700" id="modal-avatar">AR</div>
+      <div>
+        <div style="font-size:15px;font-weight:700;color:var(--navy)" id="modal-title2">Aldi Ramadan</div>
+        <div style="font-size:11px;color:var(--muted)">SMKN 1 Ketapang · Kelas XII ATP</div>
+        <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap">
+          <span style="font-size:10px;padding:3px 9px;border-radius:20px;background:var(--teal-lt);color:var(--teal);font-weight:700">Match 96/100</span>
+          <span style="font-size:10px;padding:3px 9px;border-radius:20px;background:var(--sky-lt);color:var(--sky);font-weight:700">K3 Dasar ✓</span>
+        </div>
+      </div>
+    </div>
+    <div style="background:var(--surface);border-radius:10px;padding:14px;font-size:11px;line-height:1.8;color:var(--ink2);margin-bottom:14px">
+      <strong>Pengalaman:</strong> PKL 3 bulan di Kebun Plasma Sungai Besar. Aktif di Kelompok Tani Pelajar SMKN 1.<br>
+      <strong>Sertifikat:</strong> K3 Dasar Perkebunan (Dinas Perkebunan 2024), Juara 2 Lomba Agribisnis Ketapang.<br>
+      <strong>Keahlian:</strong> Pemupukan presisi, pengendalian hama, mesin semprot, K3 lapangan.
+    </div>
+    <div class="modal-footer">
+      <button class="btn-lg btn-ghost" onclick="document.getElementById('pelamar-modal').classList.remove('show')">Tutup</button>
+      <button class="btn-lg btn-navy" onclick="scheduleInterview2()">Jadwalkan Interview →</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<!-- LOGOUT MODAL -->
+<div class="logout-modal" id="logout-modal">
+  <div class="lm-box">
+    <div class="lm-icon">🚪</div>
+    <div class="lm-title">Keluar dari akun?</div>
+    <div class="lm-sub">Kamu akan diarahkan kembali ke halaman login. Data rekrutmen tetap tersimpan.</div>
+    <div class="lm-actions">
+      <button class="lm-btn cancel" onclick="hideLogoutModal()">Batal</button>
+      <button class="lm-btn confirm" onclick="doLogout()">Ya, Keluar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="#00D49A" stroke-width="2.5"/><path d="M22 4L12 14.01l-3-3" stroke="#00D49A" stroke-width="2.5" stroke-linecap="round"/></svg>
+  <span id="toast-msg"></span>
+</div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    function setNav(el,name){
+      document.querySelectorAll('.tbn').forEach(b=>b.classList.remove('on'));
+      el.classList.add('on');
+      document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+      document.getElementById('sec-'+name).classList.add('on');
+    }
+    function setSubTab(el){document.querySelectorAll('#pelamar-tabs .mt').forEach(b=>b.classList.remove('on'));el.classList.add('on')}
+    function openPelamar(name){
+      document.getElementById('modal-name').textContent='Profil: '+name;
+      document.getElementById('modal-title2').textContent=name;
+      document.getElementById('modal-avatar').textContent=name.split(' ').map(w=>w[0]).join('');
+      document.getElementById('pelamar-modal').classList.add('show');
+    }
+    function closePelamar(){document.getElementById('pelamar-modal').classList.remove('show');}
+    function scheduleInterview(name){if(window.showToast) window.showToast('Undangan interview dikirim ke '+name+'!');}
+    function scheduleInterview2(){closePelamar();if(window.showToast) window.showToast('Interview dijadwalkan!');}
+    function publishJob(){if(window.showToast) window.showToast('Lowongan berhasil dipublikasikan! Matching sedang berjalan...');}
+  </script>
+</body>
+</html>
+

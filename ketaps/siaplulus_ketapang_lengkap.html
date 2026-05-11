@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siap Lulus Ketapang — Portal Lengkap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#06182C;--navy2:#0A2240;--teal:#00B37E;--teal2:#00D49A;--teal-lt:#E6FBF4;
+  --amber:#F59E0B;--amber-lt:#FEF3C7;--coral:#EF4444;--coral-lt:#FEE2E2;
+  --sky:#3B82F6;--sky-lt:#EFF6FF;--purple:#8B5CF6;--purple-lt:#F5F3FF;
+  --green:#16A34A;--green-lt:#DCFCE7;--pink:#EC4899;--pink-lt:#FCE7F3;
+  --orange:#EA580C;--orange-lt:#FFF7ED;
+  --line:#E2E8F0;--surface:#F8FAFC;--muted:#64748B;--subtle:#94A3B8;--ink:#0F172A;--ink2:#334155;
+}
+html,body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:var(--ink);font-size:14px;min-height:100vh}
+
+/* ═══════════ PAGE SYSTEM ═══════════ */
+.page{display:none}
+.page.active{display:flex;flex-direction:column;min-height:100vh}
+
+/* ═══════════ TOPBAR ═══════════ */
+.topbar{background:var(--navy);height:58px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;flex-shrink:0}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer}
+.brand-hex{width:36px;height:36px;background:var(--teal);clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.brand-hex svg{width:18px;height:18px}
+.brand-txt{font-family:'Fraunces',serif;font-size:17px;color:#fff;font-weight:700}
+.brand-badge{font-size:9px;padding:2px 8px;border-radius:20px;background:var(--teal);color:#fff;font-weight:700;margin-left:4px}
+.tb-search{flex:1;max-width:440px;margin:0 20px;position:relative}
+.tb-search input{width:100%;padding:9px 14px 9px 38px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;color:#fff;outline:none;transition:.2s}
+.tb-search input::placeholder{color:rgba(255,255,255,.35)}
+.tb-search input:focus{background:rgba(255,255,255,.13);border-color:var(--teal)}
+.tb-si{position:absolute;left:11px;top:50%;transform:translateY(-50%);opacity:.4;pointer-events:none}
+.tb-nav{display:flex;gap:2px}
+.tbn{padding:7px 12px;border-radius:7px;font-size:11px;font-weight:700;color:rgba(255,255,255,.55);cursor:pointer;transition:.15s;border:none;background:none;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;gap:5px}
+.tbn:hover{color:#fff;background:rgba(255,255,255,.08)}
+.tbn.active{color:#fff;background:rgba(255,255,255,.12)}
+.tbn-dot{width:6px;height:6px;border-radius:50%}
+.tb-right{display:flex;align-items:center;gap:8px}
+.xp-pill{display:flex;align-items:center;gap:5px;padding:5px 10px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:20px;cursor:pointer}
+.xp-val{font-size:11px;font-weight:700;color:var(--amber)}
+.notif-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(255,255,255,.6);position:relative;transition:.15s}
+.notif-btn:hover{background:rgba(255,255,255,.14)}
+.notif-dot{width:7px;height:7px;background:var(--coral);border-radius:50%;position:absolute;top:7px;right:7px;border:1.5px solid var(--navy)}
+.user-pill{display:flex;align-items:center;gap:7px;padding:5px 12px 5px 5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:20px;cursor:pointer;transition:.15s}
+.user-pill:hover{background:rgba(255,255,255,.13)}
+.ua{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff}
+.un{font-size:11px;font-weight:600;color:#fff}
+
+/* ═══════════ LOGIN PAGE ═══════════ */
+#page-login{flex-direction:row;min-height:100vh}
+.login-left{background:var(--navy);flex:1.1;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:44px 52px}
+.ll-orb1{position:absolute;right:-80px;top:-80px;width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,rgba(0,179,126,.28) 0%,transparent 65%);animation:drift1 9s ease-in-out infinite}
+.ll-orb2{position:absolute;left:-60px;bottom:-80px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,.18) 0%,transparent 65%);animation:drift2 11s ease-in-out infinite}
+.ll-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:50px 50px}
+@keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(-24px,18px)}}
+@keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(18px,-22px)}}
+.ll-content{position:relative;z-index:1}
+.ll-brand{display:flex;align-items:center;gap:12px;margin-bottom:56px}
+.ll-brand-hex{width:44px;height:44px;background:var(--teal);clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);display:flex;align-items:center;justify-content:center}
+.ll-brand-hex svg{width:22px;height:22px}
+.ll-brand-name{font-family:'Fraunces',serif;font-size:22px;color:#fff;font-weight:700}
+.ll-brand-sub{font-size:10px;color:rgba(255,255,255,.4);margin-top:1px}
+.ll-headline{font-family:'Fraunces',serif;font-size:50px;line-height:1.05;color:#fff;font-weight:700;margin-bottom:18px}
+.ll-headline .acc{color:var(--teal2);font-style:italic}
+.ll-desc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.8;max-width:400px;font-weight:300;margin-bottom:36px}
+.ll-roles{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:0}
+.ll-role{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:16px 12px;text-align:center;cursor:pointer;transition:.2s}
+.ll-role:hover{background:rgba(255,255,255,.11);transform:translateY(-2px)}
+.ll-role-icon{font-size:24px;margin-bottom:7px}
+.ll-role-name{font-size:11px;font-weight:700;color:#fff;display:block}
+.ll-role-count{font-size:9px;color:rgba(255,255,255,.35);display:block;margin-top:2px}
+.ll-stats{position:relative;z-index:1;display:flex;gap:28px;padding-top:28px;border-top:1px solid rgba(255,255,255,.08);margin-top:40px}
+.ll-stat-val{font-family:'Fraunces',serif;font-size:28px;color:#fff;font-weight:700;line-height:1}
+.ll-stat-lbl{font-size:10px;color:rgba(255,255,255,.35);margin-top:3px}
+
+.login-right{width:460px;background:#fff;display:flex;align-items:center;justify-content:center;padding:44px 52px;overflow-y:auto}
+.lform-wrap{width:100%}
+.lform-view{display:none;animation:fadeUp .3s ease both}
+.lform-view.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.lf-eyebrow{display:flex;align-items:center;gap:7px;margin-bottom:9px}
+.lf-ey-dot{width:6px;height:6px;border-radius:50%}
+.lf-ey-txt{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+.lf-title{font-family:'Fraunces',serif;font-size:30px;color:var(--navy);font-weight:700;line-height:1.1;margin-bottom:6px}
+.lf-sub{font-size:12px;color:var(--muted);margin-bottom:24px}
+.lf-sub a{color:var(--teal);font-weight:700;text-decoration:none}
+
+.google-btn{width:100%;padding:12px;border-radius:11px;border:2px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:var(--ink);cursor:pointer;transition:.2s;margin-bottom:8px;position:relative;overflow:hidden}
+.google-btn:hover{border-color:#4285F4;background:var(--sky-lt);transform:translateY(-1px);box-shadow:0 4px 16px rgba(66,133,244,.15)}
+.ms-btn{width:100%;padding:12px;border-radius:11px;border:2px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:var(--ink);cursor:pointer;transition:.2s;margin-bottom:8px}
+.ms-btn:hover{border-color:#00A4EF;background:#F0F8FF;transform:translateY(-1px)}
+
+.or-div{display:flex;align-items:center;gap:12px;margin:16px 0}
+.or-line{flex:1;height:1px;background:var(--line)}
+.or-txt{font-size:11px;color:var(--subtle)}
+
+.role-tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;background:var(--surface);border-radius:11px;padding:4px;margin-bottom:20px}
+.rt{padding:10px 6px;border-radius:8px;cursor:pointer;text-align:center;transition:.15s;border:none;background:none;width:100%;font-family:'Plus Jakarta Sans',sans-serif}
+.rt:hover{background:rgba(0,0,0,.04)}
+.rt.on{background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.rt-icon{font-size:17px;display:block;margin-bottom:4px}
+.rt-label{font-size:10px;font-weight:700;color:var(--muted)}
+.rt.on .rt-label{color:var(--navy)}
+
+.lf-field{margin-bottom:14px}
+.lf-label{font-size:11px;font-weight:700;color:var(--navy);margin-bottom:6px;display:flex;justify-content:space-between}
+.lf-label a{font-size:10px;color:var(--teal);font-weight:500;text-decoration:none}
+.lf-input,.lf-select{width:100%;padding:11px 14px;border:2px solid var(--line);border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;color:var(--ink);background:#fff;outline:none;transition:.2s;-webkit-appearance:none}
+.lf-input:focus,.lf-select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,179,126,.1)}
+.lf-input::placeholder{color:var(--subtle)}
+.pw-wrap{position:relative}
+.pw-wrap .lf-input{padding-right:44px}
+.eye-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--subtle);display:flex;padding:4px}
+.eye-btn:hover{color:var(--navy)}
+.pw-bars{display:flex;gap:3px;margin-top:6px}
+.pw-bar{flex:1;height:3px;border-radius:20px;background:var(--line);transition:.3s}
+.pw-hint{font-size:10px;color:var(--subtle);margin-top:4px}
+.lf-row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cb-row{display:flex;gap:9px;align-items:flex-start;margin-bottom:14px}
+.cb-row input{width:15px;height:15px;accent-color:var(--teal);flex-shrink:0;margin-top:2px;cursor:pointer}
+.cb-row label{font-size:11px;color:var(--muted);line-height:1.5}
+.cb-row a{color:var(--teal)}
+.submit-btn{width:100%;padding:13px;background:var(--navy);border:none;border-radius:11px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;cursor:pointer;transition:.2s;letter-spacing:.2px}
+.submit-btn:hover{background:var(--teal);transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,179,126,.25)}
+.submit-btn.loading{background:var(--teal);pointer-events:none}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);cursor:pointer;border:none;background:none;font-family:'Plus Jakarta Sans',sans-serif;padding:0;margin-bottom:18px}
+.back-link:hover{color:var(--navy)}
+
+/* GOOGLE ROLE PICKER */
+.grole-opt{border:2px solid var(--line);border-radius:12px;padding:15px;cursor:pointer;display:flex;align-items:center;gap:13px;transition:.15s;margin-bottom:10px;background:#fff}
+.grole-opt:hover{border-color:var(--teal);background:var(--teal-lt)}
+.grole-icon{font-size:26px;flex-shrink:0}
+.grole-name{font-size:13px;font-weight:700;color:var(--navy)}
+.grole-sub{font-size:10px;color:var(--muted)}
+.grole-arr{margin-left:auto;color:var(--subtle);font-size:16px}
+
+/* ═══════════ MAIN APP LAYOUT ═══════════ */
+.app-body{flex:1;display:grid;grid-template-columns:256px 1fr 292px;gap:0;max-width:1280px;width:100%;margin:0 auto;padding:22px;gap:18px}
+
+/* ═══════════ SIDEBAR ═══════════ */
+.sidebar{}
+.sb-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:12px}
+.sb-profile{text-align:center}
+.sb-avatar{width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--sky));margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:26px;color:#fff;font-weight:700}
+.sb-name{font-size:15px;font-weight:700;color:var(--navy)}
+.sb-school{font-size:10px;color:var(--muted);margin-top:3px}
+.sb-score-box{background:var(--surface);border-radius:10px;padding:12px;margin-top:14px;text-align:center}
+.sb-score-val{font-family:'Fraunces',serif;font-size:38px;color:var(--teal);font-weight:700;line-height:1}
+.sb-score-lbl{font-size:10px;color:var(--muted);margin-top:2px}
+.pb{height:5px;background:var(--line);border-radius:20px;overflow:hidden;margin-top:8px}
+.pb-fill{height:100%;border-radius:20px;background:var(--teal)}
+.sb-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px;justify-content:center}
+.sb-tag{font-size:10px;padding:3px 9px;border-radius:20px;font-weight:600}
+.sb-sec{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.sb-sec-ttl{font-size:9px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.sbn{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:9px;cursor:pointer;font-size:12px;font-weight:600;color:var(--ink2);transition:.15s;border:none;background:none;width:100%;font-family:'Plus Jakarta Sans',sans-serif;text-align:left}
+.sbn:hover{background:var(--surface)}
+.sbn.active{background:var(--teal-lt);color:var(--teal)}
+.sbn-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.sbn-badge{margin-left:auto;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px}
+.xp-box{background:var(--navy);border-radius:10px;padding:12px;margin-top:12px;text-align:center}
+.xp-box-val{font-family:'Fraunces',serif;font-size:22px;color:var(--amber);font-weight:700}
+.xp-box-lbl{font-size:9px;color:rgba(255,255,255,.4);margin-top:2px}
+.xp-box-bar{height:4px;background:rgba(255,255,255,.1);border-radius:20px;overflow:hidden;margin-top:8px}
+.xp-box-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--teal),var(--purple))}
+
+/* ═══════════ MAIN COL ═══════════ */
+.main-col{min-width:0}
+
+/* SECTION SYSTEM */
+.sec{display:none}
+.sec.active{display:block}
+
+/* ═══════════ HERO BANNER ═══════════ */
+.hero-banner{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 55%,#0A2A1C 100%);border-radius:16px;padding:22px 26px;margin-bottom:18px;position:relative;overflow:hidden;display:flex;align-items:center;gap:18px}
+.hb-orb{position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(0,179,126,.12)}
+.hb-emoji{font-size:36px;flex-shrink:0;position:relative;z-index:1}
+.hb-content{flex:1;position:relative;z-index:1}
+.hb-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:3px}
+.hb-sub{font-size:11px;color:rgba(255,255,255,.55)}
+.hb-btn{padding:9px 18px;background:var(--teal);border:none;border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:700;color:#fff;cursor:pointer;white-space:nowrap;flex-shrink:0;position:relative;z-index:1;transition:.15s}
+.hb-btn:hover{background:var(--teal2)}
+
+/* ═══════════ FILTER ═══════════ */
+.filter-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+.filter-row{display:flex;gap:9px;margin-bottom:12px;flex-wrap:wrap}
+.f-select{padding:9px 13px;border:2px solid var(--line);border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:var(--ink);background:#fff;cursor:pointer;outline:none;transition:.2s;-webkit-appearance:none;min-width:130px;font-weight:500}
+.f-select:focus{border-color:var(--teal)}
+.f-btn{padding:9px 16px;border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:700;cursor:pointer;border:none;transition:.15s}
+.f-btn.go{background:var(--navy);color:#fff}
+.f-btn.go:hover{background:var(--teal)}
+.f-btn.rst{background:var(--surface);color:var(--muted);border:1px solid var(--line)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;border:2px solid var(--line);background:#fff;color:var(--muted);cursor:pointer;transition:.15s}
+.chip:hover{border-color:#94A3B8;color:var(--ink)}
+.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* ═══════════ JOB TABS ═══════════ */
+.job-tabs{display:flex;background:#fff;border:1px solid var(--line);border-radius:11px;padding:4px;margin-bottom:14px;overflow-x:auto}
+.jtab{flex:1;min-width:max-content;padding:8px 12px;border-radius:8px;font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;text-align:center;transition:.15s;border:none;background:none;font-family:'Plus Jakarta Sans',sans-serif}
+.jtab.on{background:var(--navy);color:#fff}
+.jtab:hover:not(.on){background:var(--surface);color:var(--navy)}
+
+.jobs-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.jobs-count{font-size:12px;font-weight:700;color:var(--navy)}
+.jobs-sort{padding:7px 11px;border:2px solid var(--line);border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:var(--muted);background:#fff;outline:none;cursor:pointer}
+
+/* ═══════════ JOB CARD ═══════════ */
+.job-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:12px;cursor:pointer;transition:.2s;position:relative}
+.job-card:hover{border-color:#94A3B8;box-shadow:0 6px 24px rgba(0,0,0,.07);transform:translateY(-1px)}
+.job-card.featured{border:2px solid var(--teal)}
+.job-card.applied{border-color:var(--sky);background:#FAFEFF}
+.jc-badge{position:absolute;top:15px;right:15px;font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;letter-spacing:.3px}
+.jc-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:12px}
+.jc-logo{width:48px;height:48px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;border:1px solid var(--line)}
+.jc-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:3px;padding-right:90px;line-height:1.3}
+.jc-co{font-size:11px;color:var(--muted)}
+.jc-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
+.jt{font-size:10px;padding:3px 9px;border-radius:20px;font-weight:600}
+.jc-meta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px}
+.jm{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)}
+.jc-desc{font-size:11px;color:var(--muted);line-height:1.65;margin-bottom:12px}
+.jc-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.match-pill{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px}
+.deadline{font-size:10px;color:var(--subtle);display:flex;align-items:center;gap:4px}
+.deadline.urgent{color:var(--coral)}
+.jc-acts{display:flex;gap:6px}
+.btn{padding:7px 14px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;border:none;font-family:'Plus Jakarta Sans',sans-serif;transition:.15s;display:inline-flex;align-items:center;gap:4px}
+.btn-teal{background:var(--teal);color:#fff}
+.btn-teal:hover{background:var(--teal2)}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:var(--teal)}
+.btn-out{background:#fff;color:var(--navy);border:2px solid var(--line)}
+.btn-out:hover{background:var(--surface);border-color:#94A3B8}
+.btn-applied{background:var(--sky-lt);color:var(--sky);border:2px solid var(--sky-lt)}
+.btn-amber{background:var(--amber);color:#fff}
+
+/* ═══════════ LMS SECTION ═══════════ */
+.lms-hero{background:linear-gradient(135deg,var(--navy) 0%,#2D1B69 50%,#0A2240 100%);border-radius:16px;padding:24px;margin-bottom:18px;position:relative;overflow:hidden}
+.lms-orb{position:absolute;right:-40px;top:-40px;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,.25) 0%,transparent 65%)}
+.lms-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:44px 44px}
+.lms-inner{position:relative;z-index:1}
+.lms-eyebrow{font-size:10px;font-weight:700;color:var(--purple);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.lms-eyebrow span{background:rgba(139,92,246,.25);padding:2px 8px;border-radius:20px;color:#C4B5FD}
+.lms-title{font-family:'Fraunces',serif;font-size:26px;color:#fff;font-weight:700;margin-bottom:4px}
+.lms-sub{font-size:12px;color:rgba(255,255,255,.5);font-weight:300;margin-bottom:16px}
+.lms-xp{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.07);border-radius:10px;padding:12px 14px;margin-bottom:16px}
+.xp-num{font-family:'Fraunces',serif;font-size:22px;color:var(--amber);font-weight:700}
+.xp-lbl{font-size:10px;color:rgba(255,255,255,.4)}
+.lms-prog{flex:1;height:6px;background:rgba(255,255,255,.1);border-radius:20px;overflow:hidden}
+.lms-prog-fill{height:100%;width:82%;background:linear-gradient(90deg,var(--teal),var(--purple));border-radius:20px}
+.jenjang-pills{display:flex;gap:8px;flex-wrap:wrap}
+.jj-pill{padding:8px 16px;border-radius:10px;border:2px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);cursor:pointer;font-size:11px;font-weight:700;color:rgba(255,255,255,.7);transition:.2s;display:flex;align-items:center;gap:6px}
+.jj-pill:hover{background:rgba(255,255,255,.13);color:#fff}
+.jj-pill.on{border-color:var(--teal);background:rgba(0,179,126,.2);color:var(--teal2)}
+
+.subj-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.subj-card{background:#fff;border:1px solid var(--line);border-radius:13px;padding:15px;cursor:pointer;transition:.2s;position:relative;overflow:hidden}
+.subj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:13px 13px 0 0}
+.subj-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.08)}
+.sj-emoji{font-size:26px;margin-bottom:8px;display:block}
+.sj-name{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.sj-desc{font-size:10px;color:var(--muted);line-height:1.5;margin-bottom:9px}
+.sj-foot{display:flex;justify-content:space-between;align-items:center}
+.sj-lessons{font-size:10px;color:var(--subtle)}
+.sj-prog{width:50px;height:4px;background:var(--line);border-radius:20px;overflow:hidden}
+.sj-pfill{height:100%;border-radius:20px}
+
+/* ═══════════ PERUSAHAAN (company section in LMS) ═══════════ */
+.perus-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:12px}
+.pc-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+.pc-logo{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fff;flex-shrink:0}
+.pc-name{font-size:14px;font-weight:700;color:var(--navy)}
+.pc-meta{font-size:11px;color:var(--muted);margin-top:2px}
+.pc-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
+.pct{font-size:10px;padding:3px 8px;border-radius:20px;font-weight:600}
+.pc-stats{display:flex;gap:16px;margin-bottom:12px}
+.pcs{font-size:11px;color:var(--muted)}
+.pcs span{font-weight:700;color:var(--ink)}
+
+/* ═══════════ RIGHT PANEL ═══════════ */
+.right-panel{}
+.rp-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px}
+.rp-ttl{font-size:11px;font-weight:800;color:var(--navy);margin-bottom:13px;display:flex;align-items:center;justify-content:space-between;text-transform:uppercase;letter-spacing:.5px}
+.rp-see{font-size:10px;color:var(--teal);font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0}
+.ri{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid var(--line)}
+.ri:last-child{border-bottom:none;padding-bottom:0}
+.ri-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.ri-name{font-size:11px;font-weight:600;color:var(--ink)}
+.ri-meta{font-size:10px;color:var(--muted);margin-top:1px}
+.ri-score{font-family:'Fraunces',serif;font-size:22px;color:var(--teal);margin-left:auto;font-weight:700;flex-shrink:0}
+.dl-row{display:flex;align-items:flex-start;gap:9px;padding:8px 0;border-bottom:1px solid var(--line)}
+.dl-row:last-child{border-bottom:none;padding-bottom:0}
+.dl-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.dl-name{font-size:11px;font-weight:600;color:var(--ink)}
+.dl-date{font-size:10px;margin-top:2px;font-weight:600}
+
+/* ═══════════ TOAST / XP POPUP ═══════════ */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;padding:11px 18px;border-radius:12px;font-size:12px;font-weight:600;opacity:0;transform:translateY(16px);transition:.3s;pointer-events:none;z-index:9999;display:flex;align-items:center;gap:8px;max-width:320px}
+.toast.show{opacity:1;transform:translateY(0)}
+.xp-popup{position:fixed;top:76px;right:24px;background:var(--amber);color:#fff;padding:10px 18px;border-radius:12px;font-size:13px;font-weight:800;opacity:0;transform:translateY(-8px);transition:.3s;pointer-events:none;z-index:9999;display:flex;align-items:center;gap:6px}
+.xp-popup.show{opacity:1;transform:translateY(0)}
+
+/* ═══════════ MISC ═══════════ */
+.empty-state{text-align:center;padding:48px 20px;color:var(--muted)}
+.sec-title{font-family:'Fraunces',serif;font-size:20px;color:var(--navy);font-weight:700;margin-bottom:14px}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px}
+.kpi-val{font-family:'Fraunces',serif;font-size:28px;color:var(--navy);font-weight:700;line-height:1}
+.kpi-lbl{font-size:10px;color:var(--muted);margin-top:3px}
+
+@media(max-width:1100px){.app-body{grid-template-columns:220px 1fr}.right-panel{display:none}}
+@media(max-width:768px){.app-body{grid-template-columns:1fr}.sidebar{display:none}#page-login{flex-direction:column}.login-left{display:none}.login-right{width:100%}}
+</style>
+</head>
+<body>
+
+<!-- ███████████ LOGIN PAGE ███████████ -->
+<div class="page active" id="page-login">
+  <div class="login-left">
+    <div class="ll-orb1"></div><div class="ll-orb2"></div><div class="ll-grid"></div>
+    <div class="ll-content">
+      <div class="ll-brand">
+        <div class="ll-brand-hex"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="white" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+        <div><div class="ll-brand-name">Siap Lulus Ketapang</div><div class="ll-brand-sub">Kalimantan Barat · Platform Terpadu</div></div>
+      </div>
+      <div class="ll-headline">Satu platform,<br><span class="acc">semua peluang</span><br>Ketapang</div>
+      <div class="ll-desc">Siswa mencari kerja, perusahaan menemukan talenta, dan semua bisa belajar. Kurikulum Merdeka · Data lokal · Gratis.</div>
+      <div class="ll-roles">
+        <div class="ll-role" onclick="startGoogleFlow()"><div class="ll-role-icon">🎓</div><span class="ll-role-name">Siswa / Alumni</span><span class="ll-role-count">5.600+ aktif</span></div>
+        <div class="ll-role" onclick="goCompany()"><div class="ll-role-icon">🏢</div><span class="ll-role-name">Perusahaan</span><span class="ll-role-count">48 mitra</span></div>
+        <div class="ll-role" onclick="goLMS()"><div class="ll-role-icon">📚</div><span class="ll-role-name">LMS Belajar</span><span class="ll-role-count">SD–SMK gratis</span></div>
+      </div>
+    </div>
+    <div class="ll-stats">
+      <div><div class="ll-stat-val">5.6K</div><div class="ll-stat-lbl">Pengguna</div></div>
+      <div><div class="ll-stat-val">1.280</div><div class="ll-stat-lbl">Lowongan/th</div></div>
+      <div><div class="ll-stat-val">88%</div><div class="ll-stat-lbl">Serapan ATP</div></div>
+      <div><div class="ll-stat-val">4</div><div class="ll-stat-lbl">LPK Aktif</div></div>
+    </div>
+  </div>
+  <div class="login-right">
+    <div class="lform-wrap">
+
+      <!-- MAIN LOGIN -->
+      <div class="lform-view active" id="lv-main">
+        <div class="lf-eyebrow"><div class="lf-ey-dot" style="background:var(--teal)"></div><span class="lf-ey-txt" style="color:var(--teal)">Selamat Datang</span></div>
+        <div class="lf-title">Masuk ke akun</div>
+        <div class="lf-sub">Belum punya akun? <a href="#" onclick="showLV('register')">Daftar gratis</a></div>
+        <button class="google-btn" onclick="startGoogleFlow()">
+          <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Lanjutkan dengan Google
+        </button>
+        <button class="ms-btn" onclick="showToast('Microsoft login segera tersedia')">
+          <svg width="18" height="18" viewBox="0 0 21 21"><rect x="1" y="1" width="9" height="9" fill="#F25022"/><rect x="11" y="1" width="9" height="9" fill="#7FBA00"/><rect x="1" y="11" width="9" height="9" fill="#00A4EF"/><rect x="11" y="11" width="9" height="9" fill="#FFB900"/></svg>
+          Lanjutkan dengan Microsoft
+        </button>
+        <div class="or-div"><div class="or-line"></div><div class="or-txt">atau masuk dengan email</div><div class="or-line"></div></div>
+        <div class="role-tabs">
+          <button class="rt on" id="rt-siswa" onclick="setLRole('siswa')"><span class="rt-icon">🎓</span><span class="rt-label">Siswa</span></button>
+          <button class="rt" id="rt-perus" onclick="setLRole('perus')"><span class="rt-icon">🏢</span><span class="rt-label">Perusahaan</span></button>
+          <button class="rt" id="rt-lpk" onclick="setLRole('lpk')"><span class="rt-icon">🏫</span><span class="rt-label">LPK / BLK</span></button>
+        </div>
+        <div class="lf-field"><div class="lf-label">Email<a href="#" onclick="showLV('forgot')">Lupa sandi?</a></div><input class="lf-input" type="email" id="l-email" placeholder="email@domain.com"></div>
+        <div class="lf-field"><div class="lf-label">Kata Sandi</div>
+          <div class="pw-wrap"><input class="lf-input" type="password" id="l-pw" placeholder="Kata sandi"><button class="eye-btn" onclick="togglePw('l-pw',this)" type="button"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg></button></div>
+        </div>
+        <button class="submit-btn" id="login-btn" onclick="doLogin()">Masuk →</button>
+      </div>
+
+      <!-- REGISTER -->
+      <div class="lform-view" id="lv-register">
+        <button class="back-link" onclick="showLV('main')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Kembali</button>
+        <div class="lf-eyebrow"><div class="lf-ey-dot" style="background:var(--teal)"></div><span class="lf-ey-txt" style="color:var(--teal)">Daftar Gratis</span></div>
+        <div class="lf-title">Buat akun baru</div>
+        <div class="lf-sub">Sudah punya akun? <a href="#" onclick="showLV('main')">Masuk</a></div>
+        <button class="google-btn" onclick="startGoogleFlow()">
+          <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Daftar cepat dengan Google
+        </button>
+        <div class="or-div"><div class="or-line"></div><div class="or-txt">atau isi form</div><div class="or-line"></div></div>
+        <div class="role-tabs">
+          <button class="rt on" id="rtr-siswa" onclick="setRRole('siswa')"><span class="rt-icon">🎓</span><span class="rt-label">Siswa</span></button>
+          <button class="rt" id="rtr-perus" onclick="setRRole('perus')"><span class="rt-icon">🏢</span><span class="rt-label">Perusahaan</span></button>
+          <button class="rt" id="rtr-lpk" onclick="setRRole('lpk')"><span class="rt-icon">🏫</span><span class="rt-label">LPK</span></button>
+        </div>
+        <div id="rf-siswa">
+          <div class="lf-row2"><div class="lf-field"><div class="lf-label">Nama Depan</div><input class="lf-input" placeholder="Aldi"></div><div class="lf-field"><div class="lf-label">Nama Belakang</div><input class="lf-input" placeholder="Ramadan"></div></div>
+          <div class="lf-field"><div class="lf-label">Email</div><input class="lf-input" type="email" placeholder="email@sekolah.sch.id"></div>
+          <div class="lf-field"><div class="lf-label">Sekolah</div><select class="lf-select"><option value="">Pilih sekolah...</option><option>SMKN 1 Ketapang</option><option>SMKN 2 Ketapang</option><option>SMAN 1 Ketapang</option><option>SMAN 2 Ketapang</option><option>SMK Kesehatan Mulia</option><option>SMK PGRI Ketapang</option><option>SMPN 1 Ketapang</option><option>SDN Muara Pawan 1</option><option>Lainnya</option></select></div>
+        </div>
+        <div id="rf-perus" style="display:none">
+          <div style="background:var(--amber-lt);border:1px solid var(--amber);border-radius:9px;padding:10px 12px;font-size:11px;color:var(--amber);font-weight:700;margin-bottom:14px">🏢 Akun Perusahaan / Pemberi Kerja</div>
+          <div class="lf-field"><div class="lf-label">Nama Perusahaan</div><input class="lf-input" placeholder="PT / CV / BUMDes ..."></div>
+          <div class="lf-field"><div class="lf-label">Email Perusahaan</div><input class="lf-input" type="email" placeholder="hrd@perusahaan.com"></div>
+          <div class="lf-field"><div class="lf-label">Sektor Usaha</div><select class="lf-select"><option>Sawit & Agrikultur</option><option>Kesehatan</option><option>TIK & Digital</option><option>Teknik & Manufaktur</option><option>BUMDes / Desa</option><option>Lainnya</option></select></div>
+        </div>
+        <div id="rf-lpk" style="display:none">
+          <div class="lf-field"><div class="lf-label">Nama LPK / BLK</div><input class="lf-input" placeholder="BLK Ketapang ..."></div>
+          <div class="lf-field"><div class="lf-label">Email Lembaga</div><input class="lf-input" type="email" placeholder="info@lpk.com"></div>
+        </div>
+        <div class="lf-field"><div class="lf-label">Kata Sandi</div>
+          <div class="pw-wrap"><input class="lf-input" type="password" id="r-pw" placeholder="Min. 8 karakter" oninput="checkStrength(this.value)"><button class="eye-btn" onclick="togglePw('r-pw',this)" type="button"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg></button></div>
+          <div class="pw-bars"><div class="pw-bar" id="pb1"></div><div class="pw-bar" id="pb2"></div><div class="pw-bar" id="pb3"></div><div class="pw-bar" id="pb4"></div></div>
+          <div class="pw-hint" id="pw-hint">Minimal 8 karakter</div>
+        </div>
+        <div class="cb-row"><input type="checkbox" id="terms"><label for="terms">Saya setuju dengan <a href="#">Syarat & Ketentuan</a> dan <a href="#">Kebijakan Privasi</a></label></div>
+        <button class="submit-btn" onclick="doRegister()">Buat Akun Gratis →</button>
+      </div>
+
+      <!-- FORGOT -->
+      <div class="lform-view" id="lv-forgot">
+        <button class="back-link" onclick="showLV('main')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Kembali</button>
+        <div class="lf-eyebrow"><div class="lf-ey-dot" style="background:var(--amber)"></div><span class="lf-ey-txt" style="color:var(--amber)">Reset Sandi</span></div>
+        <div class="lf-title">Lupa kata sandi?</div>
+        <div class="lf-sub">Kami kirimkan tautan reset ke emailmu</div>
+        <div class="lf-field"><div class="lf-label">Email</div><input class="lf-input" type="email" placeholder="email@domain.com"></div>
+        <button class="submit-btn" onclick="doForgot()">Kirim Tautan Reset →</button>
+      </div>
+
+      <!-- GOOGLE ROLE PICKER -->
+      <div class="lform-view" id="lv-google">
+        <div style="width:52px;height:52px;border-radius:50%;background:var(--teal-lt);display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:24px">👋</div>
+        <div class="lf-title">Halo, selamat datang!</div>
+        <div class="lf-sub">Masuk dengan Google. Pilih peranmu untuk melanjutkan</div>
+        <div class="grole-opt" onclick="enterApp('siswa')"><div class="grole-icon">🎓</div><div><div class="grole-name">Siswa / Alumni</div><div class="grole-sub">Cari kerja, magang & belajar LMS</div></div><div class="grole-arr">›</div></div>
+        <div class="grole-opt" onclick="enterApp('perusahaan')"><div class="grole-icon">🏢</div><div><div class="grole-name">Perusahaan / Pemberi Kerja</div><div class="grole-sub">Posting lowongan, cari talenta terbaik</div></div><div class="grole-arr">›</div></div>
+        <div class="grole-opt" onclick="enterApp('lms')"><div class="grole-icon">📚</div><div><div class="grole-name">LMS — Platform Belajar</div><div class="grole-sub">Akses materi SD–SMA/SMK gratis</div></div><div class="grole-arr">›</div></div>
+        <div class="grole-opt" onclick="enterApp('lpk')"><div class="grole-icon">🏫</div><div><div class="grole-name">LPK / BLK</div><div class="grole-sub">Kelola program pelatihan vokasi</div></div><div class="grole-arr">›</div></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ███████████ MAIN APP PAGE ███████████ -->
+<div class="page" id="page-app">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="brand" onclick="showSec('kerja')">
+      <div class="brand-hex"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="white" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+      <div style="display:flex;align-items:center;gap:5px"><div class="brand-txt">Siap Lulus</div><div class="brand-badge" id="role-badge">SISWA</div></div>
+    </div>
+    <div class="tb-search">
+      <svg class="tb-si" width="14" height="14" viewBox="0 0 24 24" fill="none" style="color:rgba(255,255,255,.4)"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="text" placeholder="Cari lowongan, materi, LPK..." oninput="globalSearch(this.value)" id="gs-input">
+    </div>
+    <div class="tb-nav">
+      <button class="tbn active" id="tn-kerja" onclick="switchNav('kerja')"><div class="tbn-dot" style="background:var(--teal)"></div>Cari Kerja</button>
+      <button class="tbn" id="tn-lms" onclick="switchNav('lms')"><div class="tbn-dot" style="background:var(--purple)"></div>LMS Belajar</button>
+      <button class="tbn" id="tn-lamaran" onclick="switchNav('lamaran')"><div class="tbn-dot" style="background:var(--sky)"></div>Lamaranku</button>
+      <button class="tbn" id="tn-profil" onclick="switchNav('profil')"><div class="tbn-dot" style="background:var(--amber)"></div>Profil</button>
+    </div>
+    <div class="tb-right">
+      <div class="xp-pill" onclick="showToast('Level 8 · 1.240 XP · Streak 7 hari 🔥')">⚡<span class="xp-val" id="xp-disp">1.240 XP</span></div>
+      <div class="notif-btn" onclick="showToast('3 notifikasi baru: 1 interview, 2 lowongan cocok')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2"/></svg><div class="notif-dot"></div></div>
+      <div class="user-pill" onclick="switchNav('profil')">
+        <div class="ua" id="top-avatar" style="background:var(--teal)">AR</div>
+        <div class="un" id="top-name">Aldi R.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-body">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sb-card">
+        <div class="sb-profile">
+          <div class="sb-avatar" id="sb-avatar">AR</div>
+          <div class="sb-name" id="sb-name">Aldi Ramadan</div>
+          <div class="sb-school" id="sb-school">SMK ATP · XII · SMKN 1 Ketapang</div>
+          <div class="sb-score-box">
+            <div class="sb-score-val">88</div>
+            <div class="sb-score-lbl">Match Score</div>
+            <div class="pb"><div class="pb-fill" style="width:88%"></div></div>
+          </div>
+          <div class="sb-tags">
+            <span class="sb-tag" style="background:var(--teal-lt);color:var(--teal)">Agribisnis</span>
+            <span class="sb-tag" style="background:var(--amber-lt);color:var(--amber)">RSPO</span>
+            <span class="sb-tag" style="background:var(--sky-lt);color:var(--sky)">Sawit</span>
+          </div>
+        </div>
+        <div class="xp-box"><div class="xp-box-val">1.240 XP</div><div class="xp-box-lbl">Level 8 · 260 XP menuju Level 9</div><div class="xp-box-bar"><div class="xp-box-fill"></div></div></div>
+        <div class="sb-sec">
+          <div class="sb-sec-ttl">Cari Kerja</div>
+          <button class="sbn active" id="sbn-kerja" onclick="showSec('kerja')"><div class="sbn-icon" style="background:var(--teal-lt)">🔍</div>Semua Lowongan<span class="sbn-badge" style="background:var(--teal-lt);color:var(--teal)">28</span></button>
+          <button class="sbn" id="sbn-rekomendasi" onclick="showSec('rekomendasi')"><div class="sbn-icon" style="background:var(--amber-lt)">⭐</div>Rekomendasi AI<span class="sbn-badge" style="background:var(--amber-lt);color:var(--amber)">6</span></button>
+          <button class="sbn" id="sbn-lamaran" onclick="showSec('lamaran')"><div class="sbn-icon" style="background:var(--sky-lt)">📋</div>Lamaranku<span class="sbn-badge" style="background:var(--sky-lt);color:var(--sky)">3</span></button>
+          <button class="sbn" id="sbn-simpan" onclick="showSec('simpan')"><div class="sbn-icon" style="background:var(--purple-lt)">🔖</div>Disimpan<span class="sbn-badge" style="background:var(--purple-lt);color:var(--purple)">5</span></button>
+        </div>
+        <div class="sb-sec">
+          <div class="sb-sec-ttl">Belajar & Karier</div>
+          <button class="sbn" id="sbn-lms" onclick="showSec('lms')"><div class="sbn-icon" style="background:var(--purple-lt)">📚</div>LMS Belajar<span class="sbn-badge" style="background:var(--green-lt);color:var(--green)">Baru</span></button>
+          <button class="sbn" id="sbn-lpk" onclick="showSec('lpk')"><div class="sbn-icon" style="background:var(--coral-lt)">🏫</div>LPK & Pelatihan</button>
+          <button class="sbn" id="sbn-perusahaan" onclick="showSec('perusahaan')"><div class="sbn-icon" style="background:var(--amber-lt)">🏢</div>Portal Perusahaan</button>
+          <button class="sbn" id="sbn-profil" onclick="showSec('profil')"><div class="sbn-icon" style="background:var(--sky-lt)">👤</div>Profil Saya</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN COL -->
+    <div class="main-col">
+
+      <!-- ══ CARI KERJA ══ -->
+      <div class="sec active" id="sec-kerja">
+        <div class="hero-banner">
+          <div class="hb-orb"></div>
+          <div class="hb-emoji">🎯</div>
+          <div class="hb-content">
+            <div class="hb-title">Profil 78% lengkap — Tambahkan CV untuk skor lebih tinggi</div>
+            <div class="hb-sub">Profil lengkap meningkatkan peluang dilihat pemberi kerja hingga 3×</div>
+          </div>
+          <button class="hb-btn" onclick="showSec('profil')">Lengkapi Profil →</button>
+        </div>
+        <div class="filter-card">
+          <div class="filter-row">
+            <select class="f-select" id="f-sektor" onchange="filterJobs()">
+              <option value="">Semua Sektor</option>
+              <option value="sawit">Sawit & Agrikultur</option>
+              <option value="kesehatan">Kesehatan</option>
+              <option value="tik">TIK & Digital</option>
+              <option value="teknik">Teknik & Mesin</option>
+              <option value="admin">Admin & Keuangan</option>
+              <option value="umkm">UMKM & Wirausaha</option>
+            </select>
+            <select class="f-select" id="f-kec">
+              <option value="">Semua Kecamatan</option>
+              <option>Muara Pawan</option><option>Delta Pawan</option><option>Benua Kayong</option>
+            </select>
+            <select class="f-select" id="f-tipe">
+              <option value="">Semua Tipe</option>
+              <option>Magang</option><option>Full-time</option><option>Part-time</option><option>Kontrak</option>
+            </select>
+            <button class="f-btn go" onclick="filterJobs()">🔍 Filter</button>
+            <button class="f-btn rst" onclick="resetFilter()">Reset</button>
+          </div>
+          <div class="chips" id="chip-row">
+            <div class="chip on" onclick="setChip(this,'semua')">Semua (28)</div>
+            <div class="chip" onclick="setChip(this,'magang')">🎓 Magang (12)</div>
+            <div class="chip" onclick="setChip(this,'fulltime')">💼 Full-time (10)</div>
+            <div class="chip" onclick="setChip(this,'tinggi')">⭐ Match &gt;80</div>
+            <div class="chip" onclick="setChip(this,'baru')">🆕 Baru Ditambah</div>
+          </div>
+        </div>
+        <div class="job-tabs">
+          <button class="jtab on" onclick="setJtab(this)">Semua Lowongan</button>
+          <button class="jtab" onclick="setJtab(this)">Rekomendasi AI</button>
+          <button class="jtab" onclick="setJtab(this)">Sedang Dilamar</button>
+          <button class="jtab" onclick="setJtab(this)">Disimpan</button>
+        </div>
+        <div class="jobs-hd">
+          <div class="jobs-count" id="jobs-count">Menampilkan 28 lowongan</div>
+          <select class="jobs-sort"><option>Paling Relevan</option><option>Terbaru</option><option>Match Score Tertinggi</option><option>Deadline Terdekat</option></select>
+        </div>
+        <div id="job-list">
+
+          <!-- JOB 1 -->
+          <div class="job-card featured" data-sektor="sawit" data-match="96">
+            <div class="jc-badge" style="background:var(--teal);color:#fff">⭐ UNGGULAN</div>
+            <div class="jc-head"><div class="jc-logo" style="background:var(--teal-lt)">🌿</div><div><div class="jc-title">Operator Kebun & Pemantau Lingkungan</div><div class="jc-co">Cargill Ketapang Mill · Muara Pawan</div></div></div>
+            <div class="jc-tags"><span class="jt" style="background:var(--teal-lt);color:var(--teal)">Magang → Full-time</span><span class="jt" style="background:var(--amber-lt);color:var(--amber)">Sawit & Agrikultur</span><span class="jt" style="background:var(--sky-lt);color:var(--sky)">RSPO</span></div>
+            <div class="jc-meta"><div class="jm">📍 Muara Pawan</div><div class="jm">⏱ 3 bln magang + tetap</div><div class="jm">🎓 Lulusan ATP</div></div>
+            <div class="jc-desc">Bergabung sebagai operator kebun di Cargill Ketapang Mill. Program magang langsung dengan pelatihan K3 dan sertifikasi RSPO resmi.</div>
+            <div class="jc-footer">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                <div class="match-pill" style="background:var(--teal-lt);color:var(--teal)">✓ Match 96/100</div>
+                <div class="deadline urgent">⏰ Tutup 15 Mei 2026</div>
+              </div>
+              <div class="jc-acts"><button class="btn btn-out" onclick="saveJob(this)">🔖 Simpan</button><button class="btn btn-teal" onclick="applyJob(this,'Cargill Ketapang Mill')">Lamar Sekarang →</button></div>
+            </div>
+          </div>
+
+          <!-- JOB 2 -->
+          <div class="job-card" data-sektor="kesehatan" data-match="91">
+            <div class="jc-badge" style="background:var(--coral-lt);color:var(--coral)">BARU</div>
+            <div class="jc-head"><div class="jc-logo" style="background:var(--coral-lt)">💊</div><div><div class="jc-title">Asisten Bidan & Kader Posyandu Desa</div><div class="jc-co">Puskesmas Muara Pawan + 5 Desa</div></div></div>
+            <div class="jc-tags"><span class="jt" style="background:var(--coral-lt);color:var(--coral)">Full-time</span><span class="jt" style="background:var(--teal-lt);color:var(--teal)">Kesehatan</span><span class="jt" style="background:var(--purple-lt);color:var(--purple)">Save the Children</span></div>
+            <div class="jc-meta"><div class="jm">📍 Muara Pawan & Desa</div><div class="jm">⏱ Kontrak 1 tahun</div><div class="jm">🎓 SMK Kesehatan / IPA</div></div>
+            <div class="jc-desc">Mendukung layanan kesehatan dasar di 5 desa, membantu bidan desa, mengelola data Posyandu. Program "Desa Ramah Anak" Save the Children.</div>
+            <div class="jc-footer">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><div class="match-pill" style="background:var(--teal-lt);color:var(--teal)">✓ Match 91/100</div><div class="deadline">Tutup 30 Mei 2026</div></div>
+              <div class="jc-acts"><button class="btn btn-out" onclick="saveJob(this)">🔖 Simpan</button><button class="btn btn-teal" onclick="applyJob(this,'Puskesmas Muara Pawan')">Lamar →</button></div>
+            </div>
+          </div>
+
+          <!-- JOB 3 APPLIED -->
+          <div class="job-card applied" data-sektor="tik" data-match="82">
+            <div class="jc-badge" style="background:var(--sky-lt);color:var(--sky)">✓ DILAMAR</div>
+            <div class="jc-head"><div class="jc-logo" style="background:var(--purple-lt)">💻</div><div><div class="jc-title">Operator SIPADES & Admin Digital Desa</div><div class="jc-co">BUMDes Sejahtera · Delta Pawan</div></div></div>
+            <div class="jc-tags"><span class="jt" style="background:var(--purple-lt);color:var(--purple)">Full-time</span><span class="jt" style="background:var(--sky-lt);color:var(--sky)">TIK & Digital</span></div>
+            <div class="jc-meta"><div class="jm">📍 Delta Pawan</div><div class="jm">⏱ Full-time tetap</div></div>
+            <div class="jc-desc">Admin sistem SIPADES desa, mencatat data warga, media sosial BUMDes, administrasi Dana Desa digital.</div>
+            <div class="jc-footer">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><div class="match-pill" style="background:var(--sky-lt);color:var(--sky)">Match 82/100</div><div style="font-size:10px;background:var(--sky-lt);color:var(--sky);padding:3px 9px;border-radius:20px;font-weight:700">📋 Dikirim 28 Apr</div></div>
+              <div class="jc-acts"><button class="btn btn-applied">✓ Sudah Dilamar</button><button class="btn btn-out" onclick="showSec('lamaran')">Cek Status</button></div>
+            </div>
+          </div>
+
+          <!-- JOB 4 -->
+          <div class="job-card" data-sektor="teknik" data-match="78">
+            <div class="jc-head"><div class="jc-logo" style="background:var(--sky-lt)">⚙️</div><div><div class="jc-title">Teknisi Mesin & Mekanik Alsintan</div><div class="jc-co">CV Maju Bersama · Benua Kayong</div></div></div>
+            <div class="jc-tags"><span class="jt" style="background:var(--sky-lt);color:var(--sky)">Full-time</span><span class="jt" style="background:var(--amber-lt);color:var(--amber)">Teknik & Mesin</span></div>
+            <div class="jc-meta"><div class="jm">📍 Benua Kayong</div><div class="jm">🎓 SMK TKR / Teknik Mesin</div></div>
+            <div class="jc-desc">Merawat traktor, alat mesin pertanian, dan peralatan bengkel. Termasuk pemeliharaan mesin pengolahan perkebunan.</div>
+            <div class="jc-footer">
+              <div style="display:flex;align-items:center;gap:8px"><div class="match-pill" style="background:var(--amber-lt);color:var(--amber)">Match 78/100</div><div class="deadline">Tutup 10 Jun 2026</div></div>
+              <div class="jc-acts"><button class="btn btn-out" onclick="saveJob(this)">🔖</button><button class="btn btn-teal" onclick="applyJob(this,'CV Maju Bersama')">Lamar →</button></div>
+            </div>
+          </div>
+
+          <!-- JOB 5 -->
+          <div class="job-card" data-sektor="admin" data-match="65">
+            <div class="jc-head"><div class="jc-logo" style="background:var(--amber-lt)">📋</div><div><div class="jc-title">Staf Administrasi & Bendahara BUMDes</div><div class="jc-co">BUMDes Harapan Bersama · Muara Pawan</div></div></div>
+            <div class="jc-tags"><span class="jt" style="background:var(--amber-lt);color:var(--amber)">Part-time</span><span class="jt" style="background:var(--coral-lt);color:var(--coral)">Admin & Keuangan</span></div>
+            <div class="jc-meta"><div class="jm">📍 Muara Pawan</div><div class="jm">🎓 SMA IPS / SMK Akuntansi</div></div>
+            <div class="jc-desc">Pencatatan keuangan BUMDes, pembukuan sederhana, laporan Dana Desa, administrasi harian.</div>
+            <div class="jc-footer">
+              <div style="display:flex;align-items:center;gap:8px"><div class="match-pill" style="background:var(--surface);color:var(--muted)">Match 65/100</div><div class="deadline">Tutup 20 Jun 2026</div></div>
+              <div class="jc-acts"><button class="btn btn-out" onclick="saveJob(this)">🔖</button><button class="btn btn-teal" onclick="applyJob(this,'BUMDes Harapan Bersama')">Lamar →</button></div>
+            </div>
+          </div>
+
+          <!-- JOB 6 -->
+          <div class="job-card" data-sektor="umkm" data-match="72">
+            <div class="jc-head"><div class="jc-logo" style="background:#FFF7ED">🏪</div><div><div class="jc-title">Asisten Pengolahan Produk & Pemasaran Digital</div><div class="jc-co">Koperasi Perempuan Karya Mandiri · Delta Pawan</div></div></div>
+            <div class="jc-tags"><span class="jt" style="background:var(--coral-lt);color:var(--coral)">Kontrak 6 bln</span><span class="jt" style="background:var(--amber-lt);color:var(--amber)">UMKM</span></div>
+            <div class="jc-meta"><div class="jm">📍 Delta Pawan</div><div class="jm">🎓 Semua jurusan</div></div>
+            <div class="jc-desc">Produksi, pengemasan, konten media sosial, dan marketplace koperasi.</div>
+            <div class="jc-footer">
+              <div style="display:flex;align-items:center;gap:8px"><div class="match-pill" style="background:var(--amber-lt);color:var(--amber)">Match 72/100</div><div class="deadline">Tutup 5 Jun 2026</div></div>
+              <div class="jc-acts"><button class="btn btn-out" onclick="saveJob(this)">🔖</button><button class="btn btn-teal" onclick="applyJob(this,'Koperasi Karya Mandiri')">Lamar →</button></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ══ LMS BELAJAR ══ -->
+      <div class="sec" id="sec-lms">
+        <div class="lms-hero">
+          <div class="lms-orb"></div><div class="lms-grid-bg"></div>
+          <div class="lms-inner">
+            <div class="lms-eyebrow"><span>📚 LMS Belajar Ketapang</span></div>
+            <div class="lms-title">Belajar Lebih Seru, <span style="font-style:italic;color:var(--teal2)">Raih Masa Depan</span></div>
+            <div class="lms-sub">Kurikulum Merdeka 2024 · SD Kelas 1–6 · SMP 7–9 · SMA 10–12 · SMK Kejuruan · Gratis</div>
+            <div class="lms-xp">
+              <div><div class="xp-num">1.240</div><div class="xp-lbl">XP Terkumpul</div></div>
+              <div style="flex:1"><div style="font-size:10px;color:rgba(255,255,255,.5);margin-bottom:5px">Level 8 → Level 9 (82%)</div><div class="lms-prog"><div class="lms-prog-fill"></div></div></div>
+              <div style="text-align:right"><div style="font-size:14px;font-weight:800;color:#fff">14</div><div style="font-size:9px;color:rgba(255,255,255,.4)">Materi Selesai</div></div>
+            </div>
+            <div class="jenjang-pills">
+              <div class="jj-pill" onclick="setJenjang('sd')">🌱 SD (Kls 1–6)</div>
+              <div class="jj-pill" onclick="setJenjang('smp')">📖 SMP (Kls 7–9)</div>
+              <div class="jj-pill" onclick="setJenjang('sma')">🔬 SMA (Kls 10–12)</div>
+              <div class="jj-pill on" onclick="setJenjang('smk')">⚙️ SMK Kejuruan</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LANJUTKAN BELAJAR -->
+        <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px">▶ Lanjutkan Belajar</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:18px">
+          <div style="background:var(--teal-lt);border-radius:11px;padding:14px;cursor:pointer;border:1px solid rgba(0,179,126,.2)" onclick="openLesson('Matematika XII')"><div style="font-size:11px;font-weight:700;color:var(--teal)">📐 Matematika XII</div><div style="font-size:10px;color:var(--muted);margin-top:2px;margin-bottom:7px">Bab 4 — Statistika · 65%</div><div class="pb"><div class="pb-fill" style="width:65%"></div></div></div>
+          <div style="background:var(--amber-lt);border-radius:11px;padding:14px;cursor:pointer;border:1px solid rgba(245,158,11,.2)" onclick="openLesson('Agribisnis Tanaman')"><div style="font-size:11px;font-weight:700;color:var(--amber)">🌿 Agribisnis Tanaman</div><div style="font-size:10px;color:var(--muted);margin-top:2px;margin-bottom:7px">Bab 3 — Pemupukan · 40%</div><div class="pb"><div class="pb-fill" style="width:40%;background:var(--amber)"></div></div></div>
+          <div style="background:var(--sky-lt);border-radius:11px;padding:14px;cursor:pointer;border:1px solid rgba(59,130,246,.2)" onclick="openLesson('Bahasa Indonesia XII')"><div style="font-size:11px;font-weight:700;color:var(--sky)">📝 Bahasa Indonesia XII</div><div style="font-size:10px;color:var(--muted);margin-top:2px;margin-bottom:7px">Bab 2 — Teks Laporan · 80%</div><div class="pb"><div class="pb-fill" style="width:80%;background:var(--sky)"></div></div></div>
+        </div>
+
+        <!-- SMK SUBJECTS -->
+        <div style="font-size:12px;font-weight:800;color:var(--navy);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px" id="lms-jenjang-label">⚙️ SMK Kejuruan — Agribisnis Tanaman Perkebunan (ATP)</div>
+        <div class="subj-grid" id="subj-grid">
+          <div class="subj-card" style="--c:var(--teal)" onclick="openLesson('Pemupukan Presisi')"><div style="background:var(--teal);position:absolute;top:0;left:0;right:0;height:3px;border-radius:13px 13px 0 0"></div><span class="sj-emoji">🌿</span><div class="sj-name">Pemupukan Presisi</div><div class="sj-desc">Nutrisi tanaman, jenis pupuk, teknik aplikasi berbasis data lapangan.</div><div class="sj-foot"><span class="sj-lessons">16 pertemuan</span><div class="sj-prog"><div class="sj-pfill" style="width:40%;background:var(--teal)"></div></div></div></div>
+
+          <div class="subj-card" onclick="openLesson('Mekanisasi Pertanian')"><div style="background:var(--green);position:absolute;top:0;left:0;right:0;height:3px;border-radius:13px 13px 0 0"></div><span class="sj-emoji">🚜</span><div class="sj-name">Mekanisasi Pertanian</div><div class="sj-desc">Alat mesin pertanian, traktor, mesin semprot, K3 lapangan.</div><div class="sj-foot"><span class="sj-lessons">14 pertemuan</span><div class="sj-prog"><div class="sj-pfill" style="width:65%;background:var(--green)"></div></div></div></div>
+
+          <div class="subj-card" onclick="openLesson('Standar RSPO')"><div style="background:var(--amber);position:absolute;top:0;left:0;right:0;height:3px;border-radius:13px 13px 0 0"></div><span class="sj-emoji">♻️</span><div class="sj-name">Standar RSPO</div><div class="sj-desc">Prinsip RSPO, monitoring lingkungan, pelaporan keberlanjutan.</div><div class="sj-foot"><span class="sj-lessons">12 pertemuan</span><div class="sj-prog"><div class="sj-pfill" style="width:25%;background:var(--amber)"></div></div></div></div>
+
+          <div class="subj-card" onclick="openLesson('K3 Perkebunan')"><div style="background:var(--coral);position:absolute;top:0;left:0;right:0;height:3px;border-radius:13px 13px 0 0"></div><span class="sj-emoji">⛑️</span><div class="sj-name">K3 Perkebunan</div><div class="sj-desc">Keselamatan kerja lapangan, APD, bahan kimia, P3K darurat.</div><div class="sj-foot"><span class="sj-lessons">10 pertemuan</span><div class="sj-prog"><div class="sj-pfill" style="width:80%;background:var(--coral)"></div></div></div></div>
+
+          <div class="subj-card" onclick="openLesson('Pengendalian OPT')"><div style="background:var(--amber);position:absolute;top:0;left:0;right:0;height:3px;border-radius:13px 13px 0 0"></div><span class="sj-emoji">🐛</span><div class="sj-name">Pengendalian OPT</div><div class="sj-desc">Hama, penyakit tanaman, pestisida nabati, pengendalian terpadu.</div><div class="sj-foot"><span class="sj-lessons">12 pertemuan</span><div class="sj-prog"><div class="sj-pfill" style="width:55%;background:var(--amber)"></div></div></div></div>
+
+          <div class="subj-card" onclick="openLesson('Matematika XII')"><div style="background:var(--purple);position:absolute;top:0;left:0;right:0;height:3px;border-radius:13px 13px 0 0"></div><span class="sj-emoji">📐</span><div class="sj-name">Matematika XII</div><div class="sj-desc">Statistika, barisan deret, program linear, terapan industri.</div><div class="sj-foot"><span class="sj-lessons">24 pertemuan</span><div class="sj-prog"><div class="sj-pfill" style="width:65%;background:var(--purple)"></div></div></div></div>
+        </div>
+      </div>
+
+      <!-- ══ LAMARAN ══ -->
+      <div class="sec" id="sec-lamaran">
+        <div class="sec-title">📋 Status Lamaranku</div>
+        <div class="kpi-row">
+          <div class="kpi" style="border-top:3px solid var(--navy)"><div class="kpi-val">3</div><div class="kpi-lbl">Total Lamaran</div></div>
+          <div class="kpi" style="border-top:3px solid var(--green)"><div class="kpi-val" style="color:var(--green)">1</div><div class="kpi-lbl">Dipanggil Interview</div></div>
+          <div class="kpi" style="border-top:3px solid var(--amber)"><div class="kpi-val" style="color:var(--amber)">2</div><div class="kpi-lbl">Sedang Diproses</div></div>
+          <div class="kpi" style="border-top:3px solid var(--subtle)"><div class="kpi-val" style="color:var(--subtle)">0</div><div class="kpi-lbl">Ditolak</div></div>
+        </div>
+        <div class="job-card" style="border:2px solid var(--teal)">
+          <div class="jc-badge" style="background:var(--green-lt);color:var(--green)">✓ DIPANGGIL INTERVIEW</div>
+          <div class="jc-head"><div class="jc-logo" style="background:var(--teal-lt)">🌿</div><div><div class="jc-title">Operator Kebun & Pemantau Lingkungan</div><div class="jc-co">Cargill Ketapang Mill</div></div></div>
+          <div style="background:var(--teal-lt);border-radius:10px;padding:13px;font-size:11px;color:var(--teal);line-height:1.7;margin-bottom:12px">🎉 <strong>Interview dijadwalkan!</strong> Senin, 12 Mei 2026 · 09.00 WIB · Kantor Cargill Ketapang Mill. Bawa KTP, ijazah/SKL, dan sertifikat pelatihan.</div>
+          <div class="jc-footer">
+            <div class="match-pill" style="background:var(--teal-lt);color:var(--teal)">Match 96/100</div>
+            <div class="jc-acts"><button class="btn btn-out" onclick="showToast('Jadwal ulang interview...')">Jadwal Ulang</button><button class="btn btn-teal" onclick="showToast('Konfirmasi kehadiran terkirim!')">✓ Konfirmasi Hadir</button></div>
+          </div>
+        </div>
+        <div class="job-card">
+          <div class="jc-badge" style="background:var(--amber-lt);color:var(--amber)">⏳ DIPROSES</div>
+          <div class="jc-head"><div class="jc-logo" style="background:var(--purple-lt)">💻</div><div><div class="jc-title">Operator SIPADES & Admin Digital Desa</div><div class="jc-co">BUMDes Sejahtera · Delta Pawan</div></div></div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Lamaran sedang ditinjau oleh tim BUMDes. Estimasi respon 5–7 hari kerja.</div>
+          <div class="jc-footer"><div class="match-pill" style="background:var(--sky-lt);color:var(--sky)">Match 82/100</div><button class="btn btn-out" onclick="showToast('Detail status lamaran...')">Detail Status</button></div>
+        </div>
+        <div class="job-card">
+          <div class="jc-badge" style="background:var(--amber-lt);color:var(--amber)">⏳ DIPROSES</div>
+          <div class="jc-head"><div class="jc-logo" style="background:var(--coral-lt)">💊</div><div><div class="jc-title">Asisten Bidan & Kader Posyandu Desa</div><div class="jc-co">Puskesmas Muara Pawan</div></div></div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Menunggu seleksi berkas dari Puskesmas.</div>
+          <div class="jc-footer"><div class="match-pill" style="background:var(--teal-lt);color:var(--teal)">Match 91/100</div><button class="btn btn-out" onclick="showToast('Detail status...')">Detail</button></div>
+        </div>
+      </div>
+
+      <!-- ══ PORTAL PERUSAHAAN ══ -->
+      <div class="sec" id="sec-perusahaan">
+        <div class="sec-title">🏢 Mitra Perusahaan Ketapang</div>
+        <div style="background:var(--amber-lt);border:1px solid var(--amber);border-radius:12px;padding:14px;margin-bottom:18px;font-size:12px;color:var(--amber);display:flex;align-items:center;gap:10px">
+          <span style="font-size:20px">🏢</span>
+          <div>Kamu melihat halaman perusahaan sebagai siswa. <strong>Masuk sebagai Perusahaan</strong> untuk mengelola lowongan dan melihat pelamar.</div>
+          <button class="btn btn-amber" style="flex-shrink:0" onclick="switchToCompany()">Masuk Perusahaan →</button>
+        </div>
+        <div class="perus-card">
+          <div class="pc-head">
+            <div style="flex:1"><div class="pc-name">Cargill Ketapang Mill</div><div class="pc-meta">Sawit & Agrikultur · Muara Pawan · ✓ Terverifikasi</div></div>
+            <div class="pc-logo" style="background:var(--teal)">CK</div>
+          </div>
+          <div class="pc-tags"><span class="pct" style="background:var(--teal-lt);color:var(--teal)">RSPO Certified</span><span class="pct" style="background:var(--amber-lt);color:var(--amber)">Mitra Utama</span></div>
+          <div class="pc-stats"><div class="pcs">Lowongan aktif: <span>3</span></div><div class="pcs">Total direkrut: <span>24/th</span></div><div class="pcs">Avg match: <span>94</span></div></div>
+          <button class="btn btn-teal" onclick="showSec('kerja');showToast('Filter lowongan Cargill diterapkan')">Lihat Lowongan Cargill →</button>
+        </div>
+        <div class="perus-card">
+          <div class="pc-head">
+            <div style="flex:1"><div class="pc-name">Puskesmas Muara Pawan</div><div class="pc-meta">Kesehatan Komunitas · Muara Pawan · 25 desa</div></div>
+            <div class="pc-logo" style="background:var(--coral)">PM</div>
+          </div>
+          <div class="pc-tags"><span class="pct" style="background:var(--coral-lt);color:var(--coral)">Prioritas Kritis</span><span class="pct" style="background:var(--purple-lt);color:var(--purple)">Save the Children</span></div>
+          <div class="pc-stats"><div class="pcs">Kebutuhan: <span>280/th</span></div><div class="pcs">Posisi terbuka: <span>2</span></div></div>
+          <button class="btn btn-teal" onclick="showSec('kerja');showToast('Filter lowongan kesehatan diterapkan')">Lihat Lowongan →</button>
+        </div>
+        <div class="perus-card">
+          <div class="pc-head">
+            <div style="flex:1"><div class="pc-name">BUMDes Sejahtera</div><div class="pc-meta">TIK & Administrasi Desa · Delta Pawan</div></div>
+            <div class="pc-logo" style="background:var(--sky)">BS</div>
+          </div>
+          <div class="pc-tags"><span class="pct" style="background:var(--sky-lt);color:var(--sky)">Desa Digital</span><span class="pct" style="background:var(--purple-lt);color:var(--purple)">SIPADES</span></div>
+          <div class="pc-stats"><div class="pcs">Lowongan aktif: <span>1</span></div></div>
+          <button class="btn btn-teal" onclick="showSec('kerja')">Lihat Lowongan →</button>
+        </div>
+      </div>
+
+      <!-- ══ LPK ══ -->
+      <div class="sec" id="sec-lpk">
+        <div class="sec-title">🏫 LPK & Program Pelatihan</div>
+        <div class="job-card" style="border-top:3px solid var(--teal)">
+          <div class="jc-head"><div class="jc-logo" style="background:var(--teal-lt)">🌱</div><div><div class="jc-title">LPK Sawit & Mekanisasi</div><div class="jc-co">Fokus: ATP · 3 bulan · Sertifikasi RSPO · Link Cargill</div></div></div>
+          <div class="jc-desc">Kurikulum: manajemen kebun, K3, sertifikasi RSPO, mekanisasi, magang 4 minggu di kebun mitra. 87% peserta terserap kerja dalam 3 bulan lulus.</div>
+          <div class="jc-footer"><div class="match-pill" style="background:var(--teal-lt);color:var(--teal)">Match ATP 96%</div><div class="jc-acts"><button class="btn btn-teal" onclick="showToast('Formulir pendaftaran LPK Sawit dibuka!')">Daftar Sekarang</button></div></div>
+        </div>
+        <div class="job-card">
+          <div class="jc-head"><div class="jc-logo" style="background:var(--purple-lt)">💻</div><div><div class="jc-title">BLK Digital & Admin Desa</div><div class="jc-co">SIPADES · BUMDes · 2 bulan · Dana Desa digital</div></div></div>
+          <div class="jc-desc">Operasi SIPADES, keuangan desa, media sosial BUMDes, Dana Desa. Cocok untuk lulusan SMA IPS dan SMK TKJ.</div>
+          <div class="jc-footer"><div class="match-pill" style="background:var(--sky-lt);color:var(--sky)">Match IPS/TKJ 82%</div><div class="jc-acts"><button class="btn btn-teal" onclick="showToast('Info BLK Digital dibuka!')">Info Lebih Lanjut</button></div></div>
+        </div>
+        <div class="job-card" style="border-top:3px solid var(--coral)">
+          <div class="jc-head"><div class="jc-logo" style="background:var(--coral-lt)">💊</div><div><div class="jc-title">LPK Caregiver & Kesehatan Komunitas</div><div class="jc-co">4 bulan · Posyandu · Save the Children · Prioritas Kritis</div></div></div>
+          <div class="jc-desc">Pertolongan pertama, gizi balita, kesehatan ibu, caregiver lansia. Menjawab krisis nakes di 25 desa Ketapang.</div>
+          <div class="jc-footer"><div class="match-pill" style="background:var(--coral-lt);color:var(--coral)">Defisit Nakes −58%</div><div class="jc-acts"><button class="btn btn-teal" onclick="showToast('Hubungi koordinator LPK Kesehatan!')">Daftar Sekarang</button></div></div>
+        </div>
+      </div>
+
+      <!-- ══ PROFIL ══ -->
+      <div class="sec" id="sec-profil">
+        <div class="sec-title">👤 Profil Saya</div>
+        <div style="background:var(--navy);border-radius:16px;padding:26px;margin-bottom:16px;position:relative;overflow:hidden">
+          <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(0,179,126,.15) 0%,transparent 70%)"></div>
+          <div style="display:flex;align-items:flex-start;gap:20px;position:relative;z-index:1">
+            <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--sky));display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:28px;color:#fff;font-weight:700;flex-shrink:0;border:3px solid rgba(255,255,255,.2)">AR</div>
+            <div style="flex:1">
+              <div style="font-family:'Fraunces',serif;font-size:24px;color:#fff;font-weight:700;margin-bottom:4px">Aldi Ramadan</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.55);margin-bottom:12px">SMK ATP · Kelas XII · SMKN 1 Ketapang · Muara Pawan</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
+                <span style="font-size:10px;padding:3px 10px;border-radius:20px;background:rgba(0,179,126,.2);color:var(--teal2);font-weight:700">Agribisnis ATP</span>
+                <span style="font-size:10px;padding:3px 10px;border-radius:20px;background:rgba(245,158,11,.2);color:var(--amber);font-weight:700">RSPO</span>
+                <span style="font-size:10px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-weight:700">Siap Magang</span>
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <button class="btn" style="background:var(--teal);color:#fff;font-size:11px" onclick="showToast('Unduh CV berhasil!')">⬇ Unduh CV</button>
+                <button class="btn btn-out" style="border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.7);background:rgba(255,255,255,.07);font-size:11px" onclick="showToast('Link profil disalin!')">🔗 Bagikan</button>
+              </div>
+            </div>
+            <div style="text-align:center;flex-shrink:0">
+              <div style="font-family:'Fraunces',serif;font-size:46px;color:var(--teal2);font-weight:700;line-height:1">88</div>
+              <div style="font-size:10px;color:rgba(255,255,255,.4)">Match Score</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div style="background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px">
+            <div style="font-size:11px;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px">Kelengkapan Profil (78%)</div>
+            <div class="pb" style="margin-bottom:14px"><div class="pb-fill" style="width:78%"></div></div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.8">
+              ✅ Foto profil<br>✅ Data diri lengkap<br>✅ Pilih jurusan<br>✅ Tambah pengalaman<br>⬜ Upload CV <span style="color:var(--amber);font-weight:700">+20 pts</span><br>⬜ Sertifikat RSPO <span style="color:var(--amber);font-weight:700">+15 pts</span>
+            </div>
+            <button class="btn btn-navy" style="width:100%;margin-top:12px;justify-content:center;font-size:11px" onclick="showToast('Upload CV dibuka...')">Upload CV →</button>
+          </div>
+          <div style="background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px">
+            <div style="font-size:11px;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px">Detail Match Score</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;gap:8px"><div style="font-size:10px;color:var(--ink2);width:120px">Relevansi jurusan</div><div class="pb" style="flex:1"><div class="pb-fill" style="width:96%"></div></div><div style="font-size:10px;font-weight:700;color:var(--teal)">96</div></div>
+              <div style="display:flex;align-items:center;gap:8px"><div style="font-size:10px;color:var(--ink2);width:120px">Pengalaman</div><div class="pb" style="flex:1"><div class="pb-fill" style="width:80%"></div></div><div style="font-size:10px;font-weight:700;color:var(--teal)">80</div></div>
+              <div style="display:flex;align-items:center;gap:8px"><div style="font-size:10px;color:var(--ink2);width:120px">Sertifikasi</div><div class="pb" style="flex:1"><div class="pb-fill" style="width:70%;background:var(--amber)"></div></div><div style="font-size:10px;font-weight:700;color:var(--amber)">70</div></div>
+              <div style="display:flex;align-items:center;gap:8px"><div style="font-size:10px;color:var(--ink2);width:120px">Kelengkapan profil</div><div class="pb" style="flex:1"><div class="pb-fill" style="width:78%;background:var(--sky)"></div></div><div style="font-size:10px;font-weight:700;color:var(--sky)">78</div></div>
+              <div style="display:flex;align-items:center;gap:8px"><div style="font-size:10px;color:var(--ink2);width:120px">Lokasi & ketersediaan</div><div class="pb" style="flex:1"><div class="pb-fill" style="width:100%"></div></div><div style="font-size:10px;font-weight:700;color:var(--teal)">100</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SIMPAN (kosong) ══ -->
+      <div class="sec" id="sec-simpan">
+        <div class="sec-title">🔖 Lowongan Disimpan</div>
+        <div class="empty-state"><div style="font-size:40px;margin-bottom:12px">🔖</div><div style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:6px">5 Lowongan Tersimpan</div><p style="font-size:12px">Kamu sudah menyimpan 5 lowongan. <a href="#" style="color:var(--teal);font-weight:700" onclick="showSec('kerja')">Lihat semua lowongan →</a></p></div>
+      </div>
+
+      <!-- ══ REKOMENDASI ══ -->
+      <div class="sec" id="sec-rekomendasi">
+        <div class="sec-title">⭐ Rekomendasi AI untuk Kamu</div>
+        <div style="background:var(--teal-lt);border-radius:12px;padding:14px;margin-bottom:16px;font-size:12px;color:var(--teal);line-height:1.7">🤖 <strong>AI Matching aktif:</strong> Berdasarkan profil ATP-mu, match score 88, dan lokasi Muara Pawan — berikut 6 lowongan paling cocok untukmu saat ini.</div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+      <div class="rp-card">
+        <div class="rp-ttl">🤖 Rekomendasi AI<span class="rp-see">Lihat semua</span></div>
+        <div class="ri"><div class="ri-icon" style="background:var(--teal-lt)">🌿</div><div><div class="ri-name">LPK Sawit & Mekanisasi</div><div class="ri-meta">Cocok untuk ATP-mu</div></div><div class="ri-score">96</div></div>
+        <div class="ri"><div class="ri-icon" style="background:var(--amber-lt)">⚙️</div><div><div class="ri-name">Teknisi Pabrik CPO</div><div class="ri-meta">Cargill · Muara Pawan</div></div><div class="ri-score">88</div></div>
+        <div class="ri"><div class="ri-icon" style="background:var(--sky-lt)">🔬</div><div><div class="ri-name">Analis Mutu TBS</div><div class="ri-meta">PTPN · Benua Kayong</div></div><div class="ri-score">81</div></div>
+      </div>
+      <div class="rp-card">
+        <div class="rp-ttl">⏰ Deadline Mendekat<span class="rp-see">Semua</span></div>
+        <div class="dl-row"><div class="dl-dot" style="background:var(--coral)"></div><div><div class="dl-name">Cargill — Operator Kebun</div><div class="dl-date" style="color:var(--coral)">15 Mei · 13 hari lagi</div></div></div>
+        <div class="dl-row"><div class="dl-dot" style="background:var(--amber)"></div><div><div class="dl-name">Koperasi — Asisten Produksi</div><div class="dl-date" style="color:var(--amber)">5 Jun · 35 hari lagi</div></div></div>
+        <div class="dl-row"><div class="dl-dot" style="background:var(--teal)"></div><div><div class="dl-name">Puskesmas — Kader Desa</div><div class="dl-date" style="color:var(--teal)">30 Mei · 28 hari lagi</div></div></div>
+      </div>
+      <div class="rp-card">
+        <div class="rp-ttl">🏫 LPK Cocok<span class="rp-see" onclick="showSec('lpk')">Semua</span></div>
+        <div class="ri"><div class="ri-icon" style="background:var(--teal-lt)">🌱</div><div><div class="ri-name">LPK Sawit & RSPO</div><div class="ri-meta">3 bulan · Sertifikasi</div></div><div style="font-size:11px;color:var(--subtle)">›</div></div>
+        <div class="ri"><div class="ri-icon" style="background:var(--purple-lt)">💻</div><div><div class="ri-name">BLK Digital Desa</div><div class="ri-meta">2 bulan · SIPADES</div></div><div style="font-size:11px;color:var(--subtle)">›</div></div>
+        <div class="ri"><div class="ri-icon" style="background:var(--amber-lt)">📚</div><div><div class="ri-name">LMS — Belajar Online</div><div class="ri-meta">Gratis · Kurikulum Merdeka</div></div><div style="font-size:11px;color:var(--subtle)">›</div></div>
+      </div>
+      <div class="rp-card" style="background:var(--navy);border-color:var(--navy)">
+        <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,.4);letter-spacing:.5px;text-transform:uppercase;margin-bottom:12px">Statistik Profil</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:10px">Profil dilihat 8× minggu ini</div>
+        <div style="display:flex;justify-content:space-around;margin-bottom:12px">
+          <div style="text-align:center"><div style="font-family:'Fraunces',serif;font-size:24px;color:var(--teal2);font-weight:700">3</div><div style="font-size:9px;color:rgba(255,255,255,.35)">Lamaran</div></div>
+          <div style="text-align:center"><div style="font-family:'Fraunces',serif;font-size:24px;color:#fff;font-weight:700">5</div><div style="font-size:9px;color:rgba(255,255,255,.35)">Disimpan</div></div>
+          <div style="text-align:center"><div style="font-family:'Fraunces',serif;font-size:24px;color:var(--amber);font-weight:700">88</div><div style="font-size:9px;color:rgba(255,255,255,.35)">Score</div></div>
+        </div>
+        <button style="width:100%;padding:8px;background:var(--teal);border:none;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:700;color:#fff;cursor:pointer" onclick="showSec('profil')">Lihat profil lengkap →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TOAST & XP POPUP -->
+<div class="toast" id="toast"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="#00D49A" stroke-width="2.5"/><path d="M22 4L12 14.01l-3-3" stroke="#00D49A" stroke-width="2.5" stroke-linecap="round"/></svg><span id="toast-msg"></span></div>
+<div class="xp-popup" id="xp-popup">⚡ <span id="xp-msg">+100 XP!</span></div>
+
+<script>
+// ── STATE ──
+let currentRole='siswa', xp=1240;
+
+// ── TOAST ──
+function showToast(m){const t=document.getElementById('toast');document.getElementById('toast-msg').textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
+function showXP(pts){const p=document.getElementById('xp-popup');document.getElementById('xp-msg').textContent='+'+pts+' XP!';p.classList.add('show');xp+=pts;document.getElementById('xp-disp').textContent=xp.toLocaleString()+' XP';setTimeout(()=>p.classList.remove('show'),2200)}
+
+// ── LOGIN VIEWS ──
+function showLV(name){document.querySelectorAll('.lform-view').forEach(v=>v.classList.remove('active'));document.getElementById('lv-'+name).classList.add('active')}
+function togglePw(id,btn){const i=document.getElementById(id);i.type=i.type==='password'?'text':'password';btn.style.opacity=i.type==='text'?'1':'.5'}
+function checkStrength(pw){
+  const bars=[1,2,3,4].map(i=>document.getElementById('pb'+i));const h=document.getElementById('pw-hint');
+  bars.forEach(b=>b.className='pw-bar');let s=0;
+  if(pw.length>=8)s++;if(/[A-Z]/.test(pw))s++;if(/[0-9]/.test(pw))s++;if(/[^A-Za-z0-9]/.test(pw))s++;
+  const c=s<=1?'w':s<=2?'m':'s';for(let i=0;i<s;i++)bars[i].classList.add(c);
+  h.textContent=['','Lemah','Cukup','Kuat','Sangat Kuat'][s]||'Min. 8 karakter';
+  h.style.color=s<=1?'var(--coral)':s<=2?'var(--amber)':'var(--teal)';
+}
+function setLRole(r){currentRole=r;['siswa','perus','lpk'].forEach(x=>document.getElementById('rt-'+x).classList.remove('on'));document.getElementById('rt-'+r).classList.add('on')}
+function setRRole(r){['siswa','perus','lpk'].forEach(x=>{document.getElementById('rtr-'+x).classList.remove('on');const f=document.getElementById('rf-'+x);if(f)f.style.display='none'});document.getElementById('rtr-'+r).classList.add('on');const tf=document.getElementById('rf-'+r);if(tf)tf.style.display='block'}
+function startGoogleFlow(){showLV('google')}
+function goCompany(){showToast('Masuk sebagai perusahaan...');setTimeout(()=>{enterApp('perusahaan')},800)}
+function goLMS(){enterApp('lms')}
+function enterApp(role){
+  currentRole=role;
+  const b=document.getElementById('role-badge');
+  const labels={siswa:'SISWA',perusahaan:'PERUSAHAAN',lms:'BELAJAR',lpk:'LPK'};
+  const colors={siswa:'var(--teal)',perusahaan:'var(--amber)',lms:'var(--purple)',lpk:'var(--sky)'};
+  b.textContent=labels[role]||'SISWA';b.style.background=colors[role]||'var(--teal)';
+  document.getElementById('page-login').classList.remove('active');
+  document.getElementById('page-app').classList.add('active');
+  if(role==='perusahaan'){showSec('perusahaan');switchNav('profil');showToast('Selamat datang di Portal Perusahaan!')}
+  else if(role==='lms'){showSec('lms');switchNav('lms');showToast('Selamat belajar! 🎓')}
+  else{showSec('kerja');showToast('Selamat datang, Aldi Ramadan! 👋')}
+}
+function doLogin(){
+  const e=document.getElementById('l-email').value,p=document.getElementById('l-pw').value;
+  if(!e||!p){showToast('Mohon isi email dan kata sandi');return}
+  const btn=document.getElementById('login-btn');btn.textContent='Memverifikasi...';btn.classList.add('loading');
+  setTimeout(()=>{btn.classList.remove('loading');btn.textContent='Masuk →';enterApp(currentRole==='perus'?'perusahaan':currentRole)},1400)
+}
+function doRegister(){
+  if(!document.getElementById('terms').checked){showToast('Harap setujui syarat & ketentuan');return}
+  const btn=document.querySelector('#lv-register .submit-btn');btn.textContent='Membuat akun...';btn.classList.add('loading');
+  setTimeout(()=>{btn.classList.remove('loading');btn.textContent='Buat Akun Gratis →';showToast('Akun berhasil dibuat!');showLV('main')},1500)
+}
+function doForgot(){showToast('Tautan reset dikirim!');setTimeout(()=>showLV('main'),1600)}
+
+// ── APP NAVIGATION ──
+function switchNav(name){
+  document.querySelectorAll('.tbn').forEach(b=>b.classList.remove('active'));
+  const tn=document.getElementById('tn-'+name);if(tn)tn.classList.add('active');
+  const map={kerja:'kerja',lms:'lms',lamaran:'lamaran',profil:'profil'};
+  showSec(map[name]||name);
+}
+function showSec(name){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.sbn').forEach(b=>b.classList.remove('active'));
+  const sec=document.getElementById('sec-'+name);if(sec)sec.classList.add('active');
+  const sbn=document.getElementById('sbn-'+name);if(sbn)sbn.classList.add('active');
+}
+function switchToCompany(){enterApp('perusahaan')}
+
+// ── JOBS ──
+const allCards=()=>Array.from(document.querySelectorAll('.job-card'));
+function filterJobs(){
+  const sektor=document.getElementById('f-sektor').value;
+  const q=document.getElementById('gs-input').value.toLowerCase();
+  let v=0;
+  allCards().forEach(c=>{
+    const t=(c.querySelector('.jc-title')||{}).textContent?.toLowerCase()||'';
+    const co=(c.querySelector('.jc-co')||{}).textContent?.toLowerCase()||'';
+    const cs=c.dataset.sektor||'';
+    const show=(!q||t.includes(q)||co.includes(q))&&(!sektor||cs===sektor);
+    c.style.display=show?'block':'none';if(show)v++;
+  });
+  const el=document.getElementById('jobs-count');if(el)el.textContent='Menampilkan '+v+' lowongan';
+}
+function globalSearch(q){filterJobs()}
+function resetFilter(){
+  ['f-sektor','f-kec','f-tipe'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+  document.getElementById('gs-input').value='';filterJobs();
+  document.querySelectorAll('.chip').forEach((c,i)=>{c.classList.remove('on');if(i===0)c.classList.add('on')});
+  showToast('Filter direset');
+}
+function setChip(el,type){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));el.classList.add('on')}
+function setJtab(el){document.querySelectorAll('.jtab').forEach(t=>t.classList.remove('on'));el.classList.add('on')}
+function applyJob(btn,company){
+  const card=btn.closest('.job-card');btn.textContent='✓ Terkirim!';btn.className='btn btn-applied';btn.disabled=true;
+  card.classList.add('applied');showToast('Lamaran ke '+company+' berhasil dikirim!');showXP(50);
+}
+function saveJob(btn){
+  const saved=btn.textContent.includes('Tersimpan');
+  btn.textContent=saved?'🔖 Simpan':'✓ Tersimpan';
+  btn.style.background=saved?'':'var(--purple-lt)';btn.style.color=saved?'':'var(--purple)';
+  showToast(saved?'Dihapus dari simpan':'Lowongan disimpan!');
+}
+
+// ── LMS ──
+const lmsData={
+  sd:{label:'🌱 SD — Kelas 1–6 (Kurikulum Merdeka)',subjects:[{e:'📐',n:'Matematika',d:'Bilangan, geometri, literasi numerasi',l:24,p:90,c:'var(--green)'},{e:'📝',n:'Bahasa Indonesia',d:'Literasi membaca, menulis, bercerita',l:20,p:75,c:'var(--sky)'},{e:'🔬',n:'IPAS',d:'IPA & IPS tematik, lingkungan Ketapang',l:18,p:60,c:'var(--teal)'},{e:'🇮🇩',n:'Pendidikan Pancasila',d:'Nilai Pancasila, kebinekaan, gotong royong',l:16,p:50,c:'var(--coral)'},{e:'🎨',n:'Seni Budaya & Prakarya',d:'Seni rupa, tari Dayak, kerajinan lokal',l:14,p:40,c:'var(--pink)'},{e:'⚽',n:'PJOK',d:'Olahraga, kesehatan, permainan tradisional',l:12,p:80,c:'var(--orange)'}]},
+  smp:{label:'📖 SMP — Kelas 7–9 (Kurikulum Merdeka)',subjects:[{e:'📐',n:'Matematika',d:'Aljabar, geometri, statistika, fungsi',l:32,p:70,c:'var(--sky)'},{e:'⚗️',n:'IPA Terpadu',d:'Fisika, kimia, biologi. Ekosistem Kalimantan',l:28,p:55,c:'var(--teal)'},{e:'🗺️',n:'IPS Terpadu',d:'Sejarah, geografi, ekonomi, sosiologi',l:26,p:85,c:'var(--amber)'},{e:'🌍',n:'Bahasa Inggris',d:'Reading, writing, speaking, listening',l:24,p:45,c:'var(--purple)'},{e:'💻',n:'Informatika',d:'Python dasar, algoritma, keamanan digital',l:20,p:30,c:'var(--sky)'},{e:'📝',n:'Bahasa Indonesia',d:'Teks eksposisi, diskusi, pidato, cerpen',l:22,p:90,c:'var(--coral)'}]},
+  sma:{label:'🔬 SMA — Kelas 10–12 IPA & IPS (Kurikulum Merdeka)',subjects:[{e:'∫',n:'Matematika Peminatan',d:'Kalkulus, trigonometri, matriks, vektor',l:36,p:60,c:'var(--purple)'},{e:'⚡',n:'Fisika',d:'Mekanika, listrik, gelombang, fisika modern',l:30,p:50,c:'var(--sky)'},{e:'🧪',n:'Kimia',d:'Stoikiometri, elektrokimia, kimia organik',l:28,p:45,c:'var(--teal)'},{e:'🧬',n:'Biologi',d:'Sel, genetika, ekosistem tropis Kalimantan',l:28,p:75,c:'var(--green)'},{e:'📊',n:'Ekonomi',d:'Mikro & makro, APBN, perdagangan',l:26,p:65,c:'var(--amber)'},{e:'💻',n:'Informatika',d:'Python, SQL, jaringan, AI dasar',l:24,p:35,c:'var(--navy)'}]},
+  smk:{label:'⚙️ SMK Kejuruan — ATP Kelas XII (Kurikulum Merdeka Vokasi)',subjects:[{e:'🌿',n:'Pemupukan Presisi',d:'Nutrisi tanaman, teknik aplikasi berbasis data',l:16,p:40,c:'var(--teal)'},{e:'🚜',n:'Mekanisasi Pertanian',d:'Traktor, alsintan, K3 lapangan',l:14,p:65,c:'var(--green)'},{e:'♻️',n:'Standar RSPO',d:'Monitoring lingkungan, keberlanjutan, audit',l:12,p:25,c:'var(--amber)'},{e:'⛑️',n:'K3 Perkebunan',d:'APD, bahan kimia, P3K darurat',l:10,p:80,c:'var(--coral)'},{e:'🐛',n:'Pengendalian OPT',d:'Hama, penyakit, pestisida nabati, PHT',l:12,p:55,c:'var(--amber)'},{e:'📐',n:'Matematika XII',d:'Statistika, barisan deret, program linear',l:24,p:65,c:'var(--purple)'}]}
+};
+function setJenjang(j){
+  document.querySelectorAll('.jj-pill').forEach(p=>p.classList.remove('on'));
+  event.target.closest('.jj-pill').classList.add('on');
+  const data=lmsData[j];if(!data)return;
+  document.getElementById('lms-jenjang-label').textContent=data.label;
+  const grid=document.getElementById('subj-grid');
+  grid.innerHTML=data.subjects.map(s=>`
+    <div class="subj-card" onclick="openLesson('${s.n}')">
+      <div style="background:${s.c};position:absolute;top:0;left:0;right:0;height:3px;border-radius:13px 13px 0 0"></div>
+      <span class="sj-emoji">${s.e}</span>
+      <div class="sj-name">${s.n}</div>
+      <div class="sj-desc">${s.d}</div>
+      <div class="sj-foot"><span class="sj-lessons">${s.l} pertemuan</span>
+        <div class="sj-prog"><div class="sj-pfill" style="width:${s.p}%;background:${s.c}"></div></div>
+      </div>
+    </div>`).join('');
+}
+function openLesson(title){showToast('Membuka materi: '+title+' ...');showXP(10)}
+</script>
+</body>
+</html>

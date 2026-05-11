@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profil Saya — Siap Lulus Ketapang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">`n<link rel="stylesheet" href="css/profil.css">
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a class="brand" href="index.html">
+    <div class="brand-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+    <div><div class="brand-txt">Siap Lulus</div></div>
+  </a>
+  <div class="topbar-nav">
+    <a class="tnav" href="ketapang_portal_siswa.html">🔍 Cari Kerja</a>
+    <a class="tnav" href="ketapang_lms.html">📚 LMS Belajar</a>
+    <a class="tnav on" href="#">👤 Profil</a>
+    <a class="tnav" href="ketapang_lamaran.html">📋 Lamaranku</a>
+  </div>
+  <div class="topbar-right">
+  <div class="user-wrap" id="user-wrap">
+    <div class="user-pill" onclick="toggleUserMenu()" style="cursor:pointer">
+      <div class="user-avatar">AR</div>
+      <div class="user-name">Aldi R.</div>
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" style="margin-left:2px;opacity:.6"><path d="M6 9l6 6 6-6" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+    </div>
+    <div class="user-dropdown" id="user-dropdown">
+      <a href="ketapang_portal_siswa.html" class="ud-item">&#128269; Cari Kerja</a>
+      <a href="ketapang_lamaran.html" class="ud-item">&#128203; Lamaranku</a>
+      <div class="ud-sep"></div>
+      <div class="ud-item danger" onclick="showLogoutModal()">&#128682; Keluar</div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="profile-hero">
+  <div class="ph-bg"></div>
+  <div class="ph-grid"></div>
+  <div class="ph-inner">
+    <div class="ph-top">
+      <div class="ph-avatar-wrap">
+        <div class="ph-avatar">AR</div>
+        <div class="ph-edit-badge" onclick="showToast('Klik untuk ganti foto profil')">✎</div>
+      </div>
+      <div class="ph-info">
+        <div class="ph-name">Aldi Ramadan</div>
+        <div class="ph-jurusan">SMK Agribisnis Tanaman Perkebunan · Kelas XII · SMKN 1 Ketapang</div>
+        <div class="ph-tags">
+          <span class="ph-tag green">Agribisnis ATP</span>
+          <span class="ph-tag green">Sertifikasi RSPO</span>
+          <span class="ph-tag">Muara Pawan</span>
+          <span class="ph-tag">Siap Magang</span>
+          <span class="ph-tag">SIM C</span>
+        </div>
+        <div class="ph-actions">
+          <button class="ph-btn primary" onclick="showToast('Unduh CV berhasil!')">⬇ Unduh CV</button>
+          <button class="ph-btn ghost" onclick="showToast('Link profil disalin!')">🔗 Bagikan Profil</button>
+          <button class="ph-btn ghost" onclick="switchTab('edit')">✎ Edit Profil</button>
+        </div>
+      </div>
+      <div class="ph-right">
+        <div class="ph-score-ring">
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="8"/>
+            <circle cx="50" cy="50" r="42" fill="none" stroke="#22AF89" stroke-width="8" stroke-dasharray="263.9" stroke-dashoffset="31.7" stroke-linecap="round"/>
+          </svg>
+          <div class="ph-score-num">88</div>
+        </div>
+        <div class="ph-score-lbl">Match Score</div>
+      </div>
+    </div>
+    <div class="ph-tabs">
+      <div class="ph-tab on" onclick="switchTab('overview')">Ringkasan</div>
+      <div class="ph-tab" onclick="switchTab('edit')">Edit Profil</div>
+      <div class="ph-tab" onclick="switchTab('lamaran')">Lamaran (3)</div>
+      <div class="ph-tab" onclick="switchTab('skill')">Keahlian & Sertifikat</div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- OVERVIEW -->
+  <div class="tab-section on" id="tab-overview">
+    <div class="main-col">
+      <!-- STATS -->
+      <div class="stat-row">
+        <div class="stat-box"><div class="stat-val">3</div><div class="stat-lbl">Lamaran Dikirim</div></div>
+        <div class="stat-box"><div class="stat-val">5</div><div class="stat-lbl">Lowongan Disimpan</div></div>
+        <div class="stat-box"><div class="stat-val">8×</div><div class="stat-lbl">Profil Dilihat</div></div>
+      </div>
+
+      <!-- BIO -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title"><div class="ct-icon" style="background:var(--sky-lt)">👤</div>Tentang Saya</div>
+          <button class="edit-link" onclick="switchTab('edit')">Edit</button>
+        </div>
+        <p style="font-size:12px;color:var(--ink2);line-height:1.8">Siswa kelas XII jurusan Agribisnis Tanaman Perkebunan (ATP) di SMKN 1 Ketapang. Memiliki minat kuat di bidang pertanian modern, mekanisasi lahan, dan monitoring lingkungan perkebunan. Aktif di ekstrakurikuler pertanian sekolah dan telah mengikuti pelatihan dasar K3 lapangan. Siap magang dan berkarier di industri perkebunan Ketapang.</p>
+      </div>
+
+      <!-- PENGALAMAN -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title"><div class="ct-icon" style="background:var(--amber-lt)">💼</div>Pengalaman & Kegiatan</div>
+          <button class="edit-link" onclick="addExp()">+ Tambah</button>
+        </div>
+        <div id="exp-list">
+          <div class="exp-item">
+            <div class="exp-role">Praktik Kerja Lapangan (PKL)</div>
+            <div class="exp-org">Kebun Plasma Desa Sungai Besar · Muara Pawan</div>
+            <div class="exp-period">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Jun 2024 – Agu 2024 · 3 Bulan
+            </div>
+            <div class="exp-desc">Membantu proses pemupukan, pemantauan hama, dan pencatatan produksi TBS harian. Belajar mengoperasikan alat ukur tanah dan mesin semprot herbisida.</div>
+            <button class="exp-delete" onclick="this.closest('.exp-item').remove();showToast('Pengalaman dihapus')">✕</button>
+          </div>
+          <div class="exp-item">
+            <div class="exp-role">Anggota Aktif — Kelompok Tani Pelajar</div>
+            <div class="exp-org">SMKN 1 Ketapang</div>
+            <div class="exp-period">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Jan 2023 – Sekarang
+            </div>
+            <div class="exp-desc">Mengikuti pelatihan budidaya tanaman, pengelolaan green house sekolah, dan mengikuti lomba pertanian tingkat kabupaten.</div>
+            <button class="exp-delete" onclick="this.closest('.exp-item').remove();showToast('Pengalaman dihapus')">✕</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERTIFIKAT -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title"><div class="ct-icon" style="background:var(--teal-lt)">🏅</div>Sertifikat & Penghargaan</div>
+          <button class="edit-link" onclick="showToast('Form tambah sertifikat terbuka')">+ Tambah</button>
+        </div>
+        <div class="cert-item">
+          <div class="cert-icon" style="background:var(--teal-lt)">🌿</div>
+          <div>
+            <div class="cert-name">Pelatihan K3 Dasar Perkebunan</div>
+            <div class="cert-issuer">Dinas Perkebunan Kabupaten Ketapang</div>
+            <div class="cert-year">2024</div>
+          </div>
+          <span class="cert-badge" style="background:var(--teal-lt);color:var(--teal)">Terverifikasi ✓</span>
+        </div>
+        <div class="cert-item">
+          <div class="cert-icon" style="background:var(--amber-lt)">🚜</div>
+          <div>
+            <div class="cert-name">Mekanisasi Lahan Tingkat Dasar</div>
+            <div class="cert-issuer">SMKN 1 Ketapang</div>
+            <div class="cert-year">2023</div>
+          </div>
+          <span class="cert-badge" style="background:var(--amber-lt);color:var(--amber)">Internal</span>
+        </div>
+        <div class="cert-item">
+          <div class="cert-icon" style="background:var(--sky-lt)">🥈</div>
+          <div>
+            <div class="cert-name">Juara 2 — Lomba Agribisnis Tingkat Kabupaten</div>
+            <div class="cert-issuer">Dinas Pendidikan Ketapang</div>
+            <div class="cert-year">2023</div>
+          </div>
+          <span class="cert-badge" style="background:var(--sky-lt);color:var(--sky)">Prestasi</span>
+        </div>
+        <div style="margin-top:12px">
+          <div class="upload-zone" onclick="showToast('Fitur upload sertifikat segera hadir!')">
+            <div class="upload-icon">📎</div>
+            <div class="upload-title">Upload Sertifikat</div>
+            <div class="upload-sub">PDF atau gambar · Maks. 5 MB</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIDEBAR KANAN -->
+    <div class="side-col">
+      <!-- KELENGKAPAN -->
+      <div class="complete-bar">
+        <div class="cb-head">
+          <div class="cb-title">Kelengkapan Profil</div>
+          <div class="cb-pct">78%</div>
+        </div>
+        <div class="progress-bar"><div class="pb-fill" style="width:78%"></div></div>
+        <div class="cb-items">
+          <div class="cb-item done-item"><div class="cb-check done">✓</div><div class="cb-item-label">Foto profil</div><div class="cb-pts">+10 pts</div></div>
+          <div class="cb-item done-item"><div class="cb-check done">✓</div><div class="cb-item-label">Data diri lengkap</div><div class="cb-pts">+15 pts</div></div>
+          <div class="cb-item done-item"><div class="cb-check done">✓</div><div class="cb-item-label">Pilih jurusan</div><div class="cb-pts">+10 pts</div></div>
+          <div class="cb-item done-item"><div class="cb-check done">✓</div><div class="cb-item-label">Tambah pengalaman</div><div class="cb-pts">+15 pts</div></div>
+          <div class="cb-item"><div class="cb-check todo">○</div><div class="cb-item-label">Upload CV/Portofolio</div><div class="cb-pts">+20 pts</div></div>
+          <div class="cb-item"><div class="cb-check todo">○</div><div class="cb-item-label">Tambah sertifikat resmi</div><div class="cb-pts">+15 pts</div></div>
+          <div class="cb-item"><div class="cb-check todo">○</div><div class="cb-item-label">Tulis bio minimal 100 kata</div><div class="cb-pts">+15 pts</div></div>
+        </div>
+      </div>
+
+      <!-- MATCH DETAIL -->
+      <div class="card">
+        <div class="card-head"><div class="card-title"><div class="ct-icon" style="background:var(--teal-lt)">🎯</div>Detail Match Score</div></div>
+        <div class="match-breakdown">
+          <div class="mb-row"><div class="mb-label">Relevansi jurusan</div><div class="mb-track"><div class="mb-fill" style="width:96%;background:var(--teal)"></div></div><div class="mb-val" style="color:var(--teal)">96</div></div>
+          <div class="mb-row"><div class="mb-label">Pengalaman lapangan</div><div class="mb-track"><div class="mb-fill" style="width:80%;background:var(--teal)"></div></div><div class="mb-val" style="color:var(--teal)">80</div></div>
+          <div class="mb-row"><div class="mb-label">Sertifikasi teknis</div><div class="mb-track"><div class="mb-fill" style="width:70%;background:var(--amber)"></div></div><div class="mb-val" style="color:var(--amber)">70</div></div>
+          <div class="mb-row"><div class="mb-label">Kelengkapan profil</div><div class="mb-track"><div class="mb-fill" style="width:78%;background:var(--sky)"></div></div><div class="mb-val" style="color:var(--sky)">78</div></div>
+          <div class="mb-row"><div class="mb-label">Lokasi & ketersediaan</div><div class="mb-track"><div class="mb-fill" style="width:100%;background:var(--teal)"></div></div><div class="mb-val" style="color:var(--teal)">100</div></div>
+        </div>
+        <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:10px;color:var(--muted);line-height:1.6">
+          💡 <strong>Tips:</strong> Upload sertifikat RSPO untuk meningkatkan skor sertifikasi dari 70 ke 90+
+        </div>
+      </div>
+
+      <!-- REKOMENDASI KARIER -->
+      <div class="card">
+        <div class="card-head"><div class="card-title"><div class="ct-icon" style="background:var(--amber-lt)">🗺️</div>Jalur Karier Rekomendasi</div></div>
+        <div style="background:var(--teal-lt);border-radius:10px;padding:12px;margin-bottom:10px">
+          <div style="font-size:12px;font-weight:600;color:var(--teal);margin-bottom:4px">🌿 Jalur Agrikultur & Sawit</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6">Cocok 96% dengan profilmu. Cargill membuka rekrutmen langsung untuk lulusan ATP bersertifikat.</div>
+          <button style="margin-top:8px;padding:6px 12px;background:var(--teal);color:#fff;border:none;border-radius:7px;font-family:'Sora',sans-serif;font-size:10px;font-weight:600;cursor:pointer" onclick="showToast('Membuka peta jalur karier...')">Lihat Roadmap →</button>
+        </div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.6">
+          <strong style="color:var(--navy)">Langkah berikutmu:</strong><br>
+          1. Daftar LPK Sawit & Mekanisasi (3 bln)<br>
+          2. Ikuti sertifikasi RSPO<br>
+          3. Lamar posisi Operator Cargill
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT PROFIL -->
+  <div class="tab-section" id="tab-edit">
+    <div>
+      <div class="card">
+        <div class="card-head"><div class="card-title"><div class="ct-icon" style="background:var(--sky-lt)">📝</div>Data Pribadi</div></div>
+        <div class="field-row">
+          <div class="field"><label class="field-label">Nama Depan</label><input class="field-input" value="Aldi"></div>
+          <div class="field"><label class="field-label">Nama Belakang</label><input class="field-input" value="Ramadan"></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label class="field-label">Tanggal Lahir</label><input class="field-input" type="date" value="2007-03-15"></div>
+          <div class="field"><label class="field-label">Jenis Kelamin</label>
+            <select class="field-select"><option>Laki-laki</option><option>Perempuan</option></select>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Nomor Telepon</label>
+          <input class="field-input" value="0812-3456-7890" placeholder="Nomor aktif WhatsApp">
+        </div>
+        <div class="field">
+          <label class="field-label">Alamat Lengkap</label>
+          <input class="field-input" value="Jl. Diponegoro No. 12, Muara Pawan, Ketapang">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label">Kecamatan</label>
+            <select class="field-select"><option>Muara Pawan</option><option>Delta Pawan</option><option>Benua Kayong</option></select>
+          </div>
+          <div class="field">
+            <label class="field-label">Status Ketersediaan</label>
+            <select class="field-select"><option>Siap Magang</option><option>Siap Full-time</option><option>Siap Keduanya</option></select>
+          </div>
+        </div>
+        <div class="save-bar">
+          <button class="btn btn-outline">Batal</button>
+          <button class="btn btn-teal" onclick="saveProfile()">Simpan Perubahan →</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><div class="card-title"><div class="ct-icon" style="background:var(--teal-lt)">🎓</div>Pendidikan</div></div>
+        <div class="field">
+          <label class="field-label">Nama Sekolah</label>
+          <input class="field-input" value="SMKN 1 Ketapang">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label">Jurusan / Kompetensi</label>
+            <select class="field-select">
+              <option>Agribisnis Tanaman Perkebunan (ATP)</option>
+              <option>Teknik Komputer & Jaringan (TKJ)</option>
+              <option>Teknik Kendaraan Ringan (TKR)</option>
+              <option>Akuntansi & Keuangan Lembaga</option>
+              <option>Keperawatan</option>
+              <option>IPA (SMA)</option>
+              <option>IPS (SMA)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label">Kelas Saat Ini</label>
+            <select class="field-select"><option>Kelas X</option><option>Kelas XI</option><option selected>Kelas XII</option><option>Sudah Lulus</option></select>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label class="field-label">Tahun Masuk</label><input class="field-input" value="2022"></div>
+          <div class="field"><label class="field-label">Tahun Lulus (Estimasi)</label><input class="field-input" value="2025"></div>
+        </div>
+        <div class="field">
+          <label class="field-label">Nilai Rata-rata (Opsional)</label>
+          <input class="field-input" placeholder="Contoh: 85.5" value="86.4">
+          <div class="field-hint">Nilai ini hanya terlihat oleh pemberi kerja yang kamu lamar</div>
+        </div>
+        <div class="save-bar">
+          <button class="btn btn-outline">Batal</button>
+          <button class="btn btn-teal" onclick="saveProfile()">Simpan →</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><div class="card-title"><div class="ct-icon" style="background:var(--purple-lt)">💬</div>Tentang Saya / Bio</div></div>
+        <div class="field">
+          <label class="field-label">Tuliskan sedikit tentang dirimu</label>
+          <textarea class="field-textarea" rows="5" id="bio-input">Siswa kelas XII jurusan Agribisnis Tanaman Perkebunan (ATP) di SMKN 1 Ketapang. Memiliki minat kuat di bidang pertanian modern, mekanisasi lahan, dan monitoring lingkungan perkebunan. Aktif di ekstrakurikuler pertanian sekolah dan telah mengikuti pelatihan dasar K3 lapangan. Siap magang dan berkarier di industri perkebunan Ketapang.</textarea>
+          <div class="field-hint" id="bio-count">148 karakter · disarankan minimal 200 karakter</div>
+        </div>
+        <div class="save-bar">
+          <button class="btn btn-outline">Batal</button>
+          <button class="btn btn-teal" onclick="saveProfile()">Simpan →</button>
+        </div>
+      </div>
+
+      <!-- CV UPLOAD -->
+      <div class="card">
+        <div class="card-head"><div class="card-title"><div class="ct-icon" style="background:var(--coral-lt)">📄</div>Unggah CV / Portofolio</div></div>
+        <div class="upload-zone" onclick="showToast('Fitur upload CV segera hadir!')" style="margin-bottom:12px">
+          <div class="upload-icon">📄</div>
+          <div class="upload-title">Klik atau seret file CV kamu ke sini</div>
+          <div class="upload-sub">PDF · Maks 5 MB · Format: Nama_CV_SiapLulus</div>
+        </div>
+        <div style="background:var(--amber-lt);border-radius:9px;padding:12px;font-size:11px;color:var(--amber);line-height:1.6">
+          💡 Profil dengan CV mendapat 3× lebih banyak tampilan dari pemberi kerja. Upload sekarang untuk meningkatkan Match Score!
+        </div>
+      </div>
+    </div>
+    <div>
+      <!-- PREVIEW CARD -->
+      <div class="card" style="background:var(--navy);border-color:var(--navy)">
+        <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">Preview Profil Publik</div>
+        <div style="text-align:center;margin-bottom:14px">
+          <div style="width:56px;height:56px;background:linear-gradient(135deg,var(--teal),var(--sky));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',serif;font-size:20px;color:#fff;margin:0 auto 10px">AR</div>
+          <div style="font-size:15px;font-weight:600;color:#fff">Aldi Ramadan</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:2px">SMK ATP · SMKN 1 Ketapang</div>
+        </div>
+        <div style="background:rgba(255,255,255,.07);border-radius:9px;padding:12px;text-align:center;margin-bottom:12px">
+          <div style="font-family:'Instrument Serif',serif;font-size:32px;color:var(--teal2)">88</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.4)">Match Score</div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;justify-content:center">
+          <span style="font-size:10px;padding:3px 9px;border-radius:20px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)">Agribisnis ATP</span>
+          <span style="font-size:10px;padding:3px 9px;border-radius:20px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)">Siap Magang</span>
+          <span style="font-size:10px;padding:3px 9px;border-radius:20px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)">Muara Pawan</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAMARAN -->
+  <div class="tab-section" id="tab-lamaran">
+    <div style="grid-column:1/-1">
+      <div class="stat-row" style="grid-template-columns:repeat(4,1fr)">
+        <div class="stat-box"><div class="stat-val">3</div><div class="stat-lbl">Total Lamaran</div></div>
+        <div class="stat-box"><div class="stat-val" style="color:var(--amber)">2</div><div class="stat-lbl">Sedang Diproses</div></div>
+        <div class="stat-box"><div class="stat-val" style="color:var(--teal)">1</div><div class="stat-lbl">Dipanggil Interview</div></div>
+        <div class="stat-box"><div class="stat-val" style="color:var(--subtle)">0</div><div class="stat-lbl">Ditolak</div></div>
+      </div>
+
+      <div class="lamaran-item" style="border:2px solid var(--teal)">
+        <div class="li-logo" style="background:var(--teal-lt)">🌿</div>
+        <div style="flex:1">
+          <div class="li-title">Operator Kebun & Pemantau Lingkungan</div>
+          <div class="li-company">Cargill Ketapang Mill · Muara Pawan</div>
+          <div class="li-status">
+            <span class="status-badge" style="background:var(--teal-lt);color:var(--teal)">✓ Dipanggil Interview</span>
+            <span style="font-size:10px;color:var(--muted)">Match Score 96/100</span>
+            <span class="li-date">Dilamar 25 Apr 2026</span>
+          </div>
+          <div style="background:var(--teal-lt);border-radius:8px;padding:10px;margin-top:10px;font-size:11px;color:var(--teal);line-height:1.6">
+            🎉 <strong>Selamat!</strong> Kamu dipanggil wawancara pada <strong>Senin, 12 Mei 2026 pukul 09.00 WIB</strong> di Kantor Cargill Ketapang Mill. Bawa dokumen asli ijazah/SKL dan sertifikat pelatihan.
+          </div>
+        </div>
+      </div>
+
+      <div class="lamaran-item">
+        <div class="li-logo" style="background:var(--purple-lt)">💻</div>
+        <div style="flex:1">
+          <div class="li-title">Operator SIPADES & Admin Digital Desa</div>
+          <div class="li-company">BUMDes Sejahtera · Delta Pawan</div>
+          <div class="li-status">
+            <span class="status-badge" style="background:var(--amber-lt);color:var(--amber)">⏳ Sedang Diproses</span>
+            <span style="font-size:10px;color:var(--muted)">Match Score 82/100</span>
+            <span class="li-date">Dilamar 28 Apr 2026</span>
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.6">Lamaran sedang ditinjau oleh tim BUMDes. Estimasi respon dalam 5–7 hari kerja.</div>
+        </div>
+      </div>
+
+      <div class="lamaran-item">
+        <div class="li-logo" style="background:var(--coral-lt)">💊</div>
+        <div style="flex:1">
+          <div class="li-title">Asisten Bidan & Kader Posyandu Desa</div>
+          <div class="li-company">Puskesmas Muara Pawan</div>
+          <div class="li-status">
+            <span class="status-badge" style="background:var(--amber-lt);color:var(--amber)">⏳ Sedang Diproses</span>
+            <span style="font-size:10px;color:var(--muted)">Match Score 91/100</span>
+            <span class="li-date">Dilamar 30 Apr 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEAHLIAN -->
+  <div class="tab-section" id="tab-skill">
+    <div>
+      <div class="card">
+        <div class="card-head"><div class="card-title"><div class="ct-icon" style="background:var(--sky-lt)">⚡</div>Keahlian Teknis</div></div>
+        <div class="skill-grid" id="skills-tech">
+          <span class="skill-tag" style="background:var(--teal-lt);color:var(--teal)">Pemupukan Presisi <span class="remove" onclick="removeSkill(this)">✕</span></span>
+          <span class="skill-tag" style="background:var(--teal-lt);color:var(--teal)">Pengendalian Hama <span class="remove" onclick="removeSkill(this)">✕</span></span>
+          <span class="skill-tag" style="background:var(--teal-lt);color:var(--teal)">Mesin Semprot <span class="remove" onclick="removeSkill(this)">✕</span></span>
+          <span class="skill-tag" style="background:var(--sky-lt);color:var(--sky)">Pengukuran Lahan <span class="remove" onclick="removeSkill(this)">✕</span></span>
+          <span class="skill-tag" style="background:var(--amber-lt);color:var(--amber)">K3 Lapangan <span class="remove" onclick="removeSkill(this)">✕</span></span>
+          <span class="skill-tag" style="background:var(--purple-lt);color:var(--purple)">Dokumentasi TBS <span class="remove" onclick="removeSkill(this)">✕</span></span>
+        </div>
+        <div class="skill-add">
+          <input class="skill-input" id="skill-input-tech" placeholder="Tambah keahlian teknis..." onkeydown="if(event.key==='Enter')addSkill('tech')">
+          <button class="skill-add-btn" onclick="addSkill('tech')">+ Tambah</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><div class="card-title"><div class="ct-icon" style="background:var(--amber-lt)">🤝</div>Keahlian Lunak (Soft Skills)</div></div>
+        <div class="skill-grid" id="skills-soft">
+          <span class="skill-tag" style="background:var(--amber-lt);color:var(--amber)">Kerja Tim <span class="remove" onclick="removeSkill(this)">✕</span></span>
+          <span class="skill-tag" style="background:var(--amber-lt);color:var(--amber)">Disiplin Waktu <span class="remove" onclick="removeSkill(this)">✕</span></span>
+          <span class="skill-tag" style="background:var(--amber-lt);color:var(--amber)">Komunikasi Lapangan <span class="remove" onclick="removeSkill(this)">✕</span></span>
+          <span class="skill-tag" style="background:var(--amber-lt);color:var(--amber)">Pencatatan Data <span class="remove" onclick="removeSkill(this)">✕</span></span>
+        </div>
+        <div class="skill-add">
+          <input class="skill-input" id="skill-input-soft" placeholder="Tambah soft skill..." onkeydown="if(event.key==='Enter')addSkill('soft')">
+          <button class="skill-add-btn" onclick="addSkill('soft')">+ Tambah</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><div class="card-title"><div class="ct-icon" style="background:var(--coral-lt)">🌐</div>Bahasa</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;gap:12px"><div style="font-size:12px;font-weight:500;width:100px">Indonesia</div><div style="flex:1;height:6px;background:var(--line);border-radius:20px;overflow:hidden"><div style="height:100%;background:var(--teal);width:100%;border-radius:20px"></div></div><div style="font-size:11px;color:var(--muted);width:60px">Fasih</div></div>
+          <div style="display:flex;align-items:center;gap:12px"><div style="font-size:12px;font-weight:500;width:100px">Melayu Ketapang</div><div style="flex:1;height:6px;background:var(--line);border-radius:20px;overflow:hidden"><div style="height:100%;background:var(--teal);width:90%;border-radius:20px"></div></div><div style="font-size:11px;color:var(--muted);width:60px">Native</div></div>
+          <div style="display:flex;align-items:center;gap:12px"><div style="font-size:12px;font-weight:500;width:100px">Inggris</div><div style="flex:1;height:6px;background:var(--line);border-radius:20px;overflow:hidden"><div style="height:100%;background:var(--amber);width:40%;border-radius:20px"></div></div><div style="font-size:11px;color:var(--muted);width:60px">Dasar</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <!-- SERTIFIKAT PANEL -->
+      <div class="card">
+        <div class="card-head"><div class="card-title"><div class="ct-icon" style="background:var(--teal-lt)">🏅</div>Status Sertifikasi</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="background:var(--teal-lt);border-radius:9px;padding:11px;display:flex;align-items:center;gap:10px">
+            <div style="font-size:18px">✅</div>
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--teal)">K3 Dasar Perkebunan</div>
+              <div style="font-size:10px;color:var(--muted)">Diterbitkan Dinas Perkebunan · 2024</div>
+            </div>
+          </div>
+          <div style="background:var(--amber-lt);border-radius:9px;padding:11px;display:flex;align-items:center;gap:10px">
+            <div style="font-size:18px">⏳</div>
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--amber)">Sertifikasi RSPO</div>
+              <div style="font-size:10px;color:var(--muted)">Belum diambil — sangat direkomendasikan</div>
+            </div>
+          </div>
+          <div style="background:var(--coral-lt);border-radius:9px;padding:11px;display:flex;align-items:center;gap:10px">
+            <div style="font-size:18px">❌</div>
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--coral)">Sertifikat Mekanisasi Lanjut</div>
+              <div style="font-size:10px;color:var(--muted)">Tersedia di LPK Sawit · 3 bulan</div>
+            </div>
+          </div>
+        </div>
+        <button style="width:100%;margin-top:12px;padding:9px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-family:'Sora',sans-serif;font-size:11px;font-weight:600;cursor:pointer" onclick="showToast('Membuka daftar LPK & sertifikasi...')">Lihat Program LPK →</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- LOGOUT MODAL -->
+<div class="logout-modal" id="logout-modal">
+  <div class="lm-box">
+    <div class="lm-icon">🚪</div>
+    <div class="lm-title">Keluar dari akun?</div>
+    <div class="lm-sub">Kamu akan diarahkan kembali ke halaman login. Data tetap aman.</div>
+    <div class="lm-actions">
+      <button class="lm-btn cancel" onclick="hideLogoutModal()">Batal</button>
+      <button class="lm-btn confirm" onclick="doLogout()">Ya, Keluar</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="#22AF89" stroke-width="2"/><path d="M22 4L12 14.01l-3-3" stroke="#22AF89" stroke-width="2" stroke-linecap="round"/></svg>
+  <span id="toast-msg"></span>
+</div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    function setTab(el, targetId) {
+      document.querySelectorAll('.ph-tab').forEach(t => t.classList.remove('on'));
+      el.classList.add('on');
+      document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('on'));
+      document.getElementById(targetId).classList.add('on');
+    }
+  </script>
+</body>
+</html>
+

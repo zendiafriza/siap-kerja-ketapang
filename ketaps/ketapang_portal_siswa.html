@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cari Kerja — Siap Lulus Ketapang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/auth.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</head>
+</head>
+
+<body>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <a class="brand" href="index.html">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="white" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+      <div>
+        <div class="brand-txt">Siap Lulus</div>
+        <div class="brand-sub">Ketapang</div>
+      </div>
+    </a>
+    <div class="topbar-center">
+      <div class="search-wrap">
+        <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none"
+          style="color:rgba(255,255,255,.4)">
+          <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" />
+          <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <input class="topbar-search" type="text" placeholder="Cari lowongan, sektor, atau perusahaan..."
+          oninput="filterJobs(this.value)" id="global-search">
+      </div>
+    </div>
+    <div class="topbar-right" style="display:flex;align-items:center;gap:6px">
+      <a href="ketapang_lamaran.html"
+        style="padding:7px 11px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:8px;font-family:'Sora',sans-serif;font-size:11px;font-weight:600;color:rgba(255,255,255,.75);text-decoration:none;transition:.15s"
+        onmouseover="this.style.background='rgba(255,255,255,.14)'"
+        onmouseout="this.style.background='rgba(255,255,255,.07)'">📋 Lamaranku</a>
+      <a href="ketapang_profil_siswa.html"
+        style="padding:7px 11px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:8px;font-family:'Sora',sans-serif;font-size:11px;font-weight:600;color:rgba(255,255,255,.75);text-decoration:none;transition:.15s"
+        onmouseover="this.style.background='rgba(255,255,255,.14)'"
+        onmouseout="this.style.background='rgba(255,255,255,.07)'">👤 Profil</a>
+      <div class="notif-btn" onclick="showToast('Kamu punya 3 notifikasi baru')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <div class="notif-dot"></div>
+      </div>
+      <div class="user-wrap" id="user-wrap">
+        <div class="user-pill" onclick="toggleUserMenu()" style="cursor:pointer">
+          <div class="user-avatar">AR</div>
+          <div class="user-name">Aldi R.</div>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" style="margin-left:2px;opacity:.6">
+            <path d="M6 9l6 6 6-6" stroke="white" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div class="user-dropdown" id="user-dropdown">
+          <a href="ketapang_profil_siswa.html" class="ud-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            Lihat Profil
+          </a>
+          <a href="ketapang_profil_siswa.html" class="ud-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" />
+              <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" />
+            </svg>
+            Edit Profil
+          </a>
+          <div class="ud-sep"></div>
+          <div class="ud-item danger" onclick="showLogoutModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" />
+            </svg>
+            Keluar
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGOUT MODAL -->
+  <div class="logout-modal" id="logout-modal">
+    <div class="lm-box">
+      <div class="lm-icon">🚪</div>
+      <div class="lm-title">Keluar dari akun?</div>
+      <div class="lm-sub">Kamu akan keluar dari sesi ini dan diarahkan ke halaman login. Data yang tersimpan tetap aman.
+      </div>
+      <div class="lm-actions">
+        <button class="lm-btn cancel" onclick="hideLogoutModal()">Batal</button>
+        <button class="lm-btn confirm" onclick="doLogout()">Ya, Keluar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-body">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sb-card">
+        <div class="sb-profile" id="sb-profile">
+          <!-- Profile content will be dynamically inserted here -->
+        </div>
+        <div class="sb-section">
+          <div class="sb-sec-title">Menu Utama</div>
+          <div class="sb-nav-item on" onclick="setNav(this,'semua')">
+            <div class="sb-nav-icon" style="background:var(--teal-lt)">🔍</div>
+            Cari Lowongan
+            <span class="sb-nav-badge" style="background:var(--teal-lt);color:var(--teal)">28</span>
+          </div>
+          <div class="sb-nav-item" onclick="setNav(this,'rekomendasi')">
+            <div class="sb-nav-icon" style="background:var(--amber-lt)">⭐</div>
+            Rekomendasi AI
+            <span class="sb-nav-badge" style="background:var(--amber-lt);color:var(--amber)">6</span>
+          </div>
+          <div class="sb-nav-item" onclick="setNav(this,'lamar')">
+            <div class="sb-nav-icon" style="background:var(--sky-lt)">📋</div>
+            Lamaranku
+            <span class="sb-nav-badge" style="background:var(--sky-lt);color:var(--sky)">3</span>
+          </div>
+          <div class="sb-nav-item" onclick="setNav(this,'simpan')">
+            <div class="sb-nav-icon" style="background:var(--purple-lt)">🔖</div>
+            Disimpan
+            <span class="sb-nav-badge" style="background:var(--purple-lt);color:var(--purple)">5</span>
+          </div>
+        </div>
+        <div class="sb-section">
+          <div class="sb-sec-title">Jalur Lain</div>
+          <div class="sb-nav-item" onclick="setNav(this,'lpk')">
+            <div class="sb-nav-icon" style="background:var(--coral-lt)">🏫</div>
+            LPK & Pelatihan
+          </div>
+          <div class="sb-nav-item" onclick="setNav(this,'karier')">
+            <div class="sb-nav-icon" style="background:var(--teal-lt)">🗺️</div>
+            Peta Karier
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main-col">
+      <div class="banner" id="main-banner">
+        <!-- Banner content will be dynamically inserted here -->
+      </div>
+
+      <!-- FILTER -->
+      <div class="filter-section">
+        <div class="filter-row1">
+          <select class="filter-select" onchange="applyFilter()" id="f-sektor">
+            <option value="">Semua Sektor</option>
+            <option value="sawit">Sawit & Agrikultur</option>
+            <option value="kesehatan">Kesehatan</option>
+            <option value="tik">TIK & Digital</option>
+            <option value="teknik">Teknik & Mesin</option>
+            <option value="admin">Admin & Keuangan</option>
+            <option value="umkm">UMKM & Wirausaha</option>
+          </select>
+          <select class="filter-select" onchange="applyFilter()" id="f-kec">
+            <option value="">Semua Kecamatan</option>
+            <option>Muara Pawan</option>
+            <option>Delta Pawan</option>
+            <option>Benua Kayong</option>
+          </select>
+          <select class="filter-select" onchange="applyFilter()" id="f-tipe">
+            <option value="">Semua Tipe</option>
+            <option>Magang</option>
+            <option>Full-time</option>
+            <option>Part-time</option>
+            <option>Kontrak</option>
+          </select>
+          <button class="filter-btn primary" onclick="applyFilter()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="margin-right:4px">
+              <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z" stroke="white" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            Filter
+          </button>
+          <button class="filter-btn clear" onclick="clearFilter()">Reset</button>
+        </div>
+        <div class="chip-row" id="chip-row">
+          <div class="chip on" onclick="toggleChip(this,'semua')">Semua (28)</div>
+          <div class="chip" onclick="toggleChip(this,'magang')">Magang (12)</div>
+          <div class="chip" onclick="toggleChip(this,'fulltime')">Full-time (10)</div>
+          <div class="chip" onclick="toggleChip(this,'tinggi')">Match Tinggi (&gt;80)</div>
+          <div class="chip" onclick="toggleChip(this,'baru')">Baru Ditambahkan</div>
+          <div class="chip" onclick="toggleChip(this,'dekat')">Dekat Lokasiku</div>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="section-tabs">
+        <div class="stab on" onclick="setTab(this)">Semua Lowongan</div>
+        <div class="stab" onclick="setTab(this)">Rekomendasi AI</div>
+        <div class="stab" onclick="setTab(this)">Sedang Dilamar</div>
+        <div class="stab" onclick="setTab(this)">Disimpan</div>
+      </div>
+
+      <div class="jobs-header">
+        <div class="jobs-count" id="jobs-count">Menampilkan 28 lowongan</div>
+        <select class="jobs-sort">
+          <option>Paling Relevan</option>
+          <option>Terbaru</option>
+          <option>Match Score Tertinggi</option>
+          <option>Deadline Terdekat</option>
+        </select>
+      </div>
+
+      <div id="job-list">
+
+        <!-- JOB 1 - FEATURED -->
+        <div class="job-card featured" data-sektor="sawit" data-match="96">
+          <div class="feat-badge">⭐ UNGGULAN</div>
+          <div class="job-head">
+            <div class="job-logo" style="background:#EAF3DE">🌿</div>
+            <div>
+              <div class="job-title">Operator Kebun & Pemantau Lingkungan</div>
+              <div class="job-company">Cargill Ketapang Mill · Muara Pawan</div>
+            </div>
+          </div>
+          <div class="job-tags">
+            <span class="jt" style="background:var(--teal-lt);color:var(--teal)">Magang → Full-time</span>
+            <span class="jt" style="background:var(--amber-lt);color:var(--amber)">Sawit & Agrikultur</span>
+            <span class="jt" style="background:var(--sky-lt);color:var(--sky)">Sertifikasi RSPO</span>
+          </div>
+          <div class="job-meta">
+            <div class="jm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" stroke-width="2" />
+                <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" />
+              </svg> Muara Pawan, Ketapang</div>
+            <div class="jm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg> 3 bulan magang + kemungkinan tetap</div>
+            <div class="jm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  stroke="currentColor" stroke-width="2" />
+              </svg> Lulusan ATP · Min. SMA/SMK sederajat</div>
+          </div>
+          <div class="job-desc">Bergabung sebagai operator kebun di Cargill Ketapang Mill. Bertanggung jawab atas
+            pemantauan pertumbuhan tanaman, pelaksanaan standar RSPO, dan pelaporan lingkungan. Program magang langsung
+            disertai pelatihan K3 dan sertifikasi resmi.</div>
+          <div class="job-footer">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <div class="match-score-pill" style="background:var(--teal-lt);color:var(--teal)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                  <path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" />
+                  <path d="M22 4L12 14.01l-3-3" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+                </svg>
+                Match Score 96/100
+              </div>
+              <div class="deadline urgent">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                  <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                Tutup 15 Mei 2026
+              </div>
+            </div>
+            <div class="job-action-row">
+              <button class="btn-sm btn-outline" onclick="saveJob(this)">🔖 Simpan</button>
+              <button class="btn-sm btn-teal" onclick="applyJob(this, 'Cargill Ketapang Mill')">Lamar Sekarang
+                →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- JOB 2 -->
+        <div class="job-card" data-sektor="kesehatan" data-match="91">
+          <div class="new-badge">BARU</div>
+          <div class="job-head">
+            <div class="job-logo" style="background:#FBEAF0">💊</div>
+            <div>
+              <div class="job-title">Asisten Bidan & Kader Posyandu Desa</div>
+              <div class="job-company">Puskesmas Muara Pawan + 5 Desa · Muara Pawan</div>
+            </div>
+          </div>
+          <div class="job-tags">
+            <span class="jt" style="background:var(--coral-lt);color:var(--coral)">Full-time</span>
+            <span class="jt" style="background:var(--teal-lt);color:var(--teal)">Kesehatan Komunitas</span>
+            <span class="jt" style="background:var(--purple-lt);color:var(--purple)">Save the Children</span>
+          </div>
+          <div class="job-meta">
+            <div class="jm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" stroke-width="2" />
+                <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" />
+              </svg> Muara Pawan &amp; Desa Binaan</div>
+            <div class="jm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg> Kontrak 1 tahun, dapat diperpanjang</div>
+            <div class="jm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  stroke="currentColor" stroke-width="2" />
+              </svg> Lulusan SMK Kesehatan / IPA</div>
+          </div>
+          <div class="job-desc">Mendukung layanan kesehatan dasar di 5 desa binaan, membantu bidan desa, mengelola data
+            Posyandu, dan menjadi kader "Desa Ramah Anak" program Save the Children.</div>
+          <div class="job-footer">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <div class="match-score-pill" style="background:var(--teal-lt);color:var(--teal)">Match Score 91/100</div>
+              <div class="deadline">Tutup 30 Mei 2026</div>
+            </div>
+            <div class="job-action-row">
+              <button class="btn-sm btn-outline" onclick="saveJob(this)">🔖 Simpan</button>
+              <button class="btn-sm btn-teal" onclick="applyJob(this,'Puskesmas Muara Pawan')">Lamar Sekarang →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- JOB 3 - APPLIED -->
+        <div class="job-card applied" data-sektor="tik" data-match="82">
+          <div class="applied-badge">✓ SUDAH DILAMAR</div>
+          <div class="job-head">
+            <div class="job-logo" style="background:#EEEDFE">💻</div>
+            <div>
+              <div class="job-title">Operator SIPADES & Admin Digital Desa</div>
+              <div class="job-company">BUMDes Sejahtera · Delta Pawan</div>
+            </div>
+          </div>
+          <div class="job-tags">
+            <span class="jt" style="background:var(--purple-lt);color:var(--purple)">Full-time</span>
+            <span class="jt" style="background:var(--sky-lt);color:var(--sky)">TIK & Desa Digital</span>
+            <span class="jt" style="background:var(--amber-lt);color:var(--amber)">BUMDes</span>
+          </div>
+          <div class="job-meta">
+            <div class="jm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" stroke-width="2" />
+                <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" />
+              </svg> Delta Pawan, Ketapang</div>
+            <div class="jm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg> Full-time tetap</div>
+          </div>
+          <div class="job-desc">Mengelola sistem SIPADES desa, mencatat data warga, membantu pengelolaan media sosial
+            BUMDes, dan mendukung administrasi Dana Desa secara digital.</div>
+          <div class="job-footer">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <div class="match-score-pill" style="background:var(--sky-lt);color:var(--sky)">Match Score 82/100</div>
+              <div
+                style="font-size:10px;background:var(--sky-lt);color:var(--sky);padding:3px 9px;border-radius:20px;font-weight:600">
+                📋 Lamaran dikirim 28 Apr</div>
+            </div>
+            <div class="job-action-row">
+              <button class="btn-sm btn-applied">✓ Sudah Dilamar</button>
+              <button class="btn-sm btn-outline" onclick="showToast('Buka detail status lamaran')">Cek Status</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- JOB 4 -->
+        <div class="job-card" data-sektor="teknik" data-match="78">
+          <div class="job-head">
+            <div class="job-logo" style="background:#D8ECF8">⚙️</div>
+            <div>
+              <div class="job-title">Teknisi Mesin & Mekanik Alsintan</div>
+              <div class="job-company">CV Maju Bersama · Benua Kayong</div>
+            </div>
+          </div>
+          <div class="job-tags">
+            <span class="jt" style="background:var(--sky-lt);color:var(--sky)">Full-time</span>
+            <span class="jt" style="background:var(--amber-lt);color:var(--amber)">Teknik & Mesin</span>
+          </div>
+          <div class="job-meta">
+            <div class="jm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" stroke-width="2" />
+                <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" />
+              </svg> Benua Kayong</div>
+            <div class="jm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  stroke="currentColor" stroke-width="2" />
+              </svg> Lulusan SMK TKR / Teknik Mesin</div>
+          </div>
+          <div class="job-desc">Merawat dan memperbaiki traktor, alat mesin pertanian, dan peralatan bengkel. Termasuk
+            pemeliharaan rutin mesin pengolahan hasil perkebunan.</div>
+          <div class="job-footer">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div class="match-score-pill" style="background:var(--amber-lt);color:var(--amber)">Match Score 78/100
+              </div>
+              <div class="deadline">Tutup 10 Jun 2026</div>
+            </div>
+            <div class="job-action-row">
+              <button class="btn-sm btn-outline" onclick="saveJob(this)">🔖 Simpan</button>
+              <button class="btn-sm btn-teal" onclick="applyJob(this,'CV Maju Bersama')">Lamar →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- JOB 5 -->
+        <div class="job-card" data-sektor="admin" data-match="65">
+          <div class="job-head">
+            <div class="job-logo" style="background:#FEF0D6">📋</div>
+            <div>
+              <div class="job-title">Staf Administrasi & Bendahara BUMDes</div>
+              <div class="job-company">BUMDes Harapan Bersama · Muara Pawan</div>
+            </div>
+          </div>
+          <div class="job-tags">
+            <span class="jt" style="background:var(--amber-lt);color:var(--amber)">Part-time</span>
+            <span class="jt" style="background:var(--coral-lt);color:var(--coral)">Admin & Keuangan</span>
+          </div>
+          <div class="job-meta">
+            <div class="jm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" stroke-width="2" />
+                <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" />
+              </svg> Muara Pawan</div>
+            <div class="jm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  stroke="currentColor" stroke-width="2" />
+              </svg> SMA IPS / SMK Akuntansi</div>
+          </div>
+          <div class="job-desc">Membantu pencatatan keuangan BUMDes, pembukuan sederhana, laporan Dana Desa, dan
+            pengelolaan administrasi harian.</div>
+          <div class="job-footer">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div class="match-score-pill" style="background:#F3F4F6;color:var(--muted)">Match Score 65/100</div>
+              <div class="deadline">Tutup 20 Jun 2026</div>
+            </div>
+            <div class="job-action-row">
+              <button class="btn-sm btn-outline" onclick="saveJob(this)">🔖 Simpan</button>
+              <button class="btn-sm btn-teal" onclick="applyJob(this,'BUMDes Harapan Bersama')">Lamar →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- JOB 6 - UMKM -->
+        <div class="job-card" data-sektor="umkm" data-match="72">
+          <div class="job-head">
+            <div class="job-logo" style="background:#FAECE7">🏪</div>
+            <div>
+              <div class="job-title">Asisten Pengolahan Produk & Pemasaran Digital</div>
+              <div class="job-company">Koperasi Perempuan Karya Mandiri · Delta Pawan</div>
+            </div>
+          </div>
+          <div class="job-tags">
+            <span class="jt" style="background:var(--coral-lt);color:var(--coral)">Kontrak 6 bulan</span>
+            <span class="jt" style="background:var(--amber-lt);color:var(--amber)">UMKM</span>
+            <span class="jt" style="background:var(--teal-lt);color:var(--teal)">Pengolahan Hasil</span>
+          </div>
+          <div class="job-meta">
+            <div class="jm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" stroke-width="2" />
+                <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" />
+              </svg> Delta Pawan</div>
+            <div class="jm">Semua jurusan diterima</div>
+          </div>
+          <div class="job-desc">Membantu proses produksi, pengemasan produk olahan, pembuatan konten media sosial, dan
+            pengelolaan akun marketplace koperasi.</div>
+          <div class="job-footer">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div class="match-score-pill" style="background:var(--amber-lt);color:var(--amber)">Match Score 72/100
+              </div>
+              <div class="deadline">Tutup 5 Jun 2026</div>
+            </div>
+            <div class="job-action-row">
+              <button class="btn-sm btn-outline" onclick="saveJob(this)">🔖 Simpan</button>
+              <button class="btn-sm btn-teal" onclick="applyJob(this,'Koperasi Perempuan Karya Mandiri')">Lamar
+                →</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end job-list -->
+    </div><!-- end main-col -->
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+      <div class="rp-card">
+        <div class="rp-title">
+          🤖 Rekomendasi Untukmu
+          <span class="rp-see-all">Lihat semua →</span>
+        </div>
+        <div class="rec-item">
+          <div class="rec-icon" style="background:var(--teal-lt)">🌿</div>
+          <div>
+            <div class="rec-name">LPK Sawit & Mekanisasi</div>
+            <div class="rec-meta">Cocok untuk jurusan ATP-mu</div>
+          </div>
+          <div class="rec-score">96</div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-icon" style="background:var(--amber-lt)">⚙️</div>
+          <div>
+            <div class="rec-name">Teknisi Pabrik CPO</div>
+            <div class="rec-meta">Cargill · Muara Pawan</div>
+          </div>
+          <div class="rec-score">88</div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-icon" style="background:var(--sky-lt)">🔬</div>
+          <div>
+            <div class="rec-name">Analis Mutu TBS</div>
+            <div class="rec-meta">PTPN · Benua Kayong</div>
+          </div>
+          <div class="rec-score">81</div>
+        </div>
+      </div>
+
+      <div class="rp-card">
+        <div class="rp-title">
+          ⏰ Deadline Mendekat
+          <span class="rp-see-all">Semua →</span>
+        </div>
+        <div class="deadline-item">
+          <div class="dl-dot" style="background:var(--coral)"></div>
+          <div>
+            <div class="dl-name">Cargill — Operator Kebun</div>
+            <div class="dl-date" style="color:var(--coral)">Tutup 15 Mei · 14 hari lagi</div>
+          </div>
+        </div>
+        <div class="deadline-item">
+          <div class="dl-dot" style="background:var(--amber)"></div>
+          <div>
+            <div class="dl-name">Koperasi — Asisten Produksi</div>
+            <div class="dl-date" style="color:var(--amber)">Tutup 5 Jun · 35 hari lagi</div>
+          </div>
+        </div>
+        <div class="deadline-item">
+          <div class="dl-dot" style="background:var(--teal)"></div>
+          <div>
+            <div class="dl-name">Puskesmas — Kader Posyandu</div>
+            <div class="dl-date" style="color:var(--teal)">Tutup 30 Mei · 29 hari lagi</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rp-card">
+        <div class="rp-title">
+          🏫 LPK Cocok Untukmu
+          <span class="rp-see-all">Semua →</span>
+        </div>
+        <div class="lpk-item">
+          <div class="lpk-icon" style="background:var(--teal-lt)">🌱</div>
+          <div>
+            <div class="lpk-name">LPK Sawit & Mekanisasi</div>
+            <div class="lpk-dur">3 bulan · Sertifikasi RSPO</div>
+          </div>
+          <div class="lpk-arrow">›</div>
+        </div>
+        <div class="lpk-item">
+          <div class="lpk-icon" style="background:var(--purple-lt)">💻</div>
+          <div>
+            <div class="lpk-name">BLK Digital & Admin Desa</div>
+            <div class="lpk-dur">2 bulan · SIPADES & BUMDes</div>
+          </div>
+          <div class="lpk-arrow">›</div>
+        </div>
+        <div class="lpk-item">
+          <div class="lpk-icon" style="background:var(--amber-lt)">🏪</div>
+          <div>
+            <div class="lpk-name">Bootcamp UMKM</div>
+            <div class="lpk-dur">6 minggu · Wirausaha muda</div>
+          </div>
+          <div class="lpk-arrow">›</div>
+        </div>
+      </div>
+
+      <div class="rp-card" style="background:var(--navy);border-color:var(--navy)">
+        <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:8px">📊 Statistik Profil</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.6);margin-bottom:12px">Profilemu dilihat 8 kali minggu ini
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+          <div style="text-align:center">
+            <div style="font-family:'Instrument Serif',serif;font-size:24px;color:var(--teal2)">3</div>
+            <div style="font-size:10px;color:rgba(255,255,255,.4)">Lamaran</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-family:'Instrument Serif',serif;font-size:24px;color:#fff">5</div>
+            <div style="font-size:10px;color:rgba(255,255,255,.4)">Disimpan</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-family:'Instrument Serif',serif;font-size:24px;color:var(--amber)">88</div>
+            <div style="font-size:10px;color:rgba(255,255,255,.4)">Match Score</div>
+          </div>
+        </div>
+        <button
+          style="width:100%;padding:9px;background:var(--teal);border:none;border-radius:8px;font-family:'Sora',sans-serif;font-size:11px;font-weight:600;color:#fff;cursor:pointer"
+          onclick="showToast('Halaman profil lengkap segera hadir!')">Lihat profil lengkap →</button>
+      </div>
+    </div>
+
+  </div><!-- end page-body -->
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+      <path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="#22AF89" stroke-width="2" />
+      <path d="M22 4L12 14.01l-3-3" stroke="#22AF89" stroke-width="2" stroke-linecap="round" />
+    </svg>
+    <span id="toast-msg"></span>
+  </div>
+
+    <script src="js/auth.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    const allJobs = document.querySelectorAll('.job-card');
+
+    function toggleChip(el, type) {
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
+      el.classList.add('on');
+      filterJobs('');
+    }
+
+    function setTab(el) {
+      document.querySelectorAll('.stab').forEach(t => t.classList.remove('on'));
+      el.classList.add('on');
+    }
+
+    function setNav(el, page) {
+      document.querySelectorAll('.sb-nav-item').forEach(n => n.classList.remove('on'));
+      el.classList.add('on');
+    }
+
+    function filterJobs(query) {
+      const sektor = document.getElementById('f-sektor').value;
+      let visible = 0;
+      allJobs.forEach(card => {
+        const title = card.querySelector('.job-title').textContent.toLowerCase();
+        const company = card.querySelector('.job-company').textContent.toLowerCase();
+        const cardSektor = card.dataset.sektor || '';
+        const matchQ = !query || title.includes(query.toLowerCase()) || company.includes(query.toLowerCase());
+        const matchS = !sektor || cardSektor === sektor;
+        if (matchQ && matchS) { card.style.display = 'block'; visible++; }
+        else card.style.display = 'none';
+      });
+      document.getElementById('jobs-count').textContent = 'Menampilkan ' + visible + ' lowongan';
+    }
+
+    function applyFilter() {
+      filterJobs(document.getElementById('global-search').value);
+    }
+
+    function clearFilter() {
+      document.getElementById('f-sektor').value = '';
+      document.getElementById('f-kec').value = '';
+      document.getElementById('f-tipe').value = '';
+      document.getElementById('global-search').value = '';
+      filterJobs('');
+      document.querySelectorAll('.chip').forEach((c, i) => { c.classList.remove('on'); if (i === 0) c.classList.add('on'); });
+      if(window.showToast) window.showToast('Filter direset');
+    }
+  </script>
+</body>
+
+</html>

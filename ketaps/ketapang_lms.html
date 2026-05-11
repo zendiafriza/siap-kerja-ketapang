@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LMS Belajar Ketapang — SD · SMP · SMA · SMK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#06182C;--teal:#00B37E;--teal2:#00D49A;--teal-lt:#E6FBF4;
+  --amber:#F59E0B;--amber-lt:#FEF3C7;--coral:#EF4444;--coral-lt:#FEE2E2;
+  --sky:#3B82F6;--sky-lt:#EFF6FF;--purple:#8B5CF6;--purple-lt:#F5F3FF;
+  --green:#16A34A;--green-lt:#DCFCE7;--pink:#EC4899;--pink-lt:#FCE7F3;
+  --orange:#EA580C;--orange-lt:#FFF7ED;
+  --line:#E2E8F0;--surface:#F8FAFC;--muted:#64748B;--subtle:#94A3B8;--ink:#0F172A;--ink2:#334155;
+  /* JENJANG COLORS */
+  --sd:#16A34A;--sd-lt:#DCFCE7;
+  --smp:#3B82F6;--smp-lt:#EFF6FF;
+  --sma:#8B5CF6;--sma-lt:#F5F3FF;
+  --smk:#F59E0B;--smk-lt:#FEF3C7;
+}
+html,body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:var(--ink);font-size:14px;min-height:100vh}
+
+/* TOPBAR */
+.topbar{background:var(--navy);height:58px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand-hex{width:36px;height:36px;background:var(--teal);clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);display:flex;align-items:center;justify-content:center}
+.brand-hex svg{width:18px;height:18px}
+.brand-txt{font-family:'Fraunces',serif;font-size:17px;color:#fff;font-weight:700}
+.brand-badge{font-size:9px;padding:2px 8px;border-radius:20px;background:var(--purple);color:#fff;font-weight:700;margin-left:6px}
+.tb-search{flex:1;max-width:420px;margin:0 20px;position:relative}
+.tb-search input{width:100%;padding:9px 14px 9px 38px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;color:#fff;outline:none;transition:.2s}
+.tb-search input::placeholder{color:rgba(255,255,255,.35)}
+.tb-search input:focus{background:rgba(255,255,255,.13);border-color:var(--teal)}
+.tb-search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);opacity:.45;pointer-events:none}
+.tb-right{display:flex;align-items:center;gap:8px}
+.xp-pill{display:flex;align-items:center;gap:6px;padding:5px 12px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:20px}
+.xp-icon{font-size:13px}
+.xp-val{font-size:11px;font-weight:700;color:var(--amber)}
+.streak-pill{display:flex;align-items:center;gap:5px;padding:5px 11px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);border-radius:20px}
+.streak-val{font-size:11px;font-weight:700;color:var(--coral)}
+.user-pill{display:flex;align-items:center;gap:7px;padding:5px 12px 5px 5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:20px;cursor:pointer}
+.ua{width:28px;height:28px;border-radius:50%;background:var(--purple);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff}
+.un{font-size:11px;font-weight:600;color:#fff}
+
+/* HERO BANNER */
+.hero{background:var(--navy);padding:32px 24px 0;position:relative;overflow:hidden}
+.hero-mesh{position:absolute;inset:0}
+.hmesh-orb1{position:absolute;right:-60px;top:-60px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,.25) 0%,transparent 65%)}
+.hmesh-orb2{position:absolute;left:30%;bottom:-40px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(0,179,126,.18) 0%,transparent 65%)}
+.hmesh-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:44px 44px}
+.hero-inner{max-width:1160px;margin:0 auto;position:relative;z-index:1}
+.hero-top{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;margin-bottom:24px}
+.hero-eyebrow{font-size:10px;font-weight:700;color:var(--purple);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.hero-title{font-family:'Fraunces',serif;font-size:30px;color:#fff;font-weight:700;margin-bottom:5px}
+.hero-sub{font-size:12px;color:rgba(255,255,255,.5);font-weight:300;margin-bottom:16px}
+.level-bar-wrap{background:rgba(255,255,255,.07);border-radius:9px;padding:12px 14px}
+.lb-top{display:flex;justify-content:space-between;margin-bottom:6px;font-size:11px}
+.lb-level{color:#fff;font-weight:700}
+.lb-xp{color:rgba(255,255,255,.5)}
+.lb-track{height:6px;background:rgba(255,255,255,.1);border-radius:20px;overflow:hidden}
+.lb-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--teal),var(--purple))}
+
+/* JENJANG SELECTOR */
+.jenjang-row{display:flex;gap:1px;background:rgba(255,255,255,.07);border-radius:12px 12px 0 0;overflow:hidden;margin-top:16px}
+.jj{flex:1;padding:13px 10px;text-align:center;cursor:pointer;transition:.15s;background:rgba(255,255,255,.04)}
+.jj:hover{background:rgba(255,255,255,.09)}
+.jj.on{background:rgba(255,255,255,.12)}
+.jj-emoji{font-size:20px;display:block;margin-bottom:4px}
+.jj-label{font-size:11px;font-weight:700;color:rgba(255,255,255,.6)}
+.jj.on .jj-label{color:#fff}
+.jj-count{font-size:9px;color:rgba(255,255,255,.35);margin-top:2px}
+
+/* LAYOUT */
+.page{max-width:1160px;margin:0 auto;padding:24px;display:grid;grid-template-columns:240px 1fr;gap:20px}
+@media(max-width:960px){.page{grid-template-columns:1fr}}
+
+/* SIDEBAR */
+.sidebar{}
+.sb-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px}
+.sb-sec-title{font-size:9px;font-weight:800;color:var(--muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:10px}
+.sb-nav{display:flex;flex-direction:column;gap:2px}
+.sbn{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:9px;cursor:pointer;font-size:12px;font-weight:600;color:var(--ink2);transition:.15s;border:none;background:none;width:100%;font-family:'Plus Jakarta Sans',sans-serif;text-align:left}
+.sbn:hover{background:var(--surface)}
+.sbn.on{background:var(--teal-lt);color:var(--teal)}
+.sbn-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.sbn-badge{margin-left:auto;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px}
+
+/* STATS */
+.stat-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.stat-box{background:var(--surface);border-radius:10px;padding:12px;text-align:center}
+.sb-val{font-family:'Fraunces',serif;font-size:24px;color:var(--navy);font-weight:700;line-height:1}
+.sb-lbl{font-size:9px;color:var(--muted);margin-top:3px}
+
+/* MAIN */
+.main{}
+
+/* SECTION */
+.sec{display:none}
+.sec.on{display:block}
+
+/* JENJANG CONTENT */
+.jenjang-content{display:none}
+.jenjang-content.on{display:block}
+
+/* SUBJECT GRID */
+.subject-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+@media(max-width:1100px){.subject-grid{grid-template-columns:repeat(2,1fr)}}
+
+.subject-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;transition:.2s;position:relative;overflow:hidden}
+.subject-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.subject-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08);border-color:#94A3B8}
+.sc-emoji{font-size:28px;margin-bottom:10px;display:block}
+.sc-name{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.sc-desc{font-size:10px;color:var(--muted);line-height:1.5;margin-bottom:10px}
+.sc-meta{display:flex;align-items:center;justify-content:space-between}
+.sc-lessons{font-size:10px;color:var(--subtle)}
+.sc-prog{width:60px;height:4px;background:var(--line);border-radius:20px;overflow:hidden}
+.sc-prog-fill{height:100%;border-radius:20px}
+.sc-badge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;position:absolute;top:12px;right:12px}
+
+/* LESSON VIEW */
+.lesson-header{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px}
+.lh-back{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);cursor:pointer;border:none;background:none;font-family:'Plus Jakarta Sans',sans-serif;padding:0;margin-bottom:14px;transition:.15s}
+.lh-back:hover{color:var(--navy)}
+.lh-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.lh-emoji{font-size:36px;flex-shrink:0}
+.lh-title{font-family:'Fraunces',serif;font-size:22px;color:var(--navy);font-weight:700;margin-bottom:4px}
+.lh-sub{font-size:11px;color:var(--muted)}
+.lh-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.lh-tag{font-size:10px;padding:3px 9px;border-radius:20px;font-weight:600}
+.progress-bar{height:6px;background:var(--line);border-radius:20px;overflow:hidden;margin-top:10px}
+.pb-fill{height:100%;border-radius:20px}
+
+/* LESSON LIST */
+.lesson-list{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:14px}
+.ll-head{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+.ll-title{font-size:12px;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.5px}
+.ll-item{display:flex;align-items:center;gap:12px;padding:13px 18px;border-bottom:1px solid var(--line);cursor:pointer;transition:.15s}
+.ll-item:last-child{border-bottom:none}
+.ll-item:hover{background:var(--surface)}
+.ll-item.locked{opacity:.5;cursor:not-allowed}
+.ll-item.completed{background:var(--teal-lt)}
+.ll-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+.ll-num.done{background:var(--teal);color:#fff}
+.ll-num.active{background:var(--navy);color:#fff}
+.ll-num.locked{background:var(--line);color:var(--subtle)}
+.ll-content{flex:1}
+.ll-name{font-size:12px;font-weight:600;color:var(--navy)}
+.ll-meta{font-size:10px;color:var(--muted);margin-top:2px}
+.ll-right{display:flex;align-items:center;gap:8px}
+.ll-xp{font-size:10px;font-weight:700;color:var(--amber)}
+.ll-type{font-size:9px;padding:2px 7px;border-radius:20px;font-weight:700}
+
+/* VIDEO PLAYER */
+.video-player{background:var(--navy);border-radius:14px;overflow:hidden;margin-bottom:14px;position:relative}
+.vp-screen{aspect-ratio:16/9;background:linear-gradient(135deg,#06182C 0%,#0A2A1C 50%,#0A1A40 100%);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative}
+.vp-play{width:64px;height:64px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,.3);transition:.2s}
+.vp-play:hover{background:var(--teal);border-color:var(--teal);transform:scale(1.08)}
+.vp-play svg{color:#fff;margin-left:4px}
+.vp-title{position:absolute;bottom:16px;left:16px;font-size:13px;font-weight:700;color:#fff}
+.vp-dur{position:absolute;bottom:16px;right:16px;font-size:11px;color:rgba(255,255,255,.6);background:rgba(0,0,0,.4);padding:3px 8px;border-radius:6px}
+.vp-controls{padding:14px 16px;display:flex;align-items:center;gap:10px}
+.vp-progress{flex:1;height:5px;background:rgba(255,255,255,.15);border-radius:20px;cursor:pointer;position:relative}
+.vp-progress-fill{height:100%;width:35%;background:var(--teal);border-radius:20px}
+.vp-time{font-size:10px;color:rgba(255,255,255,.5)}
+
+/* QUIZ */
+.quiz-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;margin-bottom:14px}
+.qc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.qc-title{font-size:13px;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.5px}
+.qc-score{font-family:'Fraunces',serif;font-size:28px;font-weight:700}
+.q-item{background:var(--surface);border-radius:11px;padding:16px;margin-bottom:12px}
+.q-num{font-size:10px;font-weight:700;color:var(--muted);margin-bottom:6px}
+.q-text{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:12px;line-height:1.5}
+.q-options{display:flex;flex-direction:column;gap:7px}
+.q-opt{padding:10px 14px;border-radius:9px;border:2px solid var(--line);background:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;color:var(--ink);cursor:pointer;transition:.15s;text-align:left;display:flex;align-items:center;gap:9px;font-weight:500}
+.q-opt:hover{border-color:var(--navy);background:var(--surface)}
+.q-opt.selected{border-color:var(--navy);background:var(--navy);color:#fff}
+.q-opt.correct{border-color:var(--teal);background:var(--teal-lt);color:var(--teal)}
+.q-opt.wrong{border-color:var(--coral);background:var(--coral-lt);color:var(--coral)}
+.q-opt-letter{width:22px;height:22px;border-radius:50%;background:var(--line);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;color:var(--navy)}
+.q-opt.selected .q-opt-letter{background:rgba(255,255,255,.2);color:#fff}
+
+/* MATERI CARD */
+.materi-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:14px}
+.mc-title{font-family:'Fraunces',serif;font-size:18px;color:var(--navy);font-weight:700;margin-bottom:4px}
+.mc-kelas{font-size:11px;color:var(--muted);margin-bottom:16px}
+.mc-body{font-size:12px;color:var(--ink2);line-height:1.9}
+.mc-body h3{font-size:13px;font-weight:800;color:var(--navy);margin:14px 0 6px}
+.mc-body p{margin-bottom:10px}
+.mc-body ul{padding-left:18px;margin-bottom:10px}
+.mc-body li{margin-bottom:4px}
+.mc-body .highlight{background:var(--amber-lt);border-left:3px solid var(--amber);padding:10px 14px;border-radius:0 8px 8px 0;margin:10px 0;font-style:italic}
+.mc-body .info-box{background:var(--sky-lt);border:1px solid #BFDBFE;border-radius:10px;padding:12px;margin:10px 0}
+
+/* SERTIFIKAT */
+.cert-card{background:linear-gradient(135deg,var(--navy) 0%,#0A3020 50%,var(--navy2,#0A2240) 100%);border-radius:16px;padding:28px;text-align:center;color:#fff;position:relative;overflow:hidden;margin-bottom:14px}
+.cert-border{position:absolute;inset:8px;border:1px solid rgba(255,255,255,.12);border-radius:10px;pointer-events:none}
+.cert-star{position:absolute;top:16px;right:20px;font-size:28px;opacity:.3}
+.cert-emoji{font-size:40px;margin-bottom:10px}
+.cert-title{font-family:'Fraunces',serif;font-size:20px;font-weight:700;margin-bottom:6px}
+.cert-name{font-size:14px;color:rgba(255,255,255,.7);margin-bottom:4px}
+.cert-subject{font-size:12px;color:var(--teal2);font-weight:700;margin-bottom:14px}
+.cert-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,179,126,.2);border:1px solid rgba(0,179,126,.4);border-radius:20px;padding:6px 14px;font-size:11px;color:var(--teal2);font-weight:700}
+
+/* BANNER */
+.jenjang-banner{border-radius:14px;padding:20px 24px;margin-bottom:18px;position:relative;overflow:hidden;display:flex;align-items:center;gap:16px}
+.jb-emoji{font-size:36px;flex-shrink:0;position:relative;z-index:1}
+.jb-content{flex:1;position:relative;z-index:1}
+.jb-title{font-family:'Fraunces',serif;font-size:18px;font-weight:700;margin-bottom:3px}
+.jb-sub{font-size:11px;opacity:.7}
+.jb-btn{padding:9px 16px;border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:700;cursor:pointer;border:none;transition:.2s;flex-shrink:0;position:relative;z-index:1}
+
+/* KURIKULUM BADGE */
+.kur-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;padding:3px 10px;border-radius:20px;font-weight:700;margin-bottom:12px}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;padding:11px 18px;border-radius:12px;font-size:12px;font-weight:600;opacity:0;transform:translateY(16px);transition:.3s;pointer-events:none;z-index:999;display:flex;align-items:center;gap:8px}
+.toast.show{opacity:1;transform:translateY(0)}
+
+/* XP POPUP */
+.xp-popup{position:fixed;top:80px;right:24px;background:var(--amber);color:#fff;padding:10px 18px;border-radius:12px;font-size:13px;font-weight:800;opacity:0;transform:translateY(-10px);transition:.3s;pointer-events:none;z-index:999;display:flex;align-items:center;gap:7px}
+.xp-popup.show{opacity:1;transform:translateY(0)}
+
+/* BTN */
+.btn{padding:9px 18px;border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;border:none;transition:.2s;display:inline-flex;align-items:center;gap:6px}
+.btn-teal{background:var(--teal);color:#fff}
+.btn-teal:hover{background:var(--teal2)}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:var(--teal)}
+.btn-outline{background:#fff;color:var(--navy);border:2px solid var(--line)}
+.btn-outline:hover{background:var(--surface)}
+
+/* LEADERBOARD */
+.lb-item{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;margin-bottom:6px;transition:.15s}
+.lb-item:hover{background:var(--surface)}
+.lb-rank{width:24px;font-size:12px;font-weight:800;color:var(--muted);text-align:center;flex-shrink:0}
+.lb-rank.gold{color:var(--amber)}
+.lb-rank.silver{color:var(--subtle)}
+.lb-rank.bronze{color:var(--orange)}
+.lb-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0}
+.lb-name{font-size:12px;font-weight:600;color:var(--navy);flex:1}
+.lb-school{font-size:10px;color:var(--muted)}
+.lb-xp{font-size:11px;font-weight:800;color:var(--amber)}
+
+/* LOGOUT DROPDOWN */
+.user-wrap{position:relative}
+.user-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid #E5E7EB;border-radius:12px;padding:6px;min-width:160px;box-shadow:0 8px 28px rgba(0,0,0,.14);z-index:300;display:none}
+.user-dropdown.open{display:block}
+.ud-item{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:8px;font-size:12px;font-weight:500;color:#374151;cursor:pointer;text-decoration:none;transition:.12s}
+.ud-item:hover{background:#F4F6FA}
+.ud-item.danger{color:#D94F2E}
+.ud-item.danger:hover{background:#FDEAE4}
+.ud-sep{height:1px;background:#E5E7EB;margin:4px 0}
+.logout-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;align-items:center;justify-content:center}
+.logout-modal.show{display:flex}
+.lm-box{background:#fff;border-radius:18px;padding:28px;width:360px;max-width:90vw;text-align:center}
+.lm-icon{font-size:40px;margin-bottom:12px}
+.lm-title{font-size:17px;font-weight:700;color:#0B1F3A;margin-bottom:6px}
+.lm-sub{font-size:12px;color:#6B7280;margin-bottom:22px;line-height:1.6}
+.lm-actions{display:flex;gap:10px;justify-content:center}
+.lm-btn{padding:10px 22px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:.15s}
+.lm-btn.cancel{background:#F4F6FA;color:#0B1F3A;border:1.5px solid #E5E7EB}
+.lm-btn.confirm{background:#D94F2E;color:#fff}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a class="brand" href="index.html">
+    <div class="brand-hex"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="white" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+    <div style="display:flex;align-items:center;gap:6px"><div class="brand-txt">Siap Lulus</div><div class="brand-badge">LMS BELAJAR</div></div>
+  </a>
+  <div class="tb-search">
+    <svg class="tb-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" style="color:rgba(255,255,255,.4)"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    <input type="text" placeholder="Cari materi, pelajaran, kuis..." oninput="searchMateri(this.value)">
+  </div>
+  <div class="tb-right">
+    <a href="ketapang_portal_siswa.html" style="padding:7px 12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:600;color:rgba(255,255,255,.7);text-decoration:none;transition:.15s" onmouseover="this.style.background='rgba(255,255,255,.14)'" onmouseout="this.style.background='rgba(255,255,255,.07)'">🔍 Cari Kerja</a>
+    <a href="ketapang_lamaran.html" style="padding:7px 12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:600;color:rgba(255,255,255,.7);text-decoration:none;transition:.15s" onmouseover="this.style.background='rgba(255,255,255,.14)'" onmouseout="this.style.background='rgba(255,255,255,.07)'">📋 Lamaranku</a>
+    <div class="xp-pill"><span class="xp-icon">⚡</span><span class="xp-val" id="xp-counter">1.240 XP</span></div>
+    <div class="streak-pill">🔥 <span class="streak-val">7 hari</span></div>
+    <div class="user-wrap" id="user-wrap">
+      <div class="user-pill" onclick="toggleUserMenu()" style="cursor:pointer">
+        <div class="ua">AR</div>
+        <div class="un">Aldi R.</div>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" style="margin-left:2px;opacity:.6"><path d="M6 9l6 6 6-6" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="user-dropdown" id="user-dropdown">
+        <a href="ketapang_profil_siswa.html" class="ud-item">&#128100; Profil Saya</a>
+        <a href="ketapang_portal_siswa.html" class="ud-item">&#128269; Cari Kerja</a>
+        <a href="ketapang_lamaran.html" class="ud-item">&#128203; Lamaranku</a>
+        <div class="ud-sep"></div>
+        <div class="ud-item danger" onclick="showLogoutModal()">&#128682; Keluar</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-mesh"><div class="hmesh-orb1"></div><div class="hmesh-orb2"></div><div class="hmesh-grid"></div></div>
+  <div class="hero-inner">
+    <div class="hero-top">
+      <div>
+        <div class="hero-eyebrow">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="2"/></svg>
+          Platform Belajar Digital Ketapang
+        </div>
+        <div class="hero-title">Belajar Lebih Seru,<br><span style="font-style:italic;color:var(--teal2)">Raih Masa Depan</span></div>
+        <div class="hero-sub">Kurikulum Merdeka · SD kelas 1–6 · SMP kelas 7–9 · SMA kelas 10–12 · SMK Kejuruan Ketapang</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn btn-teal" onclick="showJenjang('smk')">🎓 Mulai Belajar</button>
+          <button class="btn btn-outline" style="border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.7);background:rgba(255,255,255,.06)" onclick="showSection('leaderboard')">🏆 Papan Peringkat</button>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,.06);border-radius:12px;padding:14px;min-width:200px">
+        <div class="level-bar-wrap">
+          <div class="lb-top"><span class="lb-level">Level 8 — Pelajar Aktif</span><span class="lb-xp">1.240 / 1.500 XP</span></div>
+          <div class="lb-track"><div class="lb-fill" style="width:82%"></div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
+          <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:8px;text-align:center">
+            <div style="font-family:'Fraunces',serif;font-size:20px;color:#fff;font-weight:700">14</div>
+            <div style="font-size:9px;color:rgba(255,255,255,.4)">Materi Selesai</div>
+          </div>
+          <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:8px;text-align:center">
+            <div style="font-family:'Fraunces',serif;font-size:20px;color:var(--amber);font-weight:700">87%</div>
+            <div style="font-size:9px;color:rgba(255,255,255,.4)">Avg. Skor Kuis</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- JENJANG TABS -->
+    <div class="jenjang-row">
+      <div class="jj" id="jj-sd" onclick="showJenjang('sd')">
+        <span class="jj-emoji">🌱</span>
+        <div class="jj-label">SD</div>
+        <div class="jj-count">Kelas 1–6 · 48 mapel</div>
+      </div>
+      <div class="jj" id="jj-smp" onclick="showJenjang('smp')">
+        <span class="jj-emoji">📖</span>
+        <div class="jj-label">SMP</div>
+        <div class="jj-count">Kelas 7–9 · 36 mapel</div>
+      </div>
+      <div class="jj" id="jj-sma" onclick="showJenjang('sma')">
+        <span class="jj-emoji">🔬</span>
+        <div class="jj-label">SMA</div>
+        <div class="jj-count">Kelas 10–12 · 40 mapel</div>
+      </div>
+      <div class="jj on" id="jj-smk" onclick="showJenjang('smk')">
+        <span class="jj-emoji">⚙️</span>
+        <div class="jj-label">SMK Kejuruan</div>
+        <div class="jj-count">ATP · TKJ · Nakes · Teknik</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="sb-card">
+    <div class="sb-sec-title">Menu Belajar</div>
+    <div class="sb-nav">
+      <button class="sbn on" onclick="setSbnav(this,'beranda')"><div class="sbn-icon" style="background:var(--teal-lt)">🏠</div>Beranda<span class="sbn-badge" style="background:var(--teal-lt);color:var(--teal)">Baru</span></button>
+      <button class="sbn" onclick="setSbnav(this,'lanjutkan')"><div class="sbn-icon" style="background:var(--amber-lt)">▶️</div>Lanjutkan Belajar</button>
+      <button class="sbn" onclick="setSbnav(this,'jadwal')"><div class="sbn-icon" style="background:var(--sky-lt)">📅</div>Jadwal Harian</button>
+      <button class="sbn" onclick="setSbnav(this,'kuis')"><div class="sbn-icon" style="background:var(--purple-lt)">🧩</div>Kuis & Latihan<span class="sbn-badge" style="background:var(--coral-lt);color:var(--coral)">3 baru</span></button>
+      <button class="sbn" onclick="setSbnav(this,'sertifikat')"><div class="sbn-icon" style="background:var(--amber-lt)">🏅</div>Sertifikatku</button>
+      <button class="sbn" onclick="showSection('leaderboard')"><div class="sbn-icon" style="background:var(--amber-lt)">🏆</div>Leaderboard</button>
+    </div>
+  </div>
+  <div class="sb-card">
+    <div class="sb-sec-title">Perkembanganku</div>
+    <div class="stat-row">
+      <div class="stat-box"><div class="sb-val">14</div><div class="sb-lbl">Selesai</div></div>
+      <div class="stat-box"><div class="sb-val">8</div><div class="sb-lbl">Ongoing</div></div>
+      <div class="stat-box"><div class="sb-val">87%</div><div class="sb-lbl">Avg. Skor</div></div>
+      <div class="stat-box"><div class="sb-val">7🔥</div><div class="sb-lbl">Streak</div></div>
+    </div>
+  </div>
+  <div class="sb-card">
+    <div class="sb-sec-title">Lanjutkan Belajar</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="background:var(--teal-lt);border-radius:9px;padding:11px;cursor:pointer" onclick="openLesson('Matematika Kelas 12','smk')">
+        <div style="font-size:11px;font-weight:700;color:var(--teal)">📐 Matematika Kelas 12</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px">Bab 4 — Statistika · 65%</div>
+        <div class="progress-bar" style="margin-top:6px"><div class="pb-fill" style="width:65%;background:var(--teal)"></div></div>
+      </div>
+      <div style="background:var(--amber-lt);border-radius:9px;padding:11px;cursor:pointer" onclick="openLesson('Agribisnis Tanaman','smk')">
+        <div style="font-size:11px;font-weight:700;color:var(--amber)">🌿 Agribisnis Tanaman</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px">Bab 3 — Pemupukan · 40%</div>
+        <div class="progress-bar" style="margin-top:6px"><div class="pb-fill" style="width:40%;background:var(--amber)"></div></div>
+      </div>
+      <div style="background:var(--sky-lt);border-radius:9px;padding:11px;cursor:pointer" onclick="openLesson('Bahasa Indonesia','smk')">
+        <div style="font-size:11px;font-weight:700;color:var(--sky)">📝 Bahasa Indonesia XII</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px">Bab 2 — Teks Laporan · 80%</div>
+        <div class="progress-bar" style="margin-top:6px"><div class="pb-fill" style="width:80%;background:var(--sky)"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- BERANDA / HOME -->
+  <div class="sec on" id="sec-beranda">
+    <!-- SD -->
+    <div class="jenjang-content" id="jc-sd">
+      <div class="jenjang-banner" style="background:linear-gradient(135deg,#064E3B,#065F46)">
+        <div class="jb-emoji">🌱</div>
+        <div class="jb-content">
+          <div class="jb-title" style="color:#fff">Sekolah Dasar (SD) Kelas 1–6</div>
+          <div class="jb-sub" style="color:rgba(255,255,255,.6)">Kurikulum Merdeka 2024 · Tematik & STEAM · Literasi & Numerasi</div>
+          <div style="margin-top:8px"><span class="kur-badge" style="background:rgba(0,179,126,.3);color:#6EE7B7">📚 Kurikulum Merdeka</span></div>
+        </div>
+        <button class="jb-btn" style="background:var(--sd);color:#fff" onclick="openLesson('IPA SD','sd')">Mulai Belajar →</button>
+      </div>
+      <div style="margin-bottom:12px;font-size:13px;font-weight:700;color:var(--navy)">📚 Pilih Kelas SD</div>
+      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+        <button class="btn btn-outline" style="font-size:11px;padding:6px 14px" onclick="showKelas('sd','1')">Kelas 1</button>
+        <button class="btn btn-outline" style="font-size:11px;padding:6px 14px" onclick="showKelas('sd','2')">Kelas 2</button>
+        <button class="btn btn-outline" style="font-size:11px;padding:6px 14px" onclick="showKelas('sd','3')">Kelas 3</button>
+        <button class="btn btn-outline" style="font-size:11px;padding:6px 14px" onclick="showKelas('sd','4')">Kelas 4</button>
+        <button class="btn btn-outline" style="font-size:11px;padding:6px 14px" onclick="showKelas('sd','5')">Kelas 5</button>
+        <button class="btn btn-teal" style="font-size:11px;padding:6px 14px" onclick="showKelas('sd','6')">Kelas 6 ✓</button>
+      </div>
+      <div class="subject-grid" id="sg-sd">
+        <div class="subject-card" style="--c:var(--sd)" onclick="openLesson('Matematika SD','sd')"><div class="subject-card" style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--sd);border-radius:14px 14px 0 0"></div><span class="sc-emoji">📐</span><div class="sc-name">Matematika</div><div class="sc-desc">Bilangan, geometri, pengukuran & statistika dasar. Kurikulum Merdeka fase A–C.</div><div class="sc-meta"><span class="sc-lessons">24 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:90%;background:var(--sd)"></div></div></div><span class="sc-badge" style="background:var(--sd-lt);color:var(--sd)">90%</span></div>
+
+        <div class="subject-card" onclick="openLesson('Bahasa Indonesia SD','sd')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--sky);border-radius:14px 14px 0 0"></div><span class="sc-emoji">📝</span><div class="sc-name">Bahasa Indonesia</div><div class="sc-desc">Literasi membaca, menulis, menyimak, dan berbicara. Cerpen, teks deskripsi, laporan.</div><div class="sc-meta"><span class="sc-lessons">20 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:75%;background:var(--sky)"></div></div></div><span class="sc-badge" style="background:var(--sky-lt);color:var(--sky)">75%</span></div>
+
+        <div class="subject-card" onclick="openLesson('IPAS SD','sd')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--teal);border-radius:14px 14px 0 0"></div><span class="sc-emoji">🔬</span><div class="sc-name">IPAS (Sains & Sosial)</div><div class="sc-desc">Ilmu Pengetahuan Alam dan Sosial tematik. Lingkungan, tubuh, masyarakat Ketapang.</div><div class="sc-meta"><span class="sc-lessons">18 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:60%;background:var(--teal)"></div></div></div><span class="sc-badge" style="background:var(--teal-lt);color:var(--teal)">60%</span></div>
+
+        <div class="subject-card" onclick="openLesson('Pendidikan Pancasila SD','sd')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--coral);border-radius:14px 14px 0 0"></div><span class="sc-emoji">🇮🇩</span><div class="sc-name">Pendidikan Pancasila</div><div class="sc-desc">Nilai-nilai Pancasila, UUD 1945, kebinekaan, gotong royong di lingkungan desa.</div><div class="sc-meta"><span class="sc-lessons">16 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:50%;background:var(--coral)"></div></div></div></div>
+
+        <div class="subject-card" onclick="openLesson('Seni Budaya SD','sd')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--pink);border-radius:14px 14px 0 0"></div><span class="sc-emoji">🎨</span><div class="sc-name">Seni Budaya & Prakarya</div><div class="sc-desc">Seni rupa, musik, tari tradisional Dayak Ketapang, kerajinan tangan lokal.</div><div class="sc-meta"><span class="sc-lessons">14 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:40%;background:var(--pink)"></div></div></div></div>
+
+        <div class="subject-card" onclick="openLesson('PJOK SD','sd')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--orange);border-radius:14px 14px 0 0"></div><span class="sc-emoji">⚽</span><div class="sc-name">PJOK</div><div class="sc-desc">Pendidikan jasmani, olahraga, dan kesehatan. Gaya hidup sehat, olahraga tradisional.</div><div class="sc-meta"><span class="sc-lessons">12 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:80%;background:var(--orange)"></div></div></div><span class="sc-badge" style="background:var(--orange-lt);color:var(--orange)">80%</span></div>
+      </div>
+    </div>
+
+    <!-- SMP -->
+    <div class="jenjang-content" id="jc-smp">
+      <div class="jenjang-banner" style="background:linear-gradient(135deg,#1E3A8A,#1D4ED8)">
+        <div class="jb-emoji">📖</div>
+        <div class="jb-content">
+          <div class="jb-title" style="color:#fff">Sekolah Menengah Pertama (SMP) Kelas 7–9</div>
+          <div class="jb-sub" style="color:rgba(255,255,255,.6)">Kurikulum Merdeka 2024 · IPA Terpadu · IPS Terpadu · Pemrograman Dasar</div>
+          <div style="margin-top:8px"><span class="kur-badge" style="background:rgba(59,130,246,.3);color:#93C5FD">📚 Kurikulum Merdeka</span></div>
+        </div>
+        <button class="jb-btn" style="background:var(--sky);color:#fff">Mulai Belajar →</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+        <button class="btn btn-outline" style="font-size:11px;padding:6px 14px">Kelas 7</button>
+        <button class="btn btn-outline" style="font-size:11px;padding:6px 14px">Kelas 8</button>
+        <button class="btn btn-teal" style="font-size:11px;padding:6px 14px">Kelas 9 ✓</button>
+      </div>
+      <div class="subject-grid">
+        <div class="subject-card" onclick="openLesson('Matematika SMP','smp')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--smp);border-radius:14px 14px 0 0"></div><span class="sc-emoji">📐</span><div class="sc-name">Matematika</div><div class="sc-desc">Aljabar, geometri, persamaan linear, fungsi, statistika & probabilitas.</div><div class="sc-meta"><span class="sc-lessons">32 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:70%;background:var(--smp)"></div></div></div><span class="sc-badge" style="background:var(--smp-lt);color:var(--smp)">70%</span></div>
+
+        <div class="subject-card" onclick="openLesson('IPA SMP','smp')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--teal);border-radius:14px 14px 0 0"></div><span class="sc-emoji">⚗️</span><div class="sc-name">IPA Terpadu</div><div class="sc-desc">Fisika, kimia, biologi terpadu. Ekosistem hutan Kalimantan, energi terbarukan.</div><div class="sc-meta"><span class="sc-lessons">28 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:55%;background:var(--teal)"></div></div></div></div>
+
+        <div class="subject-card" onclick="openLesson('IPS SMP','smp')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--amber);border-radius:14px 14px 0 0"></div><span class="sc-emoji">🗺️</span><div class="sc-name">IPS Terpadu</div><div class="sc-desc">Sejarah, geografi, ekonomi, sosiologi terpadu. Ketapang dalam peta Nusantara.</div><div class="sc-meta"><span class="sc-lessons">26 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:85%;background:var(--amber)"></div></div></div><span class="sc-badge" style="background:var(--amber-lt);color:var(--amber)">85%</span></div>
+
+        <div class="subject-card" onclick="openLesson('Bahasa Inggris SMP','smp')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--purple);border-radius:14px 14px 0 0"></div><span class="sc-emoji">🌍</span><div class="sc-name">Bahasa Inggris</div><div class="sc-desc">Reading, writing, speaking, listening. Konteks lokal & global ASEAN.</div><div class="sc-meta"><span class="sc-lessons">24 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:45%;background:var(--purple)"></div></div></div></div>
+
+        <div class="subject-card" onclick="openLesson('Informatika SMP','smp')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--sky);border-radius:14px 14px 0 0"></div><span class="sc-emoji">💻</span><div class="sc-name">Informatika</div><div class="sc-desc">Pemrograman Scratch & Python dasar, literasi data, algoritma, keamanan digital.</div><div class="sc-meta"><span class="sc-lessons">20 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:30%;background:var(--sky)"></div></div></div><span class="sc-badge" style="background:var(--teal-lt);color:var(--teal)">Baru!</span></div>
+
+        <div class="subject-card" onclick="openLesson('Bahasa Indonesia SMP','smp')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--coral);border-radius:14px 14px 0 0"></div><span class="sc-emoji">📝</span><div class="sc-name">Bahasa Indonesia</div><div class="sc-desc">Teks eksposisi, argumentasi, diskusi, pidato, cerita pendek sastra Kalimantan.</div><div class="sc-meta"><span class="sc-lessons">22 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:90%;background:var(--coral)"></div></div></div><span class="sc-badge" style="background:var(--coral-lt);color:var(--coral)">90%</span></div>
+      </div>
+    </div>
+
+    <!-- SMA -->
+    <div class="jenjang-content" id="jc-sma">
+      <div class="jenjang-banner" style="background:linear-gradient(135deg,#4C1D95,#6D28D9)">
+        <div class="jb-emoji">🔬</div>
+        <div class="jb-content">
+          <div class="jb-title" style="color:#fff">SMA Kelas 10–12 (IPA & IPS)</div>
+          <div class="jb-sub" style="color:rgba(255,255,255,.6)">Kurikulum Merdeka · P5 (Projek Penguatan Profil Pelajar Pancasila) · Persiapan PT</div>
+          <div style="margin-top:8px"><span class="kur-badge" style="background:rgba(139,92,246,.3);color:#C4B5FD">📚 Kurikulum Merdeka</span></div>
+        </div>
+        <button class="jb-btn" style="background:var(--sma);color:#fff">Mulai Belajar →</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+        <button class="btn btn-outline" style="font-size:11px;padding:6px 14px">Kelas 10</button>
+        <button class="btn btn-outline" style="font-size:11px;padding:6px 14px">Kelas 11</button>
+        <button class="btn btn-teal" style="font-size:11px;padding:6px 14px">Kelas 12 ✓</button>
+        <div style="width:1px;background:var(--line);margin:0 4px"></div>
+        <button class="btn btn-outline" style="font-size:11px;padding:6px 14px;border-color:var(--purple);color:var(--purple)">IPA</button>
+        <button class="btn btn-outline" style="font-size:11px;padding:6px 14px">IPS</button>
+      </div>
+      <div class="subject-grid">
+        <div class="subject-card" onclick="openLesson('Matematika Peminatan','sma')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--sma);border-radius:14px 14px 0 0"></div><span class="sc-emoji">∫</span><div class="sc-name">Matematika Peminatan</div><div class="sc-desc">Kalkulus, trigonometri lanjut, matriks, vektor, limit & turunan.</div><div class="sc-meta"><span class="sc-lessons">36 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:60%;background:var(--sma)"></div></div></div><span class="sc-badge" style="background:var(--sma-lt);color:var(--sma)">IPA</span></div>
+
+        <div class="subject-card" onclick="openLesson('Fisika SMA','sma')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--sky);border-radius:14px 14px 0 0"></div><span class="sc-emoji">⚡</span><div class="sc-name">Fisika</div><div class="sc-desc">Mekanika, listrik, gelombang, termodinamika, fisika modern. Konteks energi Kalimantan.</div><div class="sc-meta"><span class="sc-lessons">30 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:50%;background:var(--sky)"></div></div></div></div>
+
+        <div class="subject-card" onclick="openLesson('Kimia SMA','sma')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--teal);border-radius:14px 14px 0 0"></div><span class="sc-emoji">🧪</span><div class="sc-name">Kimia</div><div class="sc-desc">Stoikiometri, larutan, termokimia, elektrokimia, kimia organik & polimer.</div><div class="sc-meta"><span class="sc-lessons">28 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:45%;background:var(--teal)"></div></div></div></div>
+
+        <div class="subject-card" onclick="openLesson('Biologi SMA','sma')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--green);border-radius:14px 14px 0 0"></div><span class="sc-emoji">🧬</span><div class="sc-name">Biologi</div><div class="sc-desc">Sel, genetika, evolusi, ekosistem tropis Kalimantan, bioteknologi modern.</div><div class="sc-meta"><span class="sc-lessons">28 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:75%;background:var(--green)"></div></div></div><span class="sc-badge" style="background:var(--green-lt);color:var(--green)">75%</span></div>
+
+        <div class="subject-card" onclick="openLesson('Ekonomi SMA','sma')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--amber);border-radius:14px 14px 0 0"></div><span class="sc-emoji">📊</span><div class="sc-name">Ekonomi</div><div class="sc-desc">Mikro & makro ekonomi, APBN, perdagangan internasional, ekonomi Kalimantan.</div><div class="sc-meta"><span class="sc-lessons">26 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:65%;background:var(--amber)"></div></div></div><span class="sc-badge" style="background:var(--sma-lt);color:var(--sma)">IPS</span></div>
+
+        <div class="subject-card" onclick="openLesson('Informatika SMA','sma')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--navy);border-radius:14px 14px 0 0"></div><span class="sc-emoji">💻</span><div class="sc-name">Informatika</div><div class="sc-desc">Python, basis data SQL, jaringan komputer, keamanan siber, AI dasar.</div><div class="sc-meta"><span class="sc-lessons">24 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:35%;background:var(--navy)"></div></div></div><span class="sc-badge" style="background:var(--teal-lt);color:var(--teal)">Unggulan</span></div>
+      </div>
+    </div>
+
+    <!-- SMK -->
+    <div class="jenjang-content on" id="jc-smk">
+      <div class="jenjang-banner" style="background:linear-gradient(135deg,#78350F,#B45309)">
+        <div class="jb-emoji">⚙️</div>
+        <div class="jb-content">
+          <div class="jb-title" style="color:#fff">SMK Kejuruan Ketapang — Kelas 10–12</div>
+          <div class="jb-sub" style="color:rgba(255,255,255,.6)">Kurikulum Merdeka Vokasi 2024 · Teaching Factory · Link & Match Industri</div>
+          <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">
+            <span class="kur-badge" style="background:rgba(245,158,11,.3);color:#FDE68A">📚 Kurikulum Merdeka</span>
+            <span class="kur-badge" style="background:rgba(0,179,126,.25);color:#6EE7B7">🏭 Teaching Factory</span>
+            <span class="kur-badge" style="background:rgba(59,130,246,.25);color:#93C5FD">🤝 Link & Match Cargill</span>
+          </div>
+        </div>
+        <button class="jb-btn" style="background:var(--smk);color:#fff" onclick="openLesson('ATP Semester 5','smk')">Mulai Belajar →</button>
+      </div>
+
+      <!-- PROGRAM KEAHLIAN TABS -->
+      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+        <button class="btn btn-teal" style="font-size:11px;padding:7px 14px">🌿 ATP</button>
+        <button class="btn btn-outline" style="font-size:11px;padding:7px 14px" onclick="showToast('Membuka jurusan TKJ...')">💻 TKJ</button>
+        <button class="btn btn-outline" style="font-size:11px;padding:7px 14px" onclick="showToast('Membuka jurusan TKR...')">⚙️ TKR</button>
+        <button class="btn btn-outline" style="font-size:11px;padding:7px 14px" onclick="showToast('Membuka jurusan Keperawatan...')">💊 Keperawatan</button>
+        <button class="btn btn-outline" style="font-size:11px;padding:7px 14px" onclick="showToast('Membuka jurusan Akuntansi...')">📊 Akuntansi</button>
+      </div>
+
+      <!-- ATP SUBJECTS -->
+      <div style="font-size:12px;font-weight:800;color:var(--navy);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px">🌿 Agribisnis Tanaman Perkebunan (ATP) — Kelas XII</div>
+      <div class="subject-grid">
+        <div class="subject-card" onclick="openLesson('Pemupukan Presisi & Nutrisi Tanaman','smk')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--smk);border-radius:14px 14px 0 0"></div><span class="sc-emoji">🌿</span><div class="sc-name">Pemupukan Presisi</div><div class="sc-desc">Nutrisi tanaman, jenis pupuk, dosis, teknik aplikasi, pemupukan berbasis data.</div><div class="sc-meta"><span class="sc-lessons">16 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:40%;background:var(--smk)"></div></div></div><span class="sc-badge" style="background:var(--smk-lt);color:var(--smk)">40%</span></div>
+
+        <div class="subject-card" onclick="openLesson('Mekanisasi Pertanian','smk')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--sd);border-radius:14px 14px 0 0"></div><span class="sc-emoji">🚜</span><div class="sc-name">Mekanisasi Pertanian</div><div class="sc-desc">Alat mesin pertanian, traktor, mesin semprot, pemeliharaan & K3 lapangan.</div><div class="sc-meta"><span class="sc-lessons">14 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:65%;background:var(--sd)"></div></div></div><span class="sc-badge" style="background:var(--green-lt);color:var(--green)">65%</span></div>
+
+        <div class="subject-card" onclick="openLesson('Standar RSPO & Keberlanjutan','smk')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--teal);border-radius:14px 14px 0 0"></div><span class="sc-emoji">♻️</span><div class="sc-name">Standar RSPO</div><div class="sc-desc">Prinsip & kriteria RSPO, monitoring lingkungan, pelaporan keberlanjutan, audit.</div><div class="sc-meta"><span class="sc-lessons">12 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:25%;background:var(--teal)"></div></div></div><span class="sc-badge" style="background:var(--teal-lt);color:var(--teal)">Link Cargill</span></div>
+
+        <div class="subject-card" onclick="openLesson('K3 Perkebunan','smk')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--coral);border-radius:14px 14px 0 0"></div><span class="sc-emoji">⛑️</span><div class="sc-name">K3 Perkebunan</div><div class="sc-desc">Keselamatan kerja lapangan, APD, penanganan bahan kimia, P3K darurat.</div><div class="sc-meta"><span class="sc-lessons">10 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:80%;background:var(--coral)"></div></div></div><span class="sc-badge" style="background:var(--coral-lt);color:var(--coral)">80%</span></div>
+
+        <div class="subject-card" onclick="openLesson('Pengendalian Hama & Penyakit','smk')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--amber);border-radius:14px 14px 0 0"></div><span class="sc-emoji">🐛</span><div class="sc-name">Pengendalian OPT</div><div class="sc-desc">Identifikasi hama, penyakit tanaman, pestisida nabati, pengendalian terpadu (PHT).</div><div class="sc-meta"><span class="sc-lessons">12 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:55%;background:var(--amber)"></div></div></div></div>
+
+        <div class="subject-card" onclick="openLesson('Pengolahan Hasil Perkebunan','smk')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--purple);border-radius:14px 14px 0 0"></div><span class="sc-emoji">🏭</span><div class="sc-name">Pengolahan Hasil</div><div class="sc-desc">Pasca panen TBS, CPO processing, grading, penyimpanan & manajemen mutu.</div><div class="sc-meta"><span class="sc-lessons">14 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:20%;background:var(--purple)"></div></div></div></div>
+      </div>
+
+      <!-- MAPEL UMUM SMK -->
+      <div style="font-size:12px;font-weight:800;color:var(--navy);margin:18px 0 10px;text-transform:uppercase;letter-spacing:.5px">📚 Mata Pelajaran Umum SMK</div>
+      <div class="subject-grid">
+        <div class="subject-card" onclick="openLesson('Matematika Kelas 12','smk')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--sma);border-radius:14px 14px 0 0"></div><span class="sc-emoji">📐</span><div class="sc-name">Matematika XII</div><div class="sc-desc">Statistika, barisan & deret, program linear, terapan teknis industri.</div><div class="sc-meta"><span class="sc-lessons">24 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:65%;background:var(--sma)"></div></div></div><span class="sc-badge" style="background:var(--sma-lt);color:var(--sma)">65%</span></div>
+
+        <div class="subject-card" onclick="openLesson('Bahasa Indonesia XII','smk')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--sky);border-radius:14px 14px 0 0"></div><span class="sc-emoji">📄</span><div class="sc-name">Bahasa Indonesia XII</div><div class="sc-desc">Teks laporan teknis, surat lamaran kerja, presentasi profesi, literasi fungsional.</div><div class="sc-meta"><span class="sc-lessons">20 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:80%;background:var(--sky)"></div></div></div><span class="sc-badge" style="background:var(--sky-lt);color:var(--sky)">80%</span></div>
+
+        <div class="subject-card" onclick="openLesson('Bahasa Inggris Vokasi','smk')"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--navy);border-radius:14px 14px 0 0"></div><span class="sc-emoji">🌐</span><div class="sc-name">Bahasa Inggris Vokasi</div><div class="sc-desc">English for occupational purposes, interview skills, technical writing, ASEAN context.</div><div class="sc-meta"><span class="sc-lessons">18 pertemuan</span><div class="sc-prog"><div class="sc-prog-fill" style="width:50%;background:var(--navy)"></div></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LESSON VIEW -->
+  <div class="sec" id="sec-lesson">
+    <div class="lesson-header">
+      <button class="lh-back" onclick="backToHome()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Kembali ke daftar mapel
+      </button>
+      <div class="lh-top">
+        <div class="lh-emoji" id="lesson-emoji">🌿</div>
+        <div>
+          <div class="lh-title" id="lesson-title">Pemupukan Presisi & Nutrisi Tanaman</div>
+          <div class="lh-sub" id="lesson-sub">SMK ATP Kelas XII · Kurikulum Merdeka · Teaching Factory Cargill</div>
+          <div class="lh-tags">
+            <span class="lh-tag" style="background:var(--smk-lt);color:var(--smk)">SMK Kejuruan</span>
+            <span class="lh-tag" style="background:var(--teal-lt);color:var(--teal)">ATP</span>
+            <span class="lh-tag" style="background:var(--green-lt);color:var(--green)">Teaching Factory</span>
+          </div>
+        </div>
+        <div style="text-align:right;flex-shrink:0">
+          <div style="font-family:'Fraunces',serif;font-size:28px;color:var(--teal);font-weight:700">40%</div>
+          <div style="font-size:10px;color:var(--muted)">Selesai</div>
+          <div class="progress-bar" style="width:80px;margin-top:6px"><div class="pb-fill" style="width:40%;background:var(--teal)"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 280px;gap:16px">
+      <div>
+        <!-- VIDEO -->
+        <div class="video-player">
+          <div class="vp-screen" onclick="playVideo()">
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+              <div style="font-size:60px;margin-bottom:12px;opacity:.6">🌿</div>
+              <div class="vp-play" id="play-btn">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+            <div class="vp-title">Bab 3 — Teknik Pemupukan Presisi Modern</div>
+            <div class="vp-dur" id="vp-dur">14:32</div>
+          </div>
+          <div class="vp-controls">
+            <button onclick="playVideo()" style="background:none;border:none;cursor:pointer;color:rgba(255,255,255,.7);padding:4px;display:flex;align-items:center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </button>
+            <div class="vp-progress" onclick="seekVideo(event)">
+              <div class="vp-progress-fill" id="vp-fill"></div>
+            </div>
+            <div class="vp-time" id="vp-time">5:02 / 14:32</div>
+            <button style="background:none;border:none;cursor:pointer;color:rgba(255,255,255,.7);font-size:11px;font-weight:700" onclick="showToast('Layar penuh')">⛶</button>
+          </div>
+        </div>
+
+        <!-- MATERI -->
+        <div class="materi-card">
+          <div class="mc-title">Bab 3: Pemupukan Presisi & Nutrisi Tanaman Sawit</div>
+          <div class="mc-kelas">SMK ATP Kelas XII · Kurikulum Merdeka · Disusun bersama Cargill Ketapang Mill</div>
+          <div class="mc-body">
+            <h3>A. Pengertian Pemupukan Presisi</h3>
+            <p>Pemupukan presisi adalah teknik pemberian pupuk berdasarkan kebutuhan spesifik setiap tanaman, menggunakan data analisis tanah, kondisi cuaca, dan riwayat produksi. Berbeda dengan pemupukan konvensional yang menggunakan dosis seragam.</p>
+            <div class="info-box">
+              <strong style="color:var(--sky)">💡 Mengapa Penting?</strong><br>
+              Pemupukan presisi dapat mengurangi biaya pupuk hingga 20–30% dan meningkatkan hasil panen TBS rata-rata 15% dibandingkan metode konvensional. Ini menjadi standar di kebun-kebun bersertifikat RSPO.
+            </div>
+            <h3>B. Unsur Hara Makro & Mikro Kelapa Sawit</h3>
+            <p>Tanaman kelapa sawit membutuhkan nutrisi utama (makro) dan pendukung (mikro):</p>
+            <ul>
+              <li><strong>Nitrogen (N)</strong> — pertumbuhan daun, produksi klorofil</li>
+              <li><strong>Fosfor (P)</strong> — perkembangan akar dan pembungaan</li>
+              <li><strong>Kalium (K)</strong> — kualitas buah, ketahanan kekeringan</li>
+              <li><strong>Magnesium (Mg)</strong> — klorofil, fotosintesis</li>
+              <li><strong>Boron (B)</strong> — pembentukan buah normal</li>
+            </ul>
+            <div class="highlight">
+              "Kekurangan Boron (B) adalah masalah paling umum di perkebunan sawit Ketapang, ditandai dengan buah abnormal (partenokarpi). Deteksi dini bisa dilakukan dengan analisis daun tahunan." — Panduan Agronomi Cargill 2024
+            </div>
+            <h3>C. Langkah-Langkah Pemupukan Presisi</h3>
+            <p>Berikut prosedur pemupukan presisi yang diterapkan di kebun plasma Ketapang:</p>
+            <ul>
+              <li>Lakukan analisis tanah dan daun setiap 6 bulan</li>
+              <li>Input data ke aplikasi AgroSense atau SIPBUN</li>
+              <li>Hitung rekomendasi dosis berbasis AI dari data lapangan</li>
+              <li>Terapkan pemupukan dengan mesin spreader berteknologi GPS</li>
+              <li>Catat dan evaluasi respon tanaman setelah 4–6 minggu</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- LESSON LIST SIDEBAR -->
+      <div>
+        <div class="lesson-list">
+          <div class="ll-head">
+            <div class="ll-title">Daftar Pertemuan</div>
+            <span style="font-size:10px;color:var(--muted)">6 / 16 selesai</span>
+          </div>
+          <div class="ll-item completed" onclick="showToast('Membuka pertemuan 1...')">
+            <div class="ll-num done">✓</div>
+            <div class="ll-content"><div class="ll-name">1. Pengantar Agribisnis</div><div class="ll-meta">Video · 12 menit</div></div>
+            <div class="ll-right"><span class="ll-xp">+50 XP</span><span class="ll-type" style="background:var(--teal-lt);color:var(--teal)">Selesai</span></div>
+          </div>
+          <div class="ll-item completed" onclick="showToast('Membuka pertemuan 2...')">
+            <div class="ll-num done">✓</div>
+            <div class="ll-content"><div class="ll-name">2. Morfologi Tanaman Sawit</div><div class="ll-meta">Video + Kuis · 18 menit</div></div>
+            <div class="ll-right"><span class="ll-xp">+80 XP</span></div>
+          </div>
+          <div class="ll-item" onclick="openVideoLesson()">
+            <div class="ll-num active">3</div>
+            <div class="ll-content"><div class="ll-name">3. Pemupukan Presisi</div><div class="ll-meta">Video + Materi · 14 menit</div></div>
+            <div class="ll-right"><span class="ll-xp">+100 XP</span><span class="ll-type" style="background:var(--amber-lt);color:var(--amber)">Aktif</span></div>
+          </div>
+          <div class="ll-item" onclick="showQuiz()">
+            <div class="ll-num" style="background:var(--purple-lt);color:var(--purple);font-weight:800">❓</div>
+            <div class="ll-content"><div class="ll-name">Kuis Bab 3</div><div class="ll-meta">10 soal pilihan ganda · 15 menit</div></div>
+            <div class="ll-right"><span class="ll-xp">+150 XP</span><span class="ll-type" style="background:var(--purple-lt);color:var(--purple)">Kuis</span></div>
+          </div>
+          <div class="ll-item locked">
+            <div class="ll-num locked">🔒</div>
+            <div class="ll-content"><div class="ll-name">4. Pengendalian OPT</div><div class="ll-meta">Selesaikan kuis dulu</div></div>
+            <div class="ll-right"><span class="ll-xp">+80 XP</span></div>
+          </div>
+          <div class="ll-item locked">
+            <div class="ll-num locked">🔒</div>
+            <div class="ll-content"><div class="ll-name">5. Mekanisasi Lahan</div><div class="ll-meta">Terkunci</div></div>
+            <div class="ll-right"><span class="ll-xp">+80 XP</span></div>
+          </div>
+        </div>
+
+        <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px">
+          <div style="font-size:11px;font-weight:800;color:var(--navy);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px">🏅 Sertifikat</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:10px">Selesaikan semua 16 pertemuan untuk mendapatkan sertifikat <strong>Pemupukan Presisi Bersertifikat Cargill</strong>.</div>
+          <div class="progress-bar" style="margin-bottom:6px"><div class="pb-fill" style="width:40%;background:var(--amber)"></div></div>
+          <div style="font-size:10px;color:var(--muted)">6 dari 16 selesai</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ SECTION -->
+    <div id="quiz-area" style="display:none;margin-top:14px">
+      <div class="quiz-card">
+        <div class="qc-head">
+          <div class="qc-title">🧩 Kuis Bab 3 — Pemupukan Presisi</div>
+          <div style="font-size:11px;color:var(--muted)">Soal 1 dari 10 · <span style="color:var(--amber);font-weight:700">+150 XP</span></div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">Soal 1</div>
+          <div class="q-text">Unsur hara manakah yang paling sering kekurangan pada tanaman kelapa sawit di perkebunan Ketapang dan ditandai dengan buah abnormal?</div>
+          <div class="q-options" id="q1-opts">
+            <button class="q-opt" onclick="answerQ(this,'A','D')"><span class="q-opt-letter">A</span> Nitrogen (N)</button>
+            <button class="q-opt" onclick="answerQ(this,'B','D')"><span class="q-opt-letter">B</span> Fosfor (P)</button>
+            <button class="q-opt" onclick="answerQ(this,'C','D')"><span class="q-opt-letter">C</span> Kalium (K)</button>
+            <button class="q-opt" onclick="answerQ(this,'D','D')"><span class="q-opt-letter">D</span> Boron (B)</button>
+          </div>
+        </div>
+        <div class="q-item" style="margin-top:12px">
+          <div class="q-num">Soal 2</div>
+          <div class="q-text">Pemupukan presisi berbeda dari pemupukan konvensional karena menggunakan...</div>
+          <div class="q-options">
+            <button class="q-opt" onclick="answerQ(this,'A','A')"><span class="q-opt-letter">A</span> Data analisis tanah, cuaca, dan riwayat produksi spesifik per tanaman</button>
+            <button class="q-opt" onclick="answerQ(this,'B','A')"><span class="q-opt-letter">B</span> Lebih banyak pupuk dari metode biasa</button>
+            <button class="q-opt" onclick="answerQ(this,'C','A')"><span class="q-opt-letter">C</span> Pupuk organik saja tanpa pupuk kimia</button>
+            <button class="q-opt" onclick="answerQ(this,'D','A')"><span class="q-opt-letter">D</span> Dosis yang sama untuk semua tanaman di blok yang sama</button>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:14px;gap:8px">
+          <button class="btn btn-outline" onclick="hideQuiz()">Kembali ke Materi</button>
+          <button class="btn btn-navy" onclick="submitQuiz()">Kirim Jawaban →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEADERBOARD -->
+  <div class="sec" id="sec-leaderboard">
+    <div style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:14px">
+      <div style="font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:4px">🏆 Papan Peringkat</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:18px">Top pelajar aktif bulan Mei 2026 dari sekolah-sekolah di Ketapang</div>
+      <div class="lb-item" style="background:var(--amber-lt)">
+        <div class="lb-rank gold">🥇</div>
+        <div class="lb-av" style="background:var(--amber)">NR</div>
+        <div><div class="lb-name">Nanda Rahayu</div><div class="lb-school">SMKN 1 Ketapang · ATP</div></div>
+        <div class="lb-xp">3.480 XP</div>
+      </div>
+      <div class="lb-item" style="background:var(--surface)">
+        <div class="lb-rank silver">🥈</div>
+        <div class="lb-av" style="background:var(--sky)">DP</div>
+        <div><div class="lb-name">Deni Pratama</div><div class="lb-school">SMAN 1 Ketapang · IPA</div></div>
+        <div class="lb-xp">3.120 XP</div>
+      </div>
+      <div class="lb-item" style="background:var(--surface)">
+        <div class="lb-rank bronze">🥉</div>
+        <div class="lb-av" style="background:var(--orange)">FH</div>
+        <div><div class="lb-name">Fahri Hidayat</div><div class="lb-school">SMKN 2 Ketapang · TKJ</div></div>
+        <div class="lb-xp">2.890 XP</div>
+      </div>
+      <div class="lb-item"><div class="lb-rank">4</div><div class="lb-av" style="background:var(--purple)">SR</div><div><div class="lb-name">Siska Ramadhani</div><div class="lb-school">SMK Kes. Mulia · Keperawatan</div></div><div class="lb-xp">2.640 XP</div></div>
+      <div class="lb-item"><div class="lb-rank">5</div><div class="lb-av" style="background:var(--coral)">MA</div><div><div class="lb-name">Muhammad Aris</div><div class="lb-school">SMPN 1 Ketapang · Kelas 9</div></div><div class="lb-xp">2.410 XP</div></div>
+      <div class="lb-item" style="background:var(--teal-lt);border-radius:9px">
+        <div class="lb-rank" style="color:var(--teal);font-weight:800">8</div>
+        <div class="lb-av" style="background:var(--teal)">AR</div>
+        <div><div class="lb-name" style="color:var(--teal)">Aldi Ramadan (Kamu)</div><div class="lb-school">SMKN 1 Ketapang · ATP</div></div>
+        <div class="lb-xp" style="color:var(--teal)">1.240 XP</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERTIFIKAT -->
+  <div class="sec" id="sec-sertifikat">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="cert-card">
+        <div class="cert-border"></div><div class="cert-star">⭐</div>
+        <div class="cert-emoji">🌿</div>
+        <div class="cert-title">Sertifikat Kompetensi</div>
+        <div class="cert-name">Diberikan kepada: Aldi Ramadan</div>
+        <div class="cert-subject">K3 Dasar Perkebunan Sawit</div>
+        <div class="cert-badge">✓ Terverifikasi · April 2026</div>
+        <button style="margin-top:14px;padding:8px 16px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:#fff;cursor:pointer;font-weight:600" onclick="showToast('Unduh sertifikat PDF')">⬇ Unduh PDF</button>
+      </div>
+      <div style="background:#fff;border:2px dashed var(--line);border-radius:16px;padding:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px">
+        <div style="font-size:36px">🔒</div>
+        <div style="font-size:13px;font-weight:700;color:var(--navy)">Sertifikat RSPO Akan Terbuka</div>
+        <div style="font-size:11px;color:var(--muted)">Selesaikan modul Standar RSPO & Keberlanjutan (75% lagi)</div>
+        <div class="progress-bar" style="width:120px"><div class="pb-fill" style="width:25%;background:var(--teal)"></div></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end main -->
+</div><!-- end page -->
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="#00D49A" stroke-width="2.5"/><path d="M22 4L12 14.01l-3-3" stroke="#00D49A" stroke-width="2.5" stroke-linecap="round"/></svg>
+  <span id="toast-msg"></span>
+</div>
+<!-- XP POPUP -->
+<div class="xp-popup" id="xp-popup">⚡ <span id="xp-msg">+100 XP!</span></div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    function setNav(el, menu) {
+      document.querySelectorAll('.sb-nav-item').forEach(n => n.classList.remove('on'));
+      el.classList.add('on');
+      if(window.showToast) window.showToast('Menuju menu: ' + menu);
+    }
+    function setFilter(el, type) {
+      document.querySelectorAll('.fc').forEach(c => c.classList.remove('on'));
+      el.classList.add('on');
+    }
+  </script>
+
+<!-- LOGOUT MODAL -->
+<div class="logout-modal" id="logout-modal">
+  <div class="lm-box">
+    <div class="lm-icon">🚪</div>
+    <div class="lm-title">Keluar dari akun?</div>
+    <div class="lm-sub">Kamu akan diarahkan kembali ke halaman login. Progres belajarmu tetap tersimpan.</div>
+    <div class="lm-actions">
+      <button class="lm-btn cancel" onclick="hideLogoutModal()">Batal</button>
+      <button class="lm-btn confirm" onclick="doLogout()">Ya, Keluar</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+

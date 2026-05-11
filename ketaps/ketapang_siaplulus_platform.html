@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siap Lulus Ketapang — Platform Pencocokan Talenta & Lapangan Kerja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0B1F3A;
+  --navy2:#0F2A50;
+  --teal:#1B8C6E;
+  --teal2:#22AF89;
+  --teal-lt:#D6F2EC;
+  --amber:#E6861A;
+  --amber-lt:#FEF0D6;
+  --coral:#D94F2E;
+  --coral-lt:#FDEAE4;
+  --sky:#2A7DC8;
+  --sky-lt:#D8ECF8;
+  --purple:#5248B0;
+  --purple-lt:#EAE8FD;
+  --ink:#111827;
+  --ink2:#374151;
+  --muted:#6B7280;
+  --subtle:#9CA3AF;
+  --line:#E5E7EB;
+  --surface:#F9FAFB;
+  --white:#FFFFFF;
+  --radius:10px;
+  --radius-lg:16px;
+  --radius-xl:22px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Sora',sans-serif;background:#F4F6FA;color:var(--ink);font-size:14px;line-height:1.6;min-height:100vh}
+
+/* TOPBAR */
+.topbar{background:var(--navy);padding:0 28px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:32px;height:32px;background:var(--teal);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.logo-mark svg{width:18px;height:18px}
+.logo-text{font-family:'Instrument Serif',serif;font-size:17px;color:#fff;letter-spacing:.3px}
+.logo-sub{font-size:10px;color:rgba(255,255,255,.5);font-family:'Sora',sans-serif;font-weight:300}
+.topbar-right{display:flex;align-items:center;gap:8px}
+.topbar-pill{font-size:11px;padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);background:rgba(255,255,255,.06);cursor:pointer;transition:.15s}
+.topbar-pill:hover{background:rgba(255,255,255,.12);color:#fff}
+.topbar-pill.cta{background:var(--teal);border-color:var(--teal);color:#fff;font-weight:500}
+.topbar-pill.cta:hover{background:var(--teal2)}
+
+/* HERO */
+.hero{background:var(--navy);padding:56px 28px 0;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;right:-80px;top:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(27,140,110,.2) 0%,transparent 70%)}
+.hero::after{content:'';position:absolute;left:40%;bottom:0;width:1px;height:60%;background:rgba(255,255,255,.05)}
+.hero-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:end}
+.hero-eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--teal2)}
+.eyebrow-txt{font-size:11px;font-weight:500;color:var(--teal2);letter-spacing:1.5px;text-transform:uppercase}
+.hero-h1{font-family:'Instrument Serif',serif;font-size:42px;line-height:1.1;color:#fff;margin-bottom:16px}
+.hero-h1 em{font-style:italic;color:var(--teal2)}
+.hero-sub{font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;max-width:480px;margin-bottom:28px;font-weight:300}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:48px}
+.btn-hero{padding:11px 22px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:'Sora',sans-serif;transition:.15s}
+.btn-hero.primary{background:var(--teal);color:#fff}
+.btn-hero.primary:hover{background:var(--teal2)}
+.btn-hero.ghost{background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15)}
+.btn-hero.ghost:hover{background:rgba(255,255,255,.13)}
+
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.07);border-radius:var(--radius-lg) var(--radius-lg) 0 0;overflow:hidden}
+.hs{padding:18px 16px;background:rgba(255,255,255,.04);text-align:center}
+.hs-val{font-family:'Instrument Serif',serif;font-size:28px;color:#fff;line-height:1}
+.hs-lbl{font-size:10px;color:rgba(255,255,255,.45);margin-top:4px;font-weight:300}
+
+.hero-right{padding-bottom:0;align-self:end}
+.match-demo{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-lg);padding:18px;margin-bottom:0}
+.md-title{font-size:11px;font-weight:500;color:rgba(255,255,255,.5);letter-spacing:.8px;text-transform:uppercase;margin-bottom:14px}
+.match-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.09);border-radius:var(--radius);padding:12px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:.15s}
+.match-card:hover{background:rgba(255,255,255,.11)}
+.match-card:last-child{margin-bottom:0}
+.mc-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.mc-info{flex:1}
+.mc-name{font-size:12px;font-weight:500;color:#fff;margin-bottom:2px}
+.mc-meta{font-size:10px;color:rgba(255,255,255,.5)}
+.mc-score{text-align:right}
+.mc-pct{font-family:'Instrument Serif',serif;font-size:22px;color:var(--teal2);line-height:1}
+.mc-lbl{font-size:9px;color:rgba(255,255,255,.35)}
+
+/* NAV TABS */
+.nav-tabs{background:var(--white);border-bottom:1px solid var(--line);padding:0 28px;display:flex;gap:0;position:sticky;top:56px;z-index:90}
+.nt{padding:14px 18px;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:.15s;display:flex;align-items:center;gap:6px}
+.nt:hover{color:var(--ink)}
+.nt.on{color:var(--navy);border-bottom-color:var(--teal)}
+.nt-dot{width:6px;height:6px;border-radius:50%}
+
+/* CONTENT */
+.content{max-width:1080px;margin:0 auto;padding:28px}
+.section{display:none}
+.section.on{display:block}
+
+/* KPI ROW */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.kpi{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);padding:16px 18px}
+.kpi-val{font-family:'Instrument Serif',serif;font-size:32px;color:var(--navy);line-height:1;margin-bottom:4px}
+.kpi-lbl{font-size:11px;color:var(--muted)}
+.kpi-badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;margin-top:8px;font-weight:500}
+.kpi-border-teal{border-top:3px solid var(--teal)}
+.kpi-border-amber{border-top:3px solid var(--amber)}
+.kpi-border-coral{border-top:3px solid var(--coral)}
+.kpi-border-sky{border-top:3px solid var(--sky)}
+
+/* CARD */
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px}
+.card-title{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.ct-icon{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px}
+
+/* GRID */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+
+/* SUPPLY — demand board */
+.sdb{display:grid;grid-template-columns:1fr 80px 1fr;gap:0;align-items:start;margin-bottom:16px}
+.sdb-col{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px}
+.sdb-col.supply{border-top:3px solid var(--sky)}
+.sdb-col.demand{border-top:3px solid var(--coral)}
+.sdb-head{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
+.sdb-head.s{color:var(--sky)}
+.sdb-head.d{color:var(--coral)}
+.sdb-mid{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 0;gap:6px}
+.sdb-arrow{width:28px;height:28px;background:var(--teal-lt);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.match-line{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--line);font-size:11px}
+.match-line:last-child{border-bottom:none;padding-bottom:0}
+.ml-left{flex:1;color:var(--ink2)}
+.ml-right{flex:1;color:var(--ink2);text-align:right}
+.ml-score{background:var(--teal-lt);color:var(--teal);font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;min-width:40px;text-align:center}
+.ml-score.med{background:var(--amber-lt);color:var(--amber)}
+.ml-score.low{background:var(--coral-lt);color:var(--coral)}
+.ml-arrow{font-size:12px;color:var(--teal);flex-shrink:0}
+.ml-arrow.med{color:var(--amber)}
+.ml-arrow.low{color:var(--coral)}
+
+/* SUPPLY ITEM */
+.supply-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.supply-item:last-child{border-bottom:none;padding-bottom:0}
+.si-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.si-name{font-size:12px;font-weight:500;color:var(--ink)}
+.si-meta{font-size:10px;color:var(--muted)}
+.si-count{font-family:'Instrument Serif',serif;font-size:20px;color:var(--navy);margin-left:auto;line-height:1}
+.si-count span{font-family:'Sora',sans-serif;font-size:9px;color:var(--muted)}
+
+/* DEMAND ITEM */
+.demand-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.demand-item:last-child{border-bottom:none;padding-bottom:0}
+.di-sector{font-size:12px;font-weight:500;color:var(--ink)}
+.di-jobs{font-size:10px;color:var(--muted);line-height:1.5}
+.di-need{font-family:'Instrument Serif',serif;font-size:20px;color:var(--coral);margin-left:auto;line-height:1;flex-shrink:0}
+.di-need span{font-family:'Sora',sans-serif;font-size:9px;color:var(--muted)}
+
+/* BAR */
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.bar-label{font-size:11px;color:var(--ink2);width:170px;flex-shrink:0}
+.bar-track{flex:1;height:6px;background:var(--line);border-radius:20px;overflow:hidden}
+.bar-fill{height:100%;border-radius:20px;transition:width .3s ease}
+.bar-val{font-size:11px;color:var(--muted);width:36px;text-align:right}
+
+/* MATCH ENGINE */
+.match-engine{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);border-radius:var(--radius-xl);padding:24px;margin-bottom:16px;color:#fff;position:relative;overflow:hidden}
+.me::before{content:'';position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(27,140,110,.15)}
+.me-title{font-family:'Instrument Serif',serif;font-size:22px;margin-bottom:6px;position:relative;z-index:1}
+.me-sub{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:18px;font-weight:300;position:relative;z-index:1}
+.me-input-row{display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1}
+.me-select{flex:1;min-width:160px;padding:10px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:#fff;font-family:'Sora',sans-serif;font-size:12px;cursor:pointer;appearance:none}
+.me-select option{background:#0B1F3A;color:#fff}
+.me-btn{padding:10px 22px;background:var(--teal);border:none;border-radius:8px;color:#fff;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:.15s}
+.me-btn:hover{background:var(--teal2)}
+
+/* RESULT CARD */
+.result-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px;margin-bottom:12px;transition:.15s;cursor:pointer}
+.result-card:hover{border-color:#9CA3AF;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.result-card.top{border:2px solid var(--teal)}
+.rc-top-badge{background:var(--teal-lt);color:var(--teal);font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;display:inline-block;margin-bottom:10px}
+.rc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.rc-title{font-size:15px;font-weight:600;color:var(--navy)}
+.rc-school{font-size:11px;color:var(--muted);margin-top:3px}
+.rc-score-block{text-align:right;flex-shrink:0}
+.rc-score{font-family:'Instrument Serif',serif;font-size:36px;color:var(--navy);line-height:1}
+.rc-score.high{color:var(--teal)}
+.rc-score.med{color:var(--amber)}
+.rc-score.low{color:var(--coral)}
+.rc-score-lbl{font-size:9px;color:var(--muted)}
+.rc-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.rc-tag{font-size:10px;padding:3px 9px;border-radius:20px;font-weight:500}
+.rc-demand{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+.rc-prog-lbl{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:4px}
+.rc-prog{height:5px;background:var(--line);border-radius:20px;overflow:hidden;margin-bottom:10px}
+.rc-prog-fill{height:100%;border-radius:20px}
+.rc-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.gap-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:3px 9px;border-radius:20px;font-weight:500}
+
+/* SCHOOL LIST */
+.school-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:var(--radius);border:1px solid var(--line);margin-bottom:8px;background:var(--white);transition:.15s}
+.school-item:hover{border-color:#9CA3AF}
+.school-avatar{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.school-name{font-size:13px;font-weight:600;color:var(--navy)}
+.school-meta{font-size:10px;color:var(--muted)}
+.school-jurusan{font-size:10px;color:var(--ink2);margin-top:3px}
+.school-right{margin-left:auto;text-align:right}
+.school-siswa{font-family:'Instrument Serif',serif;font-size:22px;color:var(--navy);line-height:1}
+.school-type{display:inline-block;font-size:9px;padding:2px 8px;border-radius:20px;font-weight:500;margin-top:4px}
+
+/* GAP TABLE */
+.gap-row{display:flex;align-items:flex-start;gap:10px;padding:12px;border-radius:var(--radius);margin-bottom:8px}
+.gap-icon{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.gap-content{flex:1}
+.gap-title{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.gap-desc{font-size:11px;color:var(--muted);line-height:1.5}
+.gap-pill{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;margin-top:5px;font-weight:500}
+
+/* KARIR PATH */
+.path-col{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px}
+.path-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.path-name{font-size:13px;font-weight:600;color:var(--navy)}
+.path-badge{font-size:10px;padding:3px 9px;border-radius:20px;font-weight:500}
+.path-meta{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+.step-item{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start}
+.step-no{width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-body{font-size:11px;color:var(--muted);line-height:1.5}
+.step-body strong{display:block;font-size:12px;color:var(--ink);font-weight:600}
+
+/* LPK / PROVIDER */
+.lpk-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px;margin-bottom:14px}
+.lpk-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.lpk-name{font-size:14px;font-weight:600;color:var(--navy)}
+.lpk-meta{font-size:11px;color:var(--muted);line-height:1.5;margin-top:3px}
+.lpk-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.lpk-pill{font-size:10px;padding:3px 9px;border-radius:20px;font-weight:500}
+.lpk-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:12px;margin-top:12px}
+.lpk-box{background:var(--surface);border-radius:var(--radius);padding:14px}
+.lpk-box-title{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.lpk-box ul{list-style:none}
+.lpk-box li{font-size:11px;color:var(--ink2);line-height:1.6;padding-bottom:5px;margin-bottom:5px;border-bottom:1px solid var(--line)}
+.lpk-box li:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0}
+.lpk-box li strong{color:var(--navy);font-weight:600}
+.lpk-footer{display:flex;align-items:center;justify-content:space-between;margin-top:14px;flex-wrap:wrap;gap:8px}
+
+/* PROFILE SECTION */
+.profile-grid{display:grid;grid-template-columns:240px 1fr;gap:20px;margin-bottom:16px}
+.profile-card{background:var(--navy);border-radius:var(--radius-xl);padding:24px;color:#fff;text-align:center}
+.profile-avatar{width:72px;height:72px;border-radius:50%;background:var(--teal);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',serif;font-size:28px;color:#fff}
+.profile-name{font-size:16px;font-weight:600;margin-bottom:4px}
+.profile-school{font-size:12px;color:rgba(255,255,255,.55)}
+.profile-score{font-family:'Instrument Serif',serif;font-size:48px;color:var(--teal2);margin:16px 0 4px;line-height:1}
+.profile-score-lbl{font-size:10px;color:rgba(255,255,255,.4)}
+.profile-pills{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:12px}
+.profile-pill{font-size:10px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+.score-detail{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-xl);padding:20px}
+
+/* BTN */
+.btn{padding:8px 16px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;border:none;font-family:'Sora',sans-serif;transition:.15s;display:inline-flex;align-items:center;gap:5px}
+.btn-teal{background:var(--teal);color:#fff}
+.btn-teal:hover{background:var(--teal2)}
+.btn-outline{background:#fff;color:var(--navy);border:1px solid var(--line)}
+.btn-outline:hover{background:var(--surface);border-color:#9CA3AF}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:var(--navy2)}
+
+/* SECTION HEADER */
+.sec-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px}
+.sec-title{font-family:'Instrument Serif',serif;font-size:26px;color:var(--navy)}
+.sec-sub{font-size:12px;color:var(--muted);margin-top:4px;font-weight:300}
+
+/* FOOTER */
+.footer{background:var(--navy);color:rgba(255,255,255,.4);text-align:center;padding:20px;font-size:11px;margin-top:40px}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-inner,.profile-grid,.sdb{grid-template-columns:1fr}
+  .kpi-row,.grid2,.grid3{grid-template-columns:1fr 1fr}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+  .lpk-grid{grid-template-columns:1fr}
+  .hero-right{display:none}
+}
+@media(max-width:600px){
+  .kpi-row,.grid2,.grid3{grid-template-columns:1fr}
+  .hero-h1{font-size:30px}
+  .content{padding:16px}
+}
+
+/* TABS */
+.tab-content{display:none}
+.tab-content.on{display:block}
+
+/* MONO ACCENT */
+.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
+
+/* FILTER CHIPS */
+.filter-bar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}
+.fc{padding:6px 13px;border-radius:20px;font-size:11px;font-weight:500;border:1px solid var(--line);background:var(--white);color:var(--muted);cursor:pointer;transition:.15s}
+.fc:hover{border-color:#9CA3AF;color:var(--ink)}
+.fc.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* PROGRESS INDICATOR */
+.progress-bar{height:4px;background:var(--line);border-radius:20px;overflow:hidden;margin-top:10px}
+.pb-fill{height:100%;border-radius:20px;background:var(--teal)}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="logo-text">Siap Lulus Ketapang</div>
+      <div class="logo-sub">Platform Talenta & Lapangan Kerja</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="topbar-pill" onclick="showTab('supply')">Siswa</div>
+    <div class="topbar-pill" onclick="showTab('demand')">Pemberi Kerja</div>
+    <div class="topbar-pill" onclick="showTab('lpk')">LPK / BLK</div>
+    <div class="topbar-pill cta" onclick="showTab('match')">Cari Kecocokan ↗</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">
+        <div class="eyebrow-dot"></div>
+        <div class="eyebrow-txt">Ketapang, Kalimantan Barat</div>
+      </div>
+      <h1 class="hero-h1">Hubungkan <em>Talenta Muda</em><br>dengan Peluang Nyata</h1>
+      <p class="hero-sub">Platform digital untuk mempertemukan lulusan SMA/SMK Ketapang dengan kebutuhan lapangan kerja, pelatihan vokasi, dan jalur karier berbasis data lokal.</p>
+      <div class="hero-actions">
+        <button class="btn-hero primary" onclick="showTab('match')">Temukan Kecocokanmu →</button>
+        <button class="btn-hero ghost" onclick="showTab('supply')">Lihat Data Supply</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hs"><div class="hs-val">5,600</div><div class="hs-lbl">Siswa SMA/SMK</div></div>
+        <div class="hs"><div class="hs-val">18</div><div class="hs-lbl">Sekolah Terdaftar</div></div>
+        <div class="hs"><div class="hs-val">1,280</div><div class="hs-lbl">Posisi Tersedia/th</div></div>
+        <div class="hs"><div class="hs-val">74%</div><div class="hs-lbl">Rata-rata Match Score</div></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="match-demo">
+        <div class="md-title">Live Matching Terbaru</div>
+        <div class="match-card">
+          <div class="mc-icon" style="background:#1B4B3A">🌱</div>
+          <div class="mc-info">
+            <div class="mc-name">SMK PGRI Ketapang — ATP</div>
+            <div class="mc-meta">Cargill Mill · Operator Kebun</div>
+          </div>
+          <div class="mc-score"><div class="mc-pct">96</div><div class="mc-lbl">match</div></div>
+        </div>
+        <div class="match-card">
+          <div class="mc-icon" style="background:#1A2F4E">💊</div>
+          <div class="mc-info">
+            <div class="mc-name">SMK Kesehatan Mulia</div>
+            <div class="mc-meta">Puskesmas Delta · Asisten Bidan</div>
+          </div>
+          <div class="mc-score"><div class="mc-pct">91</div><div class="mc-lbl">match</div></div>
+        </div>
+        <div class="match-card">
+          <div class="mc-icon" style="background:#2A1A4A">💻</div>
+          <div class="mc-info">
+            <div class="mc-name">SMKN 2 Ketapang — TKJ</div>
+            <div class="mc-meta">BUMDes Maju · Admin SIPADES</div>
+          </div>
+          <div class="mc-score"><div class="mc-pct">82</div><div class="mc-lbl">match</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV TABS -->
+<div class="nav-tabs">
+  <div class="nt on" onclick="showTab('overview')" id="tab-overview">
+    <div class="nt-dot" style="background:var(--teal)"></div> Ringkasan
+  </div>
+  <div class="nt" onclick="showTab('supply')" id="tab-supply">
+    <div class="nt-dot" style="background:var(--sky)"></div> Supply (Lulusan)
+  </div>
+  <div class="nt" onclick="showTab('demand')" id="tab-demand">
+    <div class="nt-dot" style="background:var(--coral)"></div> Demand (Lapangan)
+  </div>
+  <div class="nt" onclick="showTab('match')" id="tab-match">
+    <div class="nt-dot" style="background:var(--amber)"></div> Matching Engine
+  </div>
+  <div class="nt" onclick="showTab('gap')" id="tab-gap">
+    <div class="nt-dot" style="background:var(--purple)"></div> Analisis Gap
+  </div>
+  <div class="nt" onclick="showTab('lpk')" id="tab-lpk">
+    <div class="nt-dot" style="background:var(--teal)"></div> LPK & Pelatihan
+  </div>
+  <div class="nt" onclick="showTab('karier')" id="tab-karier">
+    <div class="nt-dot" style="background:var(--navy)"></div> Jalur Karier
+  </div>
+</div>
+
+<div class="content">
+
+<!-- OVERVIEW -->
+<div class="section on" id="sec-overview">
+  <div class="sec-header">
+    <div>
+      <div class="sec-title">Peta Supply–Demand Ketapang</div>
+      <div class="sec-sub">Data gabungan survei 25 kepala desa · Rekrutmen Cargill 2024–2025 · Disnaker Ketapang · Save the Children</div>
+    </div>
+    <button class="btn btn-navy" onclick="showTab('match')">Jalankan Matching ↗</button>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi kpi-border-sky">
+      <div class="kpi-val">5,600</div>
+      <div class="kpi-lbl">Total Siswa Aktif</div>
+      <div class="kpi-badge" style="background:var(--sky-lt);color:var(--sky)">SMK 3.420 · SMA 2.180</div>
+    </div>
+    <div class="kpi kpi-border-coral">
+      <div class="kpi-val">1,280</div>
+      <div class="kpi-lbl">Kebutuhan Lapangan/th</div>
+      <div class="kpi-badge" style="background:var(--coral-lt);color:var(--coral)">6 sektor utama</div>
+    </div>
+    <div class="kpi kpi-border-amber">
+      <div class="kpi-val">38%</div>
+      <div class="kpi-lbl">Gap Rata-rata Supply–Demand</div>
+      <div class="kpi-badge" style="background:var(--amber-lt);color:var(--amber)">Perlu intervensi</div>
+    </div>
+    <div class="kpi kpi-border-teal">
+      <div class="kpi-val">4</div>
+      <div class="kpi-lbl">Program LPK Tersedia</div>
+      <div class="kpi-badge" style="background:var(--teal-lt);color:var(--teal)">Siap beroperasi</div>
+    </div>
+  </div>
+
+  <!-- SUPPLY DEMAND BOARD -->
+  <div style="margin-bottom:8px;font-size:13px;font-weight:600;color:var(--navy)">Peta Pertemuan Supply ↔ Demand</div>
+  <div class="sdb">
+    <div class="sdb-col supply">
+      <div class="sdb-head s">Supply — Lulusan per Jurusan</div>
+      <div class="supply-item">
+        <div class="si-icon" style="background:#EAF3DE;font-size:16px">🌱</div>
+        <div><div class="si-name">Agribisnis Tanaman Perkebunan</div><div class="si-meta">8 SMK · Muara Pawan, Delta Pawan</div></div>
+        <div class="si-count">640<span>/th</span></div>
+      </div>
+      <div class="supply-item">
+        <div class="si-icon" style="background:#FBEAF0;font-size:16px">💊</div>
+        <div><div class="si-name">Keperawatan & Asisten Nakes</div><div class="si-meta">3 SMK Kesehatan</div></div>
+        <div class="si-count">180<span>/th</span></div>
+      </div>
+      <div class="supply-item">
+        <div class="si-icon" style="background:#EEEDFE;font-size:16px">💻</div>
+        <div><div class="si-name">Teknik Komputer & Jaringan</div><div class="si-meta">5 SMK · Seluruh kecamatan</div></div>
+        <div class="si-count">320<span>/th</span></div>
+      </div>
+      <div class="supply-item">
+        <div class="si-icon" style="background:#D8ECF8;font-size:16px">⚙️</div>
+        <div><div class="si-name">Teknik Mesin & Otomotif</div><div class="si-meta">4 SMK Teknik</div></div>
+        <div class="si-count">280<span>/th</span></div>
+      </div>
+      <div class="supply-item">
+        <div class="si-icon" style="background:#FEF0D6;font-size:16px">📊</div>
+        <div><div class="si-name">Akuntansi & Administrasi</div><div class="si-meta">SMA IPS + SMK Bisnis</div></div>
+        <div class="si-count">410<span>/th</span></div>
+      </div>
+    </div>
+    <div class="sdb-mid">
+      <div class="sdb-arrow" style="background:var(--teal-lt)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="#1B8C6E" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div style="font-size:9px;color:var(--muted);text-align:center;font-weight:500;letter-spacing:.5px">COCOK<br>KAN</div>
+      <div class="sdb-arrow" style="background:var(--teal-lt)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M12 19l-7-7 7-7" stroke="#1B8C6E" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+    <div class="sdb-col demand">
+      <div class="sdb-head d">Demand — Kebutuhan Lapangan</div>
+      <div class="demand-item">
+        <div class="si-icon" style="background:#EAF3DE;font-size:16px">🌿</div>
+        <div><div class="di-sector">Sawit & Agrikultur</div><div class="di-jobs">Cargill, kebun plasma, mekanisasi lahan</div></div>
+        <div class="di-need">320<span>/th</span></div>
+      </div>
+      <div class="demand-item">
+        <div class="si-icon" style="background:#FBEAF0;font-size:16px">🏥</div>
+        <div><div class="di-sector">Kesehatan Komunitas</div><div class="di-jobs">Puskesmas, Posyandu, bidan desa</div></div>
+        <div class="di-need">280<span>/th</span></div>
+      </div>
+      <div class="demand-item">
+        <div class="si-icon" style="background:#EEEDFE;font-size:16px">🖥️</div>
+        <div><div class="di-sector">TIK & Digitalisasi Desa</div><div class="di-jobs">SIPADES, drone agri, media BUMDes</div></div>
+        <div class="di-need">180<span>/th</span></div>
+      </div>
+      <div class="demand-item">
+        <div class="si-icon" style="background:#D8ECF8;font-size:16px">🔧</div>
+        <div><div class="di-sector">Teknik & Mekanisasi</div><div class="di-jobs">Teknisi pabrik, mekanik alsintan</div></div>
+        <div class="di-need">200<span>/th</span></div>
+      </div>
+      <div class="demand-item">
+        <div class="si-icon" style="background:#FEF0D6;font-size:16px">📋</div>
+        <div><div class="di-sector">Admin & Keuangan Desa</div><div class="di-jobs">BUMDes, koperasi, Dana Desa</div></div>
+        <div class="di-need">150<span>/th</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-top:16px">
+    <div class="card">
+      <div class="card-title">
+        <div class="ct-icon" style="background:var(--teal-lt)">📈</div>
+        Serapan per Sektor (3 Tahun Terakhir)
+      </div>
+      <div class="bar-row"><div class="bar-label">Agribisnis Perkebunan</div><div class="bar-track"><div class="bar-fill" style="width:88%;background:var(--teal)"></div></div><div class="bar-val">88%</div></div>
+      <div class="bar-row"><div class="bar-label">Keperawatan & Nakes</div><div class="bar-track"><div class="bar-fill" style="width:42%;background:var(--coral)"></div></div><div class="bar-val">42%</div></div>
+      <div class="bar-row"><div class="bar-label">TKJ & Digital</div><div class="bar-track"><div class="bar-fill" style="width:67%;background:var(--purple)"></div></div><div class="bar-val">67%</div></div>
+      <div class="bar-row"><div class="bar-label">Teknik Mesin</div><div class="bar-track"><div class="bar-fill" style="width:75%;background:var(--sky)"></div></div><div class="bar-val">75%</div></div>
+      <div class="bar-row"><div class="bar-label">Admin & Akuntansi</div><div class="bar-track"><div class="bar-fill" style="width:53%;background:var(--amber)"></div></div><div class="bar-val">53%</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="ct-icon" style="background:var(--amber-lt)">⚠️</div>
+        Status Ketidaksesuaian (Mismatch)
+      </div>
+      <div class="gap-row" style="background:var(--coral-lt);border-radius:var(--radius)">
+        <div class="gap-icon" style="background:var(--coral)"></div>
+        <div class="gap-content">
+          <div class="gap-title">Kritis: Kesehatan</div>
+          <div class="gap-desc">Hanya 42% dari kebutuhan terpenuhi. Kekurangan 280 nakes/tahun di 25 desa.</div>
+          <span class="gap-pill" style="background:var(--coral-lt);color:var(--coral)">Defisit parah −58%</span>
+        </div>
+      </div>
+      <div class="gap-row" style="background:var(--amber-lt);border-radius:var(--radius);margin-top:8px">
+        <div class="gap-icon" style="background:var(--amber)"></div>
+        <div class="gap-content">
+          <div class="gap-title">Perhatian: Admin & IPS</div>
+          <div class="gap-desc">Lulusan banyak, tapi kurikulum tidak sesuai kebutuhan BUMDes dan Dana Desa.</div>
+          <span class="gap-pill" style="background:var(--amber-lt);color:var(--amber)">Mismatch kurikulum</span>
+        </div>
+      </div>
+      <div class="gap-row" style="background:var(--teal-lt);border-radius:var(--radius);margin-top:8px">
+        <div class="gap-icon" style="background:var(--teal)"></div>
+        <div class="gap-content">
+          <div class="gap-title">Peluang: Agribisnis ATP</div>
+          <div class="gap-desc">Permintaan masih tumbuh +18%, lulusan perlu naik kapasitas.</div>
+          <span class="gap-pill" style="background:var(--teal-lt);color:var(--teal)">Gap permintaan +18%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUPPLY -->
+<div class="section" id="sec-supply">
+  <div class="sec-header">
+    <div>
+      <div class="sec-title">Data Supply — Lulusan & Siswa</div>
+      <div class="sec-sub">18 sekolah · 5,600 siswa aktif · 3 kecamatan utama</div>
+    </div>
+  </div>
+  <div class="filter-bar">
+    <div class="fc on">Semua (18)</div>
+    <div class="fc">SMK Kejuruan (11)</div>
+    <div class="fc">SMA Umum (7)</div>
+    <div class="fc">Muara Pawan</div>
+    <div class="fc">Delta Pawan</div>
+    <div class="fc">Benua Kayong</div>
+  </div>
+  <div class="kpi-row">
+    <div class="kpi" style="border-top:3px solid var(--sky)"><div class="kpi-val">3,420</div><div class="kpi-lbl">Siswa SMK</div></div>
+    <div class="kpi" style="border-top:3px solid var(--purple)"><div class="kpi-val">2,180</div><div class="kpi-lbl">Siswa SMA</div></div>
+    <div class="kpi" style="border-top:3px solid var(--teal)"><div class="kpi-val">1,840</div><div class="kpi-lbl">Lulusan/Tahun</div></div>
+    <div class="kpi" style="border-top:3px solid var(--amber)"><div class="kpi-val">18</div><div class="kpi-lbl">Sekolah Aktif</div></div>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <div class="school-item">
+        <div class="school-avatar" style="background:var(--teal-lt)">🌱</div>
+        <div>
+          <div class="school-name">SMKN 1 Ketapang</div>
+          <div class="school-meta">Muara Pawan · Negeri</div>
+          <div class="school-jurusan">ATP, TKR, Akuntansi, TKJ</div>
+        </div>
+        <div class="school-right">
+          <div class="school-siswa">680</div>
+          <div class="school-type" style="background:var(--sky-lt);color:var(--sky)">SMK Unggulan</div>
+        </div>
+      </div>
+      <div class="school-item">
+        <div class="school-avatar" style="background:var(--sky-lt)">⚙️</div>
+        <div>
+          <div class="school-name">SMKN 2 Ketapang</div>
+          <div class="school-meta">Delta Pawan · Negeri</div>
+          <div class="school-jurusan">TKJ, Teknik Mesin, Elektro</div>
+        </div>
+        <div class="school-right">
+          <div class="school-siswa">540</div>
+          <div class="school-type" style="background:var(--sky-lt);color:var(--sky)">SMK Teknik</div>
+        </div>
+      </div>
+      <div class="school-item">
+        <div class="school-avatar" style="background:var(--coral-lt)">💊</div>
+        <div>
+          <div class="school-name">SMK Kesehatan Mulia</div>
+          <div class="school-meta">Muara Pawan · Swasta</div>
+          <div class="school-jurusan">Keperawatan, Farmasi, Gizi</div>
+        </div>
+        <div class="school-right">
+          <div class="school-siswa">320</div>
+          <div class="school-type" style="background:var(--coral-lt);color:var(--coral)">SMK Kesehatan</div>
+        </div>
+      </div>
+      <div class="school-item">
+        <div class="school-avatar" style="background:var(--amber-lt)">🌿</div>
+        <div>
+          <div class="school-name">SMK PGRI Ketapang</div>
+          <div class="school-meta">Benua Kayong · Swasta</div>
+          <div class="school-jurusan">ATP, Perkebunan, Mekanisasi</div>
+        </div>
+        <div class="school-right">
+          <div class="school-siswa">410</div>
+          <div class="school-type" style="background:var(--amber-lt);color:var(--amber)">SMK Agrikultur</div>
+        </div>
+      </div>
+      <div class="school-item">
+        <div class="school-avatar" style="background:var(--purple-lt)">📚</div>
+        <div>
+          <div class="school-name">SMAN 1 Ketapang</div>
+          <div class="school-meta">Delta Pawan · Negeri</div>
+          <div class="school-jurusan">IPA, IPS, Bahasa</div>
+        </div>
+        <div class="school-right">
+          <div class="school-siswa">720</div>
+          <div class="school-type" style="background:var(--purple-lt);color:var(--purple)">SMA Negeri</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Distribusi Jurusan SMK</div>
+      <div class="bar-row"><div class="bar-label">Agribisnis & Perkebunan (ATP)</div><div class="bar-track"><div class="bar-fill" style="width:79%;background:var(--teal)"></div></div><div class="bar-val">640</div></div>
+      <div class="bar-row"><div class="bar-label">Teknik Komputer & Jaringan</div><div class="bar-track"><div class="bar-fill" style="width:39%;background:var(--purple)"></div></div><div class="bar-val">320</div></div>
+      <div class="bar-row"><div class="bar-label">Teknik Mesin & Otomotif</div><div class="bar-track"><div class="bar-fill" style="width:34%;background:var(--sky)"></div></div><div class="bar-val">280</div></div>
+      <div class="bar-row"><div class="bar-label">Akuntansi & Bisnis</div><div class="bar-track"><div class="bar-fill" style="width:29%;background:var(--amber)"></div></div><div class="bar-val">240</div></div>
+      <div class="bar-row"><div class="bar-label">Keperawatan & Nakes</div><div class="bar-track"><div class="bar-fill" style="width:22%;background:var(--coral)"></div></div><div class="bar-val">180</div></div>
+      <div class="bar-row"><div class="bar-label">Lainnya</div><div class="bar-track"><div class="bar-fill" style="width:22%;background:var(--muted)"></div></div><div class="bar-val">180</div></div>
+      <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line)">
+        <div style="font-size:11px;font-weight:600;color:var(--navy);margin-bottom:8px">Distribusi SMA</div>
+        <div class="bar-row"><div class="bar-label">IPA (Sains)</div><div class="bar-track"><div class="bar-fill" style="width:55%;background:var(--sky)"></div></div><div class="bar-val">1,200</div></div>
+        <div class="bar-row"><div class="bar-label">IPS</div><div class="bar-track"><div class="bar-fill" style="width:44%;background:var(--amber)"></div></div><div class="bar-val">960</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DEMAND -->
+<div class="section" id="sec-demand">
+  <div class="sec-header">
+    <div>
+      <div class="sec-title">Data Demand — Kebutuhan Lapangan</div>
+      <div class="sec-sub">Berdasarkan survei 25 kepala desa · Data Cargill 2024–25 · Disnaker · Puskesmas</div>
+    </div>
+  </div>
+  <div class="kpi-row">
+    <div class="kpi" style="border-top:3px solid var(--teal)"><div class="kpi-val">320</div><div class="kpi-lbl">Kebutuhan Agrikultur/th</div></div>
+    <div class="kpi" style="border-top:3px solid var(--coral)"><div class="kpi-val">280</div><div class="kpi-lbl">Kebutuhan Kesehatan/th</div></div>
+    <div class="kpi" style="border-top:3px solid var(--purple)"><div class="kpi-val">180</div><div class="kpi-lbl">Kebutuhan TIK/th</div></div>
+    <div class="kpi" style="border-top:3px solid var(--sky)"><div class="kpi-val">200</div><div class="kpi-lbl">Kebutuhan Teknik/th</div></div>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <div class="ct-icon" style="background:var(--teal-lt);width:36px;height:36px;margin-bottom:10px;border-radius:10px;font-size:18px;display:flex;align-items:center;justify-content:center">🌿</div>
+      <div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px">Sawit & Agrikultur</div>
+      <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:10px">Operator kebun, mandor panen, teknisi pupuk, staf monitoring RSPO, mekanik alsintan</div>
+      <div class="bar-track" style="margin-bottom:6px"><div class="bar-fill" style="width:80%;background:var(--teal)"></div></div>
+      <div style="font-size:12px;font-weight:600;color:var(--teal)">320 posisi/tahun</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:3px">Cargill · Kebun Plasma · RSPO</div>
+    </div>
+    <div class="card">
+      <div class="ct-icon" style="background:var(--coral-lt);width:36px;height:36px;margin-bottom:10px;border-radius:10px;font-size:18px;display:flex;align-items:center;justify-content:center">🏥</div>
+      <div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px">Kesehatan Komunitas</div>
+      <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:10px">Asisten bidan, kader Posyandu, perawat komunitas, tenaga gizi, kader desa ramah anak</div>
+      <div class="bar-track" style="margin-bottom:6px"><div class="bar-fill" style="width:70%;background:var(--coral)"></div></div>
+      <div style="font-size:12px;font-weight:600;color:var(--coral)">280 posisi/tahun</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:3px">Puskesmas · 25 Desa · Save the Children</div>
+    </div>
+    <div class="card">
+      <div class="ct-icon" style="background:var(--purple-lt);width:36px;height:36px;margin-bottom:10px;border-radius:10px;font-size:18px;display:flex;align-items:center;justify-content:center">💻</div>
+      <div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px">TIK & Digitalisasi</div>
+      <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:10px">Admin SIPADES, operator drone agri, data entry pertanian, media sosial BUMDes</div>
+      <div class="bar-track" style="margin-bottom:6px"><div class="bar-fill" style="width:45%;background:var(--purple)"></div></div>
+      <div style="font-size:12px;font-weight:600;color:var(--purple)">180 posisi/tahun</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:3px">BUMDes · Desa Digital · Pemkab</div>
+    </div>
+    <div class="card">
+      <div class="ct-icon" style="background:var(--sky-lt);width:36px;height:36px;margin-bottom:10px;border-radius:10px;font-size:18px;display:flex;align-items:center;justify-content:center">⚙️</div>
+      <div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px">Teknik & Mekanisasi</div>
+      <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:10px">Teknisi pabrik pengolahan, mekanik alsintan, listrik industri, K3 lapangan</div>
+      <div class="bar-track" style="margin-bottom:6px"><div class="bar-fill" style="width:50%;background:var(--sky)"></div></div>
+      <div style="font-size:12px;font-weight:600;color:var(--sky)">200 posisi/tahun</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:3px">Industri pengolahan · Bengkel</div>
+    </div>
+    <div class="card">
+      <div class="ct-icon" style="background:var(--amber-lt);width:36px;height:36px;margin-bottom:10px;border-radius:10px;font-size:18px;display:flex;align-items:center;justify-content:center">📋</div>
+      <div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px">Admin & Keuangan</div>
+      <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:10px">Bendahara BUMDes, staf koperasi, operator Dana Desa, akuntansi usaha lokal</div>
+      <div class="bar-track" style="margin-bottom:6px"><div class="bar-fill" style="width:38%;background:var(--amber)"></div></div>
+      <div style="font-size:12px;font-weight:600;color:var(--amber)">150 posisi/tahun</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:3px">BUMDes · Koperasi · Pemdes</div>
+    </div>
+    <div class="card">
+      <div class="ct-icon" style="background:var(--coral-lt);width:36px;height:36px;margin-bottom:10px;border-radius:10px;font-size:18px;display:flex;align-items:center;justify-content:center">📦</div>
+      <div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px">Pengolahan & Logistik</div>
+      <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:10px">Pengelola gudang, sortasi TBS, rantai dingin produk pertanian, administrasi logistik</div>
+      <div class="bar-track" style="margin-bottom:6px"><div class="bar-fill" style="width:33%;background:#D94F2E)"></div></div>
+      <div style="font-size:12px;font-weight:600;color:var(--coral)">130 posisi/tahun</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:3px">Pergudangan · Pabrik CPO</div>
+    </div>
+  </div>
+</div>
+
+<!-- MATCH ENGINE -->
+<div class="section" id="sec-match">
+  <div class="sec-header">
+    <div>
+      <div class="sec-title">Matching Engine</div>
+      <div class="sec-sub">Sistem pencocokan berbasis skor: ketersediaan lulusan · permintaan pasar · relevansi kurikulum · proyeksi 3 tahun</div>
+    </div>
+  </div>
+
+  <div class="match-engine me">
+    <div class="me-title">Temukan Kecocokan Terbaik</div>
+    <div class="me-sub">Pilih profil siswa atau jurusan untuk melihat rekomendasi lapangan kerja dan jalur pelatihan</div>
+    <div class="me-input-row">
+      <select class="me-select" id="sel-jurusan">
+        <option value="">Pilih Jurusan</option>
+        <option value="atp">Agribisnis Tanaman Perkebunan (ATP)</option>
+        <option value="nakes">Keperawatan & Asisten Nakes</option>
+        <option value="tkj">Teknik Komputer & Jaringan</option>
+        <option value="mesin">Teknik Mesin & Otomotif</option>
+        <option value="admin">Akuntansi & Administrasi</option>
+        <option value="ipa">SMA IPA</option>
+        <option value="ips">SMA IPS</option>
+      </select>
+      <select class="me-select" id="sel-kec">
+        <option value="">Kecamatan</option>
+        <option>Muara Pawan</option>
+        <option>Delta Pawan</option>
+        <option>Benua Kayong</option>
+      </select>
+      <select class="me-select" id="sel-sektor">
+        <option value="">Prioritas Sektor</option>
+        <option>Sawit & Agrikultur</option>
+        <option>Kesehatan</option>
+        <option>TIK & Digital</option>
+        <option>Teknik</option>
+      </select>
+      <button class="me-btn" onclick="runMatch()">Jalankan Matching →</button>
+    </div>
+  </div>
+
+  <div id="match-results">
+    <div class="result-card top" id="r1">
+      <div class="rc-top-badge">✦ Rekomendasi Teratas</div>
+      <div class="rc-head">
+        <div>
+          <div class="rc-title">Agribisnis Tanaman Perkebunan (ATP)</div>
+          <div class="rc-school">SMK · Tersedia di 8 sekolah · Muara Pawan & Delta Pawan</div>
+        </div>
+        <div class="rc-score-block">
+          <div class="rc-score high">96</div>
+          <div class="rc-score-lbl">/ 100 skor</div>
+        </div>
+      </div>
+      <div class="rc-tags">
+        <span class="rc-tag" style="background:var(--teal-lt);color:var(--teal)">Cargill Priority</span>
+        <span class="rc-tag" style="background:var(--amber-lt);color:var(--amber)">RSPO Certified</span>
+        <span class="rc-tag" style="background:var(--sky-lt);color:var(--sky)">Kurikulum Sesuai</span>
+      </div>
+      <div class="rc-demand">Kebutuhan lapangan: 320 posisi/tahun · Operator kebun, mandor panen, teknisi pupuk, staf monitoring lingkungan · Cargill membuka jalur magang langsung bagi lulusan ATP bersertifikat</div>
+      <div class="rc-prog-lbl"><span>Kesesuaian kurikulum</span><span>94%</span></div>
+      <div class="rc-prog"><div class="rc-prog-fill" style="width:94%;background:var(--teal)"></div></div>
+      <div class="rc-prog-lbl"><span>Serapan lulusan 3 tahun terakhir</span><span>88%</span></div>
+      <div class="rc-prog"><div class="rc-prog-fill" style="width:88%;background:var(--sky)"></div></div>
+      <div class="rc-footer">
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <span class="gap-badge" style="background:var(--teal-lt);color:var(--teal)">Supply seimbang</span>
+          <span class="gap-badge" style="background:var(--amber-lt);color:var(--amber)">Gap permintaan +18%</span>
+        </div>
+        <button class="btn btn-teal">Lihat jalur karier ↗</button>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <div class="rc-head">
+        <div>
+          <div class="rc-title">Keperawatan & Asisten Tenaga Kesehatan</div>
+          <div class="rc-school">SMK Kesehatan · Tersedia di 3 sekolah</div>
+        </div>
+        <div class="rc-score-block">
+          <div class="rc-score high">91</div>
+          <div class="rc-score-lbl">/ 100 skor</div>
+        </div>
+      </div>
+      <div class="rc-tags">
+        <span class="rc-tag" style="background:var(--coral-lt);color:var(--coral)">Kritis — Kekurangan</span>
+        <span class="rc-tag" style="background:var(--teal-lt);color:var(--teal)">Save the Children</span>
+        <span class="rc-tag" style="background:var(--sky-lt);color:var(--sky)">Posyandu Desa</span>
+      </div>
+      <div class="rc-demand">Kekurangan 280 tenaga/tahun di 25 desa · Puskesmas & Posyandu butuh bidan dan perawat · Program StC "Desa Ramah Anak" membutuhkan kader kesehatan terlatih</div>
+      <div class="rc-prog-lbl"><span>Kesesuaian kebutuhan desa</span><span>96%</span></div>
+      <div class="rc-prog"><div class="rc-prog-fill" style="width:96%;background:var(--coral)"></div></div>
+      <div class="rc-prog-lbl"><span>Ketersediaan lulusan saat ini</span><span>42%</span></div>
+      <div class="rc-prog"><div class="rc-prog-fill" style="width:42%;background:var(--amber)"></div></div>
+      <div class="rc-footer">
+        <span class="gap-badge" style="background:var(--coral-lt);color:var(--coral)">Defisit parah −58%</span>
+        <button class="btn btn-outline">Strategi ekspansi ↗</button>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <div class="rc-head">
+        <div>
+          <div class="rc-title">Teknik Komputer & Jaringan (TKJ)</div>
+          <div class="rc-school">SMK · Tersedia di 5 sekolah</div>
+        </div>
+        <div class="rc-score-block">
+          <div class="rc-score med">82</div>
+          <div class="rc-score-lbl">/ 100 skor</div>
+        </div>
+      </div>
+      <div class="rc-tags">
+        <span class="rc-tag" style="background:var(--purple-lt);color:var(--purple)">Digitalisasi Desa</span>
+        <span class="rc-tag" style="background:var(--sky-lt);color:var(--sky)">SIPADES</span>
+        <span class="rc-tag" style="background:var(--amber-lt);color:var(--amber)">Butuh Update</span>
+      </div>
+      <div class="rc-demand">Admin sistem SIPADES, teknisi jaringan internet desa, operator drone agrikultur, pengelola media sosial BUMDes · Kurikulum perlu pembaruan ke IoT pertanian</div>
+      <div class="rc-prog-lbl"><span>Kesesuaian kurikulum saat ini</span><span>67%</span></div>
+      <div class="rc-prog"><div class="rc-prog-fill" style="width:67%;background:var(--purple)"></div></div>
+      <div class="rc-prog-lbl"><span>Potensi setelah update kurikulum</span><span>89%</span></div>
+      <div class="rc-prog"><div class="rc-prog-fill" style="width:89%;background:var(--sky)"></div></div>
+      <div class="rc-footer">
+        <span class="gap-badge" style="background:var(--amber-lt);color:var(--amber)">Potensi tinggi</span>
+        <button class="btn btn-outline">Update kurikulum ↗</button>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <div class="rc-head">
+        <div>
+          <div class="rc-title">Teknik Kendaraan Ringan & Mekanisasi (TKR)</div>
+          <div class="rc-school">SMK Teknik · Tersedia di 4 sekolah</div>
+        </div>
+        <div class="rc-score-block">
+          <div class="rc-score med">78</div>
+          <div class="rc-score-lbl">/ 100 skor</div>
+        </div>
+      </div>
+      <div class="rc-tags">
+        <span class="rc-tag" style="background:var(--sky-lt);color:var(--sky)">Mekanisasi Lahan</span>
+        <span class="rc-tag" style="background:var(--amber-lt);color:var(--amber)">Industri Pengolahan</span>
+      </div>
+      <div class="rc-demand">Mekanik traktor dan alsintan, teknisi pabrik CPO, pemeliharaan mesin kebun · Kebutuhan mekanisasi terus tumbuh seiring ekspansi lahan</div>
+      <div class="rc-prog-lbl"><span>Kesesuaian industri</span><span>78%</span></div>
+      <div class="rc-prog"><div class="rc-prog-fill" style="width:78%;background:var(--sky)"></div></div>
+      <div class="rc-footer">
+        <span class="gap-badge" style="background:var(--sky-lt);color:var(--sky)">Stabil</span>
+        <button class="btn btn-outline">Detail program ↗</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GAP -->
+<div class="section" id="sec-gap">
+  <div class="sec-header">
+    <div>
+      <div class="sec-title">Analisis Kesenjangan</div>
+      <div class="sec-sub">Identifikasi ketidaksesuaian supply–demand dan rekomendasi intervensi</div>
+    </div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi" style="border-top:3px solid var(--coral)"><div class="kpi-val" style="color:var(--coral)">−58%</div><div class="kpi-lbl">Defisit Nakes</div></div>
+    <div class="kpi" style="border-top:3px solid var(--amber)"><div class="kpi-val" style="color:var(--amber)">+18%</div><div class="kpi-lbl">Gap ATP (Demand)</div></div>
+    <div class="kpi" style="border-top:3px solid var(--purple)"><div class="kpi-val" style="color:var(--purple)">−22%</div><div class="kpi-lbl">Gap TIK</div></div>
+    <div class="kpi" style="border-top:3px solid var(--teal)"><div class="kpi-val" style="color:var(--teal)">+14%</div><div class="kpi-lbl">Surplus Admin IPS</div></div>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <div style="font-size:12px;font-weight:600;color:var(--coral);margin-bottom:10px;display:flex;align-items:center;gap:6px">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--coral)"></div>
+        Kritis — Perlu Tindakan Segera
+      </div>
+      <div class="gap-row" style="background:var(--coral-lt);border-radius:var(--radius)">
+        <div class="gap-icon" style="background:var(--coral)"></div>
+        <div class="gap-content">
+          <div class="gap-title">Krisis Tenaga Kesehatan Desa</div>
+          <div class="gap-desc">25 desa kekurangan 280 nakes/tahun. Hanya 180 lulusan SMK Kesehatan tersedia, jauh dari kebutuhan 460+ posisi. Program Save the Children menuntut kader terlatih di tiap desa.</div>
+          <span class="gap-pill" style="background:var(--coral);color:#fff">Prioritas 1 — Ekspansi kapasitas SMK Kesehatan</span>
+        </div>
+      </div>
+      <div class="gap-row" style="background:var(--amber-lt);border-radius:var(--radius);margin-top:10px">
+        <div class="gap-icon" style="background:var(--amber)"></div>
+        <div class="gap-content">
+          <div class="gap-title">Mismatch Kurikulum TKJ & Digital</div>
+          <div class="gap-desc">320 lulusan TKJ pertahun, namun kurikulum masih di jaringan konvensional. Kebutuhan lapangan sudah ke IoT pertanian, drone, dan SIPADES v3. Gap relevansi 33%.</div>
+          <span class="gap-pill" style="background:var(--amber);color:#fff">Prioritas 2 — Update kurikulum TKJ 2025</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px;font-weight:600;color:var(--amber);margin-bottom:10px;display:flex;align-items:center;gap:6px">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--amber)"></div>
+        Perhatian — Intervensi Jangka Menengah
+      </div>
+      <div class="gap-row" style="background:var(--amber-lt);border-radius:var(--radius)">
+        <div class="gap-icon" style="background:var(--amber)"></div>
+        <div class="gap-content">
+          <div class="gap-title">Surplus Lulusan IPS & Akuntansi</div>
+          <div class="gap-desc">1,000+ lulusan IPS & Akuntansi per tahun namun hanya 150 posisi admin formal. Mayoritas tidak siap untuk peran BUMDes dan keuangan desa yang butuh skill spesifik.</div>
+          <span class="gap-pill" style="background:var(--amber-lt);color:var(--amber)">Solusi: BLK Digital & Admin 2 bulan</span>
+        </div>
+      </div>
+      <div class="gap-row" style="background:var(--teal-lt);border-radius:var(--radius);margin-top:10px">
+        <div class="gap-icon" style="background:var(--teal)"></div>
+        <div class="gap-content">
+          <div class="gap-title">Peluang: Gap Permintaan ATP +18%</div>
+          <div class="gap-desc">Permintaan Cargill dan kebun plasma terus tumbuh. 640 lulusan ATP belum memenuhi. Jalur magang langsung dan sertifikasi RSPO bisa meningkatkan serapan secara signifikan.</div>
+          <span class="gap-pill" style="background:var(--teal-lt);color:var(--teal)">Solusi: Program sertifikasi RSPO cepat</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:4px">
+    <div class="card-title">Matriks Keputusan Intervensi</div>
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead>
+          <tr style="background:var(--surface)">
+            <th style="padding:10px;text-align:left;border-bottom:1px solid var(--line);color:var(--muted);font-weight:600">Isu</th>
+            <th style="padding:10px;text-align:left;border-bottom:1px solid var(--line);color:var(--muted);font-weight:600">Jurusan Terdampak</th>
+            <th style="padding:10px;text-align:left;border-bottom:1px solid var(--line);color:var(--muted);font-weight:600">Skala Gap</th>
+            <th style="padding:10px;text-align:left;border-bottom:1px solid var(--line);color:var(--muted);font-weight:600">Solusi Rekomendasi</th>
+            <th style="padding:10px;text-align:left;border-bottom:1px solid var(--line);color:var(--muted);font-weight:600">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:10px;border-bottom:1px solid var(--line);font-weight:500">Defisit Nakes</td><td style="padding:10px;border-bottom:1px solid var(--line);color:var(--muted)">Keperawatan, Farmasi</td><td style="padding:10px;border-bottom:1px solid var(--line)"><span style="background:var(--coral-lt);color:var(--coral);padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600">−58% Kritis</span></td><td style="padding:10px;border-bottom:1px solid var(--line);color:var(--muted)">LPK Caregiver Komunitas 4 bulan + buka prodi baru</td><td style="padding:10px;border-bottom:1px solid var(--line)"><span style="background:var(--amber-lt);color:var(--amber);padding:2px 8px;border-radius:20px;font-size:10px">Perencanaan</span></td></tr>
+          <tr><td style="padding:10px;border-bottom:1px solid var(--line);font-weight:500">Mismatch TKJ</td><td style="padding:10px;border-bottom:1px solid var(--line);color:var(--muted)">TKJ, TIK</td><td style="padding:10px;border-bottom:1px solid var(--line)"><span style="background:var(--amber-lt);color:var(--amber);padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600">−22% Sedang</span></td><td style="padding:10px;border-bottom:1px solid var(--line);color:var(--muted)">BLK Digital & Admin 2 bulan, modul IoT & drone</td><td style="padding:10px;border-bottom:1px solid var(--line)"><span style="background:var(--teal-lt);color:var(--teal);padding:2px 8px;border-radius:20px;font-size:10px">Berjalan</span></td></tr>
+          <tr><td style="padding:10px;border-bottom:1px solid var(--line);font-weight:500">Surplus IPS</td><td style="padding:10px;border-bottom:1px solid var(--line);color:var(--muted)">IPS, Akuntansi</td><td style="padding:10px;border-bottom:1px solid var(--line)"><span style="background:var(--amber-lt);color:var(--amber);padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600">+14% Surplus</span></td><td style="padding:10px;border-bottom:1px solid var(--line);color:var(--muted)">Bootcamp UMKM 6 minggu + penempatan BUMDes</td><td style="padding:10px;border-bottom:1px solid var(--line)"><span style="background:var(--sky-lt);color:var(--sky);padding:2px 8px;border-radius:20px;font-size:10px">Siap mulai</span></td></tr>
+          <tr><td style="padding:10px;font-weight:500">Gap ATP +18%</td><td style="padding:10px;color:var(--muted)">ATP, Perkebunan</td><td style="padding:10px"><span style="background:var(--teal-lt);color:var(--teal);padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600">+18% Peluang</span></td><td style="padding:10px;color:var(--muted)">LPK Sawit & Mekanisasi 3 bulan + sertifikasi RSPO</td><td style="padding:10px"><span style="background:var(--teal-lt);color:var(--teal);padding:2px 8px;border-radius:20px;font-size:10px">Aktif</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- LPK -->
+<div class="section" id="sec-lpk">
+  <div class="sec-header">
+    <div>
+      <div class="sec-title">LPK & Program Pelatihan</div>
+      <div class="sec-sub">4 jalur pelatihan vokasi untuk menjembatani gap supply–demand</div>
+    </div>
+  </div>
+
+  <div class="lpk-card" style="border-top:3px solid var(--teal)">
+    <div class="lpk-head">
+      <div>
+        <div class="lpk-name">LPK Sawit & Mekanisasi</div>
+        <div class="lpk-meta">Fokus: teknik kebun sawit, K3, sertifikasi RSPO, dan mekanisasi lahan — paling relevan untuk lulusan SMK ATP dan Teknik Mesin</div>
+        <div class="lpk-pills">
+          <span class="lpk-pill" style="background:var(--teal-lt);color:var(--teal)">Agrikultur</span>
+          <span class="lpk-pill" style="background:var(--amber-lt);color:var(--amber)">3 bulan</span>
+          <span class="lpk-pill" style="background:var(--sky-lt);color:var(--sky)">Sertifikasi RSPO</span>
+        </div>
+      </div>
+      <span style="background:var(--teal-lt);color:var(--teal);font-size:10px;font-weight:600;padding:4px 12px;border-radius:20px;white-space:nowrap">Match Teratas</span>
+    </div>
+    <div class="lpk-grid">
+      <div class="lpk-box">
+        <div class="lpk-box-title">Rincian Program</div>
+        <ul>
+          <li><strong>Kurikulum:</strong> manajemen kebun, K3 mesin, sertifikasi RSPO, pemupukan presisi, monitoring lingkungan, dan magang di kebun mitra.</li>
+          <li><strong>Durasi:</strong> 3 bulan, termasuk 4 minggu magang lapangan di Cargill atau kebun plasma.</li>
+          <li><strong>Syarat:</strong> lulusan SMK ATP/TKR/Mesin, atau SMA IPA dengan nilai sains baik.</li>
+          <li><strong>Output:</strong> sertifikat RSPO, surat rekomendasi magang, dan jalur rekrutmen langsung.</li>
+        </ul>
+      </div>
+      <div class="lpk-box">
+        <div class="lpk-box-title">Skema Penempatan</div>
+        <ul>
+          <li><strong>Mitra kerja:</strong> Cargill Ketapang Mill, kebun plasma, PTPN, dan koperasi petani sawit.</li>
+          <li><strong>Kapasitas:</strong> 40 peserta/angkatan, 4 angkatan/tahun = 160 orang.</li>
+          <li><strong>Biaya:</strong> subsidi dari CSR Cargill dan Dana BOS vokasi.</li>
+          <li><strong>Serapan historis:</strong> 87% peserta terserap kerja dalam 3 bulan lulus.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="lpk-footer">
+      <div style="font-size:11px;color:var(--muted)">Target serapan: 160 orang/tahun</div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-outline">Lihat modul detail</button>
+        <button class="btn btn-teal">Daftar sekarang ↗</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="lpk-card">
+    <div class="lpk-head">
+      <div>
+        <div class="lpk-name">BLK Digital & Admin Desa</div>
+        <div class="lpk-meta">Fokus: SIPADES, komputer, administrasi desa digital, akuntansi BUMDes — paling relevan untuk lulusan SMA IPS dan SMK Akuntansi/TKJ</div>
+        <div class="lpk-pills">
+          <span class="lpk-pill" style="background:var(--purple-lt);color:var(--purple)">TIK & Admin</span>
+          <span class="lpk-pill" style="background:var(--amber-lt);color:var(--amber)">2 bulan</span>
+          <span class="lpk-pill" style="background:var(--sky-lt);color:var(--sky)">Desa Digital</span>
+        </div>
+      </div>
+      <span style="background:var(--sky-lt);color:var(--sky);font-size:10px;font-weight:600;padding:4px 12px;border-radius:20px;white-space:nowrap">Cocok: IPS & TKJ</span>
+    </div>
+    <div class="lpk-grid">
+      <div class="lpk-box">
+        <div class="lpk-box-title">Rincian Program</div>
+        <ul>
+          <li><strong>Kurikulum:</strong> operasi SIPADES, spreadsheet keuangan desa, administrasi surat digital, media sosial BUMDes, dan pengelolaan Dana Desa.</li>
+          <li><strong>Durasi:</strong> 2 bulan intensif, termasuk simulasi kerja di kantor desa mitra.</li>
+          <li><strong>Syarat:</strong> lulusan SMA/SMK semua jurusan, familiar komputer dasar.</li>
+        </ul>
+      </div>
+      <div class="lpk-box">
+        <div class="lpk-box-title">Skema Penempatan</div>
+        <ul>
+          <li><strong>Mitra kerja:</strong> BUMDes, kantor desa, koperasi perempuan, Pemdes.</li>
+          <li><strong>Kapasitas:</strong> 30 peserta/angkatan, 6 angkatan/tahun = 180 orang.</li>
+          <li><strong>Biaya:</strong> subsidi Pemkab dan Dana Desa komponen pemberdayaan.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="lpk-footer">
+      <div style="font-size:11px;color:var(--muted)">Target serapan: 180 orang/tahun</div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-outline">Lihat modul detail</button>
+        <button class="btn btn-navy">Info lebih lanjut ↗</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="lpk-card" style="border-top:3px solid var(--coral)">
+    <div class="lpk-head">
+      <div>
+        <div class="lpk-name">LPK Caregiver & Kesehatan Komunitas</div>
+        <div class="lpk-meta">Fokus: pertolongan pertama, gizi balita, kesehatan ibu, caregiver lansia — menjawab krisis nakes di 25 desa pelosok Ketapang</div>
+        <div class="lpk-pills">
+          <span class="lpk-pill" style="background:var(--coral-lt);color:var(--coral)">Kesehatan</span>
+          <span class="lpk-pill" style="background:var(--amber-lt);color:var(--amber)">4 bulan</span>
+          <span class="lpk-pill" style="background:var(--teal-lt);color:var(--teal)">Save the Children</span>
+        </div>
+      </div>
+      <span style="background:var(--coral-lt);color:var(--coral);font-size:10px;font-weight:600;padding:4px 12px;border-radius:20px;white-space:nowrap">Prioritas Kritis</span>
+    </div>
+    <div class="lpk-footer">
+      <div style="font-size:11px;color:var(--muted)">Target serapan: 100 orang/tahun · 25 desa × 4 kader</div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-outline">Lihat modul detail</button>
+        <button class="btn btn-teal">Hubungi koordinator ↗</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="lpk-card">
+    <div class="lpk-head">
+      <div>
+        <div class="lpk-name">Bootcamp Wirausaha Muda & UMKM</div>
+        <div class="lpk-meta">Fokus: pengolahan hasil pertanian, kemasan, pemasaran digital, pencatatan usaha — cocok lulusan yang ingin wirausaha atau masuk UMKM lokal</div>
+        <div class="lpk-pills">
+          <span class="lpk-pill" style="background:var(--amber-lt);color:var(--amber)">UMKM & Usaha</span>
+          <span class="lpk-pill" style="background:var(--teal-lt);color:var(--teal)">Pendapatan Lokal</span>
+          <span class="lpk-pill" style="background:var(--amber-lt);color:var(--amber)">6 minggu</span>
+        </div>
+      </div>
+      <span style="background:var(--amber-lt);color:var(--amber);font-size:10px;font-weight:600;padding:4px 12px;border-radius:20px;white-space:nowrap">Jalur Alternatif</span>
+    </div>
+    <div class="lpk-footer">
+      <div style="font-size:11px;color:var(--muted)">Target: 15 usaha rintisan/angkatan</div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-outline">Lihat modul detail</button>
+        <button class="btn btn-outline">Info pendaftaran</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KARIER -->
+<div class="section" id="sec-karier">
+  <div class="sec-header">
+    <div>
+      <div class="sec-title">Jalur Karier — Siap Lulus</div>
+      <div class="sec-sub">4 jalur karier utama dari sekolah menuju pekerjaan di Ketapang</div>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-bottom:16px">
+    <div class="path-col" style="border-top:3px solid var(--teal)">
+      <div class="path-top">
+        <div class="path-name">🌱 Jalur Agrikultur & Sawit</div>
+        <span class="path-badge" style="background:var(--teal-lt);color:var(--teal)">88% serapan</span>
+      </div>
+      <div class="path-meta">Untuk lulusan SMK ATP dan TKR yang ingin berkarier di industri perkebunan, mekanisasi, dan pengolahan CPO.</div>
+      <div class="step-item"><div class="step-no">1</div><div class="step-body"><strong>Lulus SMK ATP / TKR</strong>Sertifikat kompetensi dasar agribisnis</div></div>
+      <div class="step-item"><div class="step-no">2</div><div class="step-body"><strong>LPK Sawit 3 bulan</strong>Sertifikasi RSPO + magang di Cargill</div></div>
+      <div class="step-item"><div class="step-no">3</div><div class="step-body"><strong>Rekrutmen langsung</strong>Operator kebun, mandor panen, teknisi pupuk</div></div>
+      <div class="step-item"><div class="step-no">4</div><div class="step-body"><strong>Karier lanjut</strong>Supervisor kebun, staf HSE, analis lahan</div></div>
+    </div>
+    <div class="path-col" style="border-top:3px solid var(--coral)">
+      <div class="path-top">
+        <div class="path-name">💊 Jalur Kesehatan Desa</div>
+        <span class="path-badge" style="background:var(--coral-lt);color:var(--coral)">Kritis dibutuhkan</span>
+      </div>
+      <div class="path-meta">Untuk lulusan SMK Kesehatan yang ingin berkarier sebagai tenaga kesehatan komunitas di desa-desa Ketapang.</div>
+      <div class="step-item"><div class="step-no">1</div><div class="step-body"><strong>Lulus SMK Kesehatan</strong>Keperawatan, Farmasi, atau Gizi</div></div>
+      <div class="step-item"><div class="step-no">2</div><div class="step-body"><strong>LPK Caregiver 4 bulan</strong>Praktik di Puskesmas & Posyandu desa</div></div>
+      <div class="step-item"><div class="step-no">3</div><div class="step-body"><strong>Penempatan desa</strong>Kader Posyandu, asisten bidan, perawat desa</div></div>
+      <div class="step-item"><div class="step-no">4</div><div class="step-body"><strong>Karier lanjut</strong>Bidan mandiri, tenaga Puskesmas, fasilitator StC</div></div>
+    </div>
+    <div class="path-col" style="border-top:3px solid var(--purple)">
+      <div class="path-top">
+        <div class="path-name">💻 Jalur Digital & Admin Desa</div>
+        <span class="path-badge" style="background:var(--purple-lt);color:var(--purple)">Tumbuh cepat</span>
+      </div>
+      <div class="path-meta">Untuk lulusan SMA IPS atau SMK TKJ yang ingin berkarier di tata kelola desa digital dan ekonomi kreatif lokal.</div>
+      <div class="step-item"><div class="step-no">1</div><div class="step-body"><strong>Lulus SMA/SMK TKJ</strong>Dasar TIK dan administrasi</div></div>
+      <div class="step-item"><div class="step-no">2</div><div class="step-body"><strong>BLK Digital 2 bulan</strong>SIPADES, keuangan desa, media sosial BUMDes</div></div>
+      <div class="step-item"><div class="step-no">3</div><div class="step-body"><strong>Penempatan BUMDes/Desa</strong>Operator sistem, admin keuangan, media creator</div></div>
+      <div class="step-item"><div class="step-no">4</div><div class="step-body"><strong>Karier lanjut</strong>Manajer BUMDes, konsultan desa, wirausaha digital</div></div>
+    </div>
+    <div class="path-col" style="border-top:3px solid var(--amber)">
+      <div class="path-top">
+        <div class="path-name">🏪 Jalur Wirausaha Lokal</div>
+        <span class="path-badge" style="background:var(--amber-lt);color:var(--amber)">Jalur mandiri</span>
+      </div>
+      <div class="path-meta">Untuk semua lulusan yang ingin merintis usaha berbasis sumber daya lokal Ketapang.</div>
+      <div class="step-item"><div class="step-no">1</div><div class="step-body"><strong>Lulus SMA/SMK apapun</strong>Minat usaha dan bahan baku lokal</div></div>
+      <div class="step-item"><div class="step-no">2</div><div class="step-body"><strong>Bootcamp UMKM 6 minggu</strong>Produk, kemasan, marketplace, pencatatan kas</div></div>
+      <div class="step-item"><div class="step-no">3</div><div class="step-body"><strong>Uji pasar & pitching</strong>Produk sampel, akun jualan, katalog digital</div></div>
+      <div class="step-item"><div class="step-no">4</div><div class="step-body"><strong>Scaling</strong>UMKM formal, koperasi, atau ekspansi online</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Perbandingan Jalur Karier</div>
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:11px">
+        <thead>
+          <tr style="background:var(--surface)">
+            <th style="padding:10px;text-align:left;border-bottom:1px solid var(--line);color:var(--muted);font-weight:600">Jalur</th>
+            <th style="padding:10px;text-align:left;border-bottom:1px solid var(--line);color:var(--muted);font-weight:600">Durasi Total</th>
+            <th style="padding:10px;text-align:left;border-bottom:1px solid var(--line);color:var(--muted);font-weight:600">Posisi Target</th>
+            <th style="padding:10px;text-align:left;border-bottom:1px solid var(--line);color:var(--muted);font-weight:600">Mitra Utama</th>
+            <th style="padding:10px;text-align:left;border-bottom:1px solid var(--line);color:var(--muted);font-weight:600">Serapan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:9px 10px;border-bottom:1px solid var(--line);font-weight:600;color:var(--teal)">Agrikultur & Sawit</td><td style="padding:9px 10px;border-bottom:1px solid var(--line);color:var(--muted)">SMK (3th) + LPK (3bl)</td><td style="padding:9px 10px;border-bottom:1px solid var(--line);color:var(--muted)">Operator kebun, mandor, teknisi</td><td style="padding:9px 10px;border-bottom:1px solid var(--line);color:var(--muted)">Cargill, kebun plasma</td><td style="padding:9px 10px;border-bottom:1px solid var(--line)"><span style="background:var(--teal-lt);color:var(--teal);padding:2px 8px;border-radius:20px;font-weight:600">88%</span></td></tr>
+          <tr><td style="padding:9px 10px;border-bottom:1px solid var(--line);font-weight:600;color:var(--coral)">Kesehatan Desa</td><td style="padding:9px 10px;border-bottom:1px solid var(--line);color:var(--muted)">SMK (3th) + LPK (4bl)</td><td style="padding:9px 10px;border-bottom:1px solid var(--line);color:var(--muted)">Kader Posyandu, asisten bidan</td><td style="padding:9px 10px;border-bottom:1px solid var(--line);color:var(--muted)">Puskesmas, Save the Children</td><td style="padding:9px 10px;border-bottom:1px solid var(--line)"><span style="background:var(--amber-lt);color:var(--amber);padding:2px 8px;border-radius:20px;font-weight:600">42%*</span></td></tr>
+          <tr><td style="padding:9px 10px;border-bottom:1px solid var(--line);font-weight:600;color:var(--purple)">Digital & Admin</td><td style="padding:9px 10px;border-bottom:1px solid var(--line);color:var(--muted)">SMA (3th) + BLK (2bl)</td><td style="padding:9px 10px;border-bottom:1px solid var(--line);color:var(--muted)">Operator SIPADES, admin BUMDes</td><td style="padding:9px 10px;border-bottom:1px solid var(--line);color:var(--muted)">Pemdes, BUMDes, koperasi</td><td style="padding:9px 10px;border-bottom:1px solid var(--line)"><span style="background:var(--sky-lt);color:var(--sky);padding:2px 8px;border-radius:20px;font-weight:600">67%</span></td></tr>
+          <tr><td style="padding:9px 10px;font-weight:600;color:var(--amber)">Wirausaha Lokal</td><td style="padding:9px 10px;color:var(--muted)">SMA/SMK + Bootcamp (6mg)</td><td style="padding:9px 10px;color:var(--muted)">UMKM, pengolahan produk desa</td><td style="padding:9px 10px;color:var(--muted)">BUMDes, koperasi, CSR</td><td style="padding:9px 10px"><span style="background:var(--amber-lt);color:var(--amber);padding:2px 8px;border-radius:20px;font-weight:600">Mandiri</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:10px;font-size:10px;color:var(--subtle)">*Angka 42% karena keterbatasan supply, bukan permintaan. Dengan ekspansi LPK Kesehatan, proyeksi naik ke 85%+.</div>
+  </div>
+</div>
+
+</div><!-- end .content -->
+
+<div class="footer">
+  Siap Lulus Ketapang · Data: Survei Kepala Desa Okt 2025 · Cargill Ketapang Mill · Disnaker Ketapang · Save the Children · Puskesmas & Posyandu 25 Desa
+</div>
+
+<script>
+function showTab(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('.nt').forEach(t => t.classList.remove('on'));
+  const sec = document.getElementById('sec-' + name);
+  const tab = document.getElementById('tab-' + name);
+  if (sec) sec.classList.add('on');
+  if (tab) tab.classList.add('on');
+}
+
+function runMatch() {
+  const jur = document.getElementById('sel-jurusan').value;
+  const scores = {
+    atp: [96, 72, 60, 55, 40],
+    nakes: [91, 68, 50, 45, 38],
+    tkj: [82, 70, 60, 55, 42],
+    mesin: [78, 72, 58, 50, 40],
+    admin: [65, 60, 55, 48, 35],
+    ipa: [70, 65, 55, 50, 38],
+    ips: [60, 55, 50, 45, 32]
+  };
+  const cards = document.querySelectorAll('.result-card');
+  const s = scores[jur] || [96, 91, 82, 78];
+  cards.forEach((c, i) => {
+    const scoreEl = c.querySelector('.rc-score');
+    if (scoreEl && s[i] !== undefined) {
+      scoreEl.textContent = s[i];
+      scoreEl.className = 'rc-score ' + (s[i] >= 80 ? 'high' : s[i] >= 65 ? 'med' : 'low');
+    }
+  });
+}
+</script>
+</body>
+</html>
